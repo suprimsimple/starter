@@ -48,6 +48,10 @@ The following tasks are available:
 npm run dev
 # Run the development server
 
+npm run csr
+# Run React Application for development
+
+
 npm run build
 # Run the production build
 ```
