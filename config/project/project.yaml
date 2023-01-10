@@ -1,0 +1,459 @@
+dateModified: 1673241208
+elementSources:
+  craft\elements\Category:
+    -
+      disabled: false
+      key: 'group:1174bde9-64cb-4130-8e97-e4310f7c7285' # News Categories
+      tableAttributes:
+        - link
+        - slug
+        - id
+      type: native
+  craft\elements\Entry:
+    -
+      key: '*'
+      type: native
+    -
+      disabled: false
+      key: singles
+      tableAttributes:
+        - revisionCreator
+        - dateUpdated
+        - uri
+      type: native
+    -
+      heading: Channels
+      type: heading
+    -
+      disabled: false
+      key: 'section:1c3892ba-d0f8-49d9-b942-4afa80272e1d' # News
+      tableAttributes:
+        - 'field:440ee12e-8957-4daa-bac9-420f461a30c6' # Feature Image
+        - 'field:58c4d753-3f89-4d16-908d-14a4e265b939' # Category
+        - postDate
+        - revisionCreator
+        - link
+      type: native
+    -
+      disabled: false
+      key: 'section:af1f0d8e-fa93-4f55-87ff-9175cc33b128' # People
+      tableAttributes:
+        - 'field:6ec0b970-7ef7-4580-ac90-b5af8b9e588f' # Profile Image
+        - 'field:1afea7e3-c27d-4cb0-b897-b312ed5e10d3' # Position
+        - dateUpdated
+        - link
+      type: native
+    -
+      heading: Structures
+      type: heading
+    -
+      key: 'section:59180e18-27bd-4cb4-9fc7-39eeea9c19b0' # Sitemap
+      type: native
+email:
+  fromEmail: $EMAIL_SYSTEM_EMAIL_ADDRESS
+  fromName: $GENERAL_SYSTEM_NAME
+  replyToEmail: null
+  template: ''
+  transportSettings:
+    command: '/usr/sbin/sendmail -bs'
+  transportType: craft\mail\transportadapters\Sendmail
+fs:
+  downloads:
+    hasUrls: true
+    name: Downloads
+    settings:
+      path: '@assetsBasePath/downloads'
+    type: craft\fs\Local
+    url: '@assetsBaseUrl/downloads'
+  formUploads:
+    hasUrls: false
+    name: 'Form Uploads'
+    settings:
+      path: '@secureAssetBasePath/form-uploads'
+    type: craft\fs\Local
+    url: null
+  images:
+    hasUrls: true
+    name: Images
+    settings:
+      path: '@assetsBasePath/images'
+    type: craft\fs\Local
+    url: '@assetsBaseUrl/images'
+  userPhotos:
+    hasUrls: false
+    name: 'User Photos'
+    settings:
+      path: '@secureAssetBasePath/user-photos'
+    type: craft\fs\Local
+    url: null
+  videos:
+    hasUrls: false
+    name: Videos
+    settings:
+      path: '@assetsBasePath/videos'
+    type: craft\fs\Local
+    url: null
+meta:
+  __names__:
+    0a6a3517-36e6-4589-8a2a-462594c86360: Downloads # Downloads
+    0c7f50f5-bad5-44a8-b347-4f5678d1b51e: Tip # Tip
+    1afea7e3-c27d-4cb0-b897-b312ed5e10d3: Position # Position
+    1ba394e6-5ef1-4c71-90a1-b9b315a5e486: 'First Name' # First Name
+    1c4deb64-5557-42a9-83de-bbb760b29c26: 'Video Embed' # Video Embed
+    1c3892ba-d0f8-49d9-b942-4afa80272e1d: News # News
+    1e44534a-45ac-46b9-a99b-f4a309b55247: Caption # Caption
+    1ef82344-c43a-4084-9a5e-be061fdde972: Homepage # Homepage
+    2ab39786-79ea-4b1c-91b0-1489ca22792d: Display # Display
+    2b4f9b34-11e8-4190-b278-9d86c1903e13: Content # Content
+    2b40ac45-ae30-4d6b-9c7d-81a13849e517: Form # Form
+    2d2c09c8-c400-4df8-bdac-bd4906a68690: Form # Form
+    3c14afe7-5c3d-41ff-b29f-49fb4cd451c5: 'Email Address' # Email Address
+    3efced5f-5a2e-450d-bbeb-a4734016d19c: Heading # Heading
+    4c8f93aa-0e7c-40d4-833f-6109c652c595: Accordion # Accordion
+    5b4ed2e9-5ee2-44af-83b6-c90e78d04a9a: 'LinkedIn Page' # LinkedIn Page
+    5e7a03ef-b278-47fe-8b04-570a23bd1b8d: Summary # Summary
+    5ed189e3-b44a-4d37-8238-444877760c4e: 'Links & Downloads' # Links & Downloads
+    5f099227-bab3-4588-a4de-3899c61605ea: Link # Link
+    05fcf341-3d07-4f9f-bd75-d5ca6418570f: Links # Links
+    6aac93a8-9102-4d84-a382-abdd2eb6962f: People # People
+    6b0d3ba6-e4f1-4d65-92a1-7b706500f050: Form # Form
+    6da5e421-2629-4d24-8c03-14a4413eb33d: Attribution # Attribution
+    6e0d1f7e-6865-4c99-a962-fb53a2d37112: Suburb # Suburb
+    6e150aaf-e280-483d-99b8-9f554430bff3: Map # Map
+    0006e839-b7f7-48d2-bd2c-b73f71bb20c7: Table # Table
+    6ec0b970-7ef7-4580-ac90-b5af8b9e588f: 'Profile Image' # Profile Image
+    6fc0d230-7d0a-441c-ae94-60526c05b0ce: Form # Form
+    7cff4d8a-4325-4cf7-955c-d5de168e98e5: $DEFAULT_SITE_NAME # $DEFAULT_SITE_NAME
+    7d294d38-34c7-44cb-bb8b-bfaca4d061bb: Quote # Quote
+    7eb5d2e1-bdf5-4c47-b5d7-010429de7db8: 'Listing – News' # Listing – News
+    8ccc192a-6b42-4b77-948f-60d7df1e9741: 'Business Description' # Business Description
+    8d24b32e-1891-4dac-a170-241a696e85c3: 'Phone Number' # Phone Number
+    9d69c1a3-a18f-4960-b3c8-1edc75a282bb: Title # Title
+    9ed02a10-c5bd-4846-8103-afa0ba59bbb4: Footer # Footer
+    10d45bef-3acb-4dc4-b66e-8fe0ac9da884: 'Instagram Username' # Instagram Username
+    33c48e12-1cc3-43ce-9b94-84bcd51011e1: 'Listing – Children' # Listing – Children
+    37cd3013-fe22-4121-9d8e-abf66fd7b82a: 'Call To Action' # Call To Action
+    37f4eb2d-7dd0-41ac-9a21-4bfd18378698: 'Address Line One' # Address Line One
+    40f87e3d-201e-4421-b67a-e2303f577587: 'Address Line Two' # Address Line Two
+    47eeb68a-65d6-4d09-be70-f0037cfcf8fd: 'Content Blocks' # Content Blocks
+    58c4d753-3f89-4d16-908d-14a4e265b939: Category # Category
+    62c6ceb3-208b-4451-87ea-8817bef46885: Display # Display
+    62fa57dc-974d-4aa7-8a3f-6140505708f9: Fallbacks # Fallbacks
+    67c26d95-724f-4e48-a3a4-b19b1a624fa4: Videos # Videos
+    74dcb940-7812-4e4e-ba10-e33c689f664e: 'Full Business Name' # Full Business Name
+    76eb371f-fb30-4a2c-8e62-eb9cd1629262: Globals # Globals
+    79a0153c-8b78-476d-bb26-7eaf5c01d1c4: 'Success Message' # Success Message
+    83a6b91f-feb0-4082-b456-14e8e58a179b: 'Content Page' # Content Page
+    0091a5d3-4e6b-4fa4-a94c-47bb0273cbbe: 'Default Form Settings' # Default Form Settings
+    211a7d44-20d4-42b2-a7dd-a3e8231a46d1: 'Last Name' # Last Name
+    297d2abd-664d-413c-bfd5-365af29a5c98: Geolocation # Geolocation
+    327ce231-ffd4-47e8-81a6-c9ec201a01bb: Article # Article
+    336ecc00-f868-49ae-8e2a-7c0425a2f1e1: Common # Common
+    352f913c-ae12-4651-ab99-bd06c7c922c3: Link # Link
+    412c62c9-8dde-47e3-969a-45bccc5a2518: New # New
+    437b6d46-ed50-4b2e-b139-6ef3d2bad8ff: 'Related People' # Related People
+    440ee12e-8957-4daa-bac9-420f461a30c6: 'Feature Image' # Feature Image
+    559aaca6-8c69-45a0-9e04-d3d1ac89abb6: News # News
+    00676af0-a7f5-42a2-86cd-ee7e0563223d: 'User Photos' # User Photos
+    712e1ad9-1027-4d44-a4a9-1d5987a22b04: 'Footer Links' # Footer Links
+    898aaf51-615d-4d29-be1d-18e6cff0c277: SEO # SEO
+    919edb88-05a2-47be-920f-003a786022cb: Blockquote # Blockquote
+    991fe2e2-a7db-4474-ac30-8d52e4f9d75c: 'Business Details' # Business Details
+    1174bde9-64cb-4130-8e97-e4310f7c7285: 'News Categories' # News Categories
+    1827b28d-e381-4644-b686-9f0698fbd333: 'Show in Table of Contents' # Show in Table of Contents
+    3398ad72-92a0-4d6f-b91e-ef5f10b58fa1: Postcode # Postcode
+    4356bc52-1d75-4257-985e-173863209454: Table # Table
+    8295a178-63b9-4be8-b53c-bc1e7e37bec1: SEO # SEO
+    9642d52c-6736-48fd-b7d9-fd0001469624: Text # Text
+    9912f60f-e5db-4015-b098-8d93f6a70e7e: Homepage # Homepage
+    20734dfc-9178-4b1e-94bd-68660cc6a8fb: Search # Search
+    53061ca8-4aeb-4c47-8d09-a5b9a7061075: Text # Text
+    59180e18-27bd-4cb4-9fc7-39eeea9c19b0: Sitemap # Sitemap
+    890580fd-0072-40a5-b06a-71ae9fec7cc0: 'Rich Text' # Rich Text
+    3042153c-d928-466d-9f52-bfd52c6594f7: 'Public Schema' # Public Schema
+    6980935c-c341-4a77-8155-8b72bfff849b: 'Fallback Person' # Fallback Person
+    14641187-5a7f-4b50-a3ff-3baabbd25de7: 'Fallback Banner' # Fallback Banner
+    21847131-85cd-4cd5-a00f-4c9589d30f1b: Image # Image
+    38895029-1821-4752-adaf-c5824626891e: 'Rich Text' # Rich Text
+    50254482-131f-49bf-a888-14049ecc2cf2: 'Full-width Image' # Full-width Image
+    a5e673e2-276f-4e90-9a0b-87d9ed98f554: 'Phone Number' # Phone Number
+    a40e98dc-9d28-492d-aa94-0e528cd68ebb: 'Short Biography' # Short Biography
+    ab45cc71-ada0-4bc3-b990-34eeb6fd9e73: 'YouTube Channel' # YouTube Channel
+    af1f0d8e-fa93-4f55-87ff-9175cc33b128: People # People
+    b4d902ee-a471-4d99-ab4d-2b11587f9295: 'Email Address' # Email Address
+    b7a93a03-c4c0-4371-96f6-f3eb2a3a95fc: Images # Images
+    b54a7046-e6f4-4aef-86f2-c8af8ab19831: Body # Body
+    bc5712b5-f3c3-43f3-a86f-0c753ade706e: 'Fax Number' # Fax Number
+    c098fde7-bc2b-4bc0-8139-235dd729b4e9: Link # Link
+    c2cb7fa9-6df4-4568-96cd-67fe9bf334d6: Heading # Heading
+    c7b4e367-cbcf-4718-a238-ccd85b0179fb: Caption # Caption
+    c60bc901-4d9f-4d09-b7db-967e7bdd9f3e: 'Mobile Number' # Mobile Number
+    c5794033-9938-4d76-bd36-3c5b59676beb: 'Table of Contents' # Table of Contents
+    ca424967-a482-4f31-b41c-d52395ab9dd8: Video # Video
+    cb90ac97-fcfc-4571-95af-ee57a70b1ba0: Tagline # Tagline
+    cbcaa7bc-ad79-4217-bdbf-181ef62eeadf: 'Public Schema' # Public Schema
+    cbeb5c23-5052-4eb7-91c6-2c2921fd73cf: Heading # Heading
+    cca6534f-9afd-4d33-8b55-c82c25d52db8: 'Form Uploads' # Form Uploads
+    d09c8da6-f1a8-4473-a115-35f53b79920a: Default # Default
+    d18b92a2-1d0e-4343-a37d-de5a5703835a: Images # Images
+    dca4c724-ab1f-4395-b096-e1b3edcf2261: 'Facebook Username' # Facebook Username
+    ddb66ba4-f17d-4029-94fb-e934e6a7ba9f: 'Image Gallery' # Image Gallery
+    e3ac717d-d2ef-4306-8fec-eaf749d79da2: Search # Search
+    e6ff483a-ad4f-462b-96b8-29a404988b9f: Assets # Assets
+    e19fac13-a3b4-4f10-843f-074416b49810: Title # Title
+    e3173f1b-8163-4bba-892e-cee12cf612cd: 'User Notification' # User Notification
+    e6868c0c-41bf-4894-ad63-7e21c7f0b113: 'Heading Level' # Heading Level
+    ec6f2e50-3b5e-48af-88bf-3e241c404bb0: 'Twitter Handle' # Twitter Handle
+    eebe4179-920a-4520-bbf0-c3cea952a512: 'Custom Template' # Custom Template
+    ef2849ad-90a3-45dc-b533-141cfe5ea7c4: State # State
+    f144cce9-6b53-44f0-b9d6-366f511eee9d: 'Admin Notification' # Admin Notification
+    f490eab9-3135-4439-89a9-f7a3d6423b7d: People # People
+    fb99689e-d3a9-4944-b602-62e6c450cdbf: Person # Person
+    ff120ba6-d1b6-435b-b3ec-ba95472f51ba: 'Links & Downloads' # Links & Downloads
+plugins:
+  aws-s3:
+    enabled: '1'
+    licenseKey: null
+    schemaVersion: '2.0'
+    settings: null
+  batch-actions:
+    edition: standard
+    enabled: true
+    schemaVersion: 1.0.0
+  blitz-recommendations:
+    edition: standard
+    enabled: true
+    schemaVersion: 2.1.0
+  buttonbox:
+    enabled: '1'
+    licenseKey: null
+    schemaVersion: 3.0.0
+    settings: null
+  command-palette:
+    enabled: '1'
+    licenseKey: null
+    schemaVersion: 3.0.0
+    settings: null
+  cp-css:
+    enabled: '1'
+    licenseKey: null
+    schemaVersion: 2.0.0
+    settings:
+      additionalCss: ''
+      cssFile: /simple/overrides/admin.css
+  cp-field-inspect:
+    enabled: '1'
+    licenseKey: null
+    schemaVersion: 1.0.0
+    settings: null
+  cp-js:
+    enabled: '1'
+    licenseKey: null
+    schemaVersion: 2.0.0
+    settings:
+      additionalJs: ''
+      jsFile: /simple/overrides/admin.js
+  elements-panel:
+    edition: standard
+    enabled: true
+    schemaVersion: 1.0.0
+  embeddedassets:
+    enabled: '1'
+    licenseKey: null
+    schemaVersion: 1.0.0
+    settings: null
+  field-manager:
+    enabled: '1'
+    licenseKey: null
+    schemaVersion: 1.0.0
+    settings: null
+  formalism:
+    edition: standard
+    enabled: true
+    schemaVersion: 1.0.0
+  formie:
+    edition: standard
+    enabled: true
+    licenseKey: 6ZRQVQBT3LZ0OXWMYS2I8C3U
+    schemaVersion: 2.0.8
+    settings:
+      ajaxTimeout: '10'
+      alertEmails: null
+      defaultDateDisplayType: ''
+      defaultDateTime:
+        __assoc__:
+          -
+            - date
+            - ''
+          -
+            - timezone
+            - Australia/Adelaide
+          -
+            - time
+            - ''
+      defaultDateValueOption: ''
+      defaultEmailTemplate: userNotification
+      defaultFileUploadVolume: 'folder:cca6534f-9afd-4d33-8b55-c82c25d52db8' # Form Uploads
+      defaultFormTemplate: customTemplate
+      defaultInstructionsPosition: verbb\formie\positions\AboveInput
+      defaultLabelPosition: verbb\formie\positions\AboveInput
+      defaultPage: forms
+      disabledFields: ''
+      enableUnloadWarning: '1'
+      maxIncompleteSubmissionAge: 30
+      maxSentNotificationsAge: 30
+      pluginName: Formie
+      saveSpam: true
+      sendEmailAlerts: false
+      sentNotifications: true
+      spamBehaviour: showSuccess
+      spamBehaviourMessage: ''
+      spamKeywords: ''
+      spamLimit: 500
+      useQueueForIntegrations: true
+      useQueueForNotifications: true
+  imager-x:
+    edition: pro
+    enabled: true
+    licenseKey: 6YNQ7M0AMR5P94UREQHZFHCA
+    schemaVersion: 4.0.0
+  matrixmate:
+    edition: standard
+    enabled: true
+    schemaVersion: 1.0.0
+  minify:
+    enabled: '1'
+    licenseKey: null
+    schemaVersion: 1.0.0
+    settings: null
+  mjml:
+    edition: standard
+    enabled: true
+    schemaVersion: 1.0.0
+  palette:
+    edition: standard
+    enabled: true
+    schemaVersion: 1.0.0
+  quick-field:
+    edition: standard
+    enabled: true
+    schemaVersion: 1.0.0
+  redactor:
+    enabled: '1'
+    licenseKey: null
+    schemaVersion: 2.3.0
+    settings: null
+  seomatic:
+    enabled: '1'
+    licenseKey: 3PZ00O9EC0QI198SBDQPTE0C
+    schemaVersion: 3.0.11
+    settings:
+      addHrefLang: true
+      addXDefaultHrefLang: true
+      cpTitlePrefix: '⚙ '
+      devModeCpTitlePrefix: '&#x1f6a7;⚙ '
+      devModeTitlePrefix: '&#x1f6a7;'
+      displayAnalysisSidebar: true
+      displayPreviewSidebar: true
+      environment: local
+      generatorEnabled: true
+      headersEnabled: true
+      maxDescriptionLength: 300
+      maxTitleLength: 120
+      pluginName: Optimise
+      regenerateSitemapsAutomatically: true
+      renderEnabled: true
+      separatorChar: •
+      sidebarDisplayPreviewTypes:
+        - google
+        - twitter
+        - facebook
+      siteGroupsSeparate: '1'
+      sitemapsEnabled: true
+      socialMediaPreviewTarget: true
+  simple:
+    edition: standard
+    enabled: true
+    schemaVersion: 1.0.0
+  simplemap:
+    enabled: '1'
+    licenseKey: null
+    schemaVersion: 3.4.2
+    settings:
+      apiKey: AIzaSyDKaMoivdTnNhErhA_tz0ui1yRMqpLYsSg
+      browserApiKey: null
+      disablePopulateMissingFieldData: false
+      geoLocationAutoRedirect: false
+      geoLocationCacheDuration: 5187600
+      geoLocationService: none
+      geoLocationToken: ''
+      geoService: google
+      geoToken: AIzaSyAPQlH0tzqc9Jd9d29tqOJusKmlW3ch0d8
+      mapTiles: google.roadmap
+      mapToken: AIzaSyAPQlH0tzqc9Jd9d29tqOJusKmlW3ch0d8
+      serverApiKey: null
+      unrestrictedApiKey: ''
+      w3wEnabled: ''
+      w3wToken: ''
+  smith:
+    edition: standard
+    enabled: true
+    schemaVersion: 1.0.0
+  splash:
+    enabled: '1'
+    licenseKey: null
+    schemaVersion: 3.0.0
+    settings:
+      authorField: ''
+      authorUrlField: ''
+      colorField: ''
+      volume: '1'
+  super-table:
+    enabled: '1'
+    licenseKey: null
+    schemaVersion: 3.0.0
+    settings: null
+  tablemaker:
+    enabled: '1'
+    licenseKey: null
+    schemaVersion: 3.0.0
+    settings: null
+  twigpack:
+    edition: standard
+    enabled: true
+    schemaVersion: 1.0.0
+  typedlinkfield:
+    enabled: '1'
+    licenseKey: null
+    schemaVersion: 2.0.0
+    settings: null
+  typogrify:
+    edition: standard
+    enabled: true
+    schemaVersion: 1.0.0
+  ui-element-fields:
+    edition: standard
+    enabled: true
+    schemaVersion: 1.0.0
+  vite:
+    edition: standard
+    enabled: true
+    schemaVersion: 1.0.0
+  wordsmith:
+    edition: standard
+    enabled: true
+    schemaVersion: 0.0.0.0
+system:
+  edition: pro
+  live: true
+  name: $GENERAL_SYSTEM_NAME
+  retryDuration: null
+  schemaVersion: 4.0.0.9
+  timeZone: Australia/Adelaide
+users:
+  allowPublicRegistration: false
+  deactivateByDefault: false
+  defaultGroup: ''
+  photoSubpath: null
+  photoVolumeUid: 00676af0-a7f5-42a2-86cd-ee7e0563223d # User Photos
+  requireEmailVerification: true

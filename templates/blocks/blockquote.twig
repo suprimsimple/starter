@@ -1,0 +1,24 @@
+
+<figure class="relative flex pt-16 pl-8 text-blue-700">
+
+	<svg class="absolute top-0 left-0 w-12 h-12 text-blue-400" fill="currentColor" viewBox="0 0 48 48">
+		<path d="M0 30.3113C0 36.5331 3.42857 41 9.42857 41C15.0857 41 19.2 36.6926 19.2 31.5875C19.2 26.4825 14.5714 22.4942 9.25714 22.4942C10.1143 15.9533 13.3714 10.3696 19.3714 6.22179V0C5.82857 7.17899 0 17.8677 0 30.3113ZM48 0C34.4571 7.17899 28.6286 17.8677 28.6286 30.3113C28.6286 36.5331 32.0571 41 38.0571 41C43.7143 41 47.8286 36.6926 47.8286 31.5875C47.8286 26.4825 43.2 22.4942 37.8857 22.4942C38.7429 15.9533 42 10.3696 48 6.22179V0Z"/>
+	</svg>
+
+	</svg>
+
+	<figure class="pl-12 pr-24 border-l-4 border-blue-400">
+
+		<blockquote class="leading-normal heading-4 middleclass-text">
+			{{ block.quote }}
+		</blockquote>
+
+		{% if block.attribution|default %}
+			<figcaption class="mt-8 font-medium heading-5 text-black">
+				<cite class="not-italic">{{ block.attribution }}</cite>
+			</figcaption>
+		{% endif %}
+
+	</figure>
+
+</figure>

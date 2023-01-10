@@ -1,0 +1,685 @@
+
+{# TODO: Convert to plugin #}
+
+{% macro messages(error, instructions, instructionId) %}
+	{% if error %}
+		<div class="mt-2 text-pink-700 type-small" data-field-error>
+			{{ error }}
+		</div>
+	{% endif %}
+	{% if instructions %}
+		<div{% if instructionId %} id="{{ instructionId }}"{% endif %} class="mt-2 text-gray-700 type-small" data-field-instruction>
+			{{ instructions }}
+		</div>
+	{% endif %}
+{% endmacro %}
+
+{% macro label(text, optional, children = '', fontSize = "type-small") %}
+	<span class="flex justify-between items-baseline leading-tight {{ fontSize|default }}">
+		<span class="font-medium text-gray-800">{{ text }}</span>
+		{% if optional %}
+			<span class="ml-4 text-gray-700 type-small">Optional</span>
+		{% endif %}
+		{{ children|raw }}
+	</span>
+{% endmacro %}
+
+{#
+	==========================
+	Input
+	==========================
+#}
+{% macro input(params, overrides) %}{% spaceless %}
+	{% import 'macros' as macros %}
+	{% import _self as forms %}
+
+	{% set defaults = {
+		label: 'Label',
+		name: '',
+		value: '',
+		instructions: '',
+		placeholder: '',
+		id: 'input' ~ random(5000),
+		type: 'text',
+		error: '',
+		hasError: false,
+		isDisabled: false,
+		isRequired: false,
+		isOpen: false,
+		attributesContainer: {},
+		attributesInner: {},
+		attributesField: {},
+	} %}
+
+	{% set self = craft.formalism.deepMerge(defaults, params) %}
+
+	{% if overrides %}
+		{% set self = craft.formalism.deepMerge(self,overrides) %}
+	{% endif %}
+
+	{% set hasError = self.error or self.hasError %}
+	{% set errorClass = hasError ? 'has-error' : '' %}
+	{% set filledClass = self.value or self.isOpen ? 'is-filled' : '' %}
+
+	{% set attributesContainer = macros.addAttributes(craft.formalism.deepMerge(self.attributesContainer, {
+		class: [errorClass, filledClass]|join(' ')|trim,
+		'data-field-container': '',
+	})) %}
+
+	{% set attributesInner = macros.addAttributes(craft.formalism.deepMerge(self.attributesInner, {
+		class: 'block',
+		for: self.id,
+		'data-field-inner': '',
+	})) %}
+
+	{% set instructionId = self.instructions ? self.id ~ '-instructions' : null %}
+
+	{% set attributesField = macros.addAttributes(craft.formalism.deepMerge(self.attributesField, {
+		class: [
+			'form-input mt-2 block w-full focus:ring',
+			 hasError ? 'pr-10 border-pink-700 text-pink-700 placeholder-pink-500 focus:border-pink-700 focus:ring' : null,
+			 self.attributesField.class|default()
+		]|join(' ')|trim,
+		type: self.type,
+		id: self.id,
+		name: self.name,
+		value: self.value,
+		required: self.isRequired ? 'required' : null,
+		disabled: self.isDisabled ? 'true' : null,
+		placeholder: self.placeholder,
+		'aria-invalid': hasError ? 'true' : null,
+		'aria-describedby': instructionId,
+		'data-field': ''
+	})) %}
+
+	<div {{ attributesContainer }}>
+		<label {{ attributesInner }}>
+			{{ forms.label(self.label, not self.isRequired) }}
+			<div class="relative">
+				<input {{ attributesField }}>
+				{% if hasError %}
+					<div class="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none">
+						<svg class="w-5 h-5 text-pink-500" fill="currentColor" viewBox="0 0 20 20">
+							<path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clip-rule="evenodd" />
+						</svg>
+					</div>
+				{% endif %}
+			</div>
+		</label>
+		{{ forms.messages(self.error, self.instructions, instructionId) }}
+	</div>
+
+{% endspaceless %}{% endmacro %}
+
+
+{#
+	==========================
+	Textarea
+	==========================
+#}
+{% macro textarea(params, overrides) %}{% spaceless %}
+	{% import 'macros' as macros %}
+	{% import _self as forms %}
+
+	{% set defaults = {
+		label: 'Label',
+		name: '',
+		value: '',
+		instructions: '',
+		placeholder: '',
+		size: [5, 40],
+		id: 'textarea' ~ random(5000),
+		error: '',
+		hasError: false,
+		isDisabled: false,
+		isRequired: false,
+		isOpen: false,
+		attributesContainer: {},
+		attributesInner: {},
+		attributesField: {},
+	} %}
+
+	{% set self = craft.formalism.deepMerge(defaults, params) %}
+
+	{% if overrides %}
+		{% set self = craft.formalism.deepMerge(self,overrides) %}
+	{% endif %}
+
+	{% set hasError = self.error or self.hasError %}
+	{% set errorClass = hasError ? 'has-error' : '' %}
+	{% set filledClass = self.value or self.isOpen ? 'is-filled' : '' %}
+
+	{% set attributesContainer = macros.addAttributes(craft.formalism.deepMerge(self.attributesContainer, {
+		class: [errorClass, filledClass]|join(' ')|trim,
+		'data-field-container': '',
+	})) %}
+
+	{% set attributesInner = macros.addAttributes(craft.formalism.deepMerge(self.attributesInner, {
+		class: 'block',
+		for: self.id,
+		'data-field-inner': '',
+	})) %}
+
+	{% set instructionId = self.instructions ? self.id ~ '-instructions' : null %}
+
+	{% set attributesField = macros.addAttributes(craft.formalism.deepMerge(self.attributesField, {
+		class: [
+			'form-textarea mt-2 block w-full',
+			 hasError ? 'pr-10 border-pink-700 text-pink-700 placeholder-pink-500 focus:border-pink-700 focus:ring' : null,
+			 self.attributesField.class|default()
+		]|join(' ')|trim,
+		id: self.id,
+		name: self.name,
+		rows: self.size[0],
+		cols: self.size[1],
+		required: self.isRequired ? 'required' : null,
+		disabled: self.isDisabled ? 'true' : null,
+		placeholder: self.placeholder,
+		'aria-invalid': hasError ? 'true' : null,
+		'aria-describedby': instructionId,
+		'data-field': ''
+	})) %}
+
+	<div {{ attributesContainer }}>
+		<label {{ attributesInner }}>
+			{{ forms.label(self.label, not self.isRequired) }}
+			<div class="relative">
+				<textarea {{ attributesField }}>{{ self.value }}</textarea>
+				{% if hasError %}
+					<div class="absolute top-0 right-0 flex items-center pt-3 pr-3 pointer-events-none">
+						<svg class="w-5 h-5 text-pink-500" fill="currentColor" viewBox="0 0 20 20">
+							<path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clip-rule="evenodd" />
+						</svg>
+					</div>
+				{% endif %}
+			</div>
+		</label>
+		{{ forms.messages(self.error, self.instructions, instructionId) }}
+	</div>
+
+{% endspaceless %}{% endmacro %}
+
+
+{% macro select(params, overrides) %}{% spaceless %}
+	{% import 'macros' as macros %}
+	{% import _self as forms %}
+
+		{% set defaults = {
+		label: 'Label',
+		name: '',
+		options: [],
+		value: '',
+		instructions: '',
+		id: 'select' ~ random(5000),
+		error: '',
+		hasError: false,
+		isDisabled: false,
+		isRequired: false,
+		attributesContainer: {},
+		attributesInner: {},
+		attributesField: {},
+	} %}
+
+	{% set self = craft.formalism.deepMerge(defaults, params) %}
+
+	{% if overrides %}
+		{% set self = craft.formalism.deepMerge(self,overrides) %}
+	{% endif %}
+
+	{% set hasError = self.error or self.hasError %}
+	{% set errorClass = hasError ? 'has-error' : '' %}
+	{% set filledClass = 'is-filled' %}
+	{% set attributesContainer = macros.addAttributes(craft.formalism.deepMerge(self.attributesContainer, {
+		class: [errorClass, filledClass]|join(' ')|trim,
+		'data-field-container': '',
+	})) %}
+
+	{% set attributesInner = macros.addAttributes(craft.formalism.deepMerge(self.attributesInner, {
+		class:'block',
+		for: self.id,
+		'data-field-inner': '',
+	})) %}
+
+	{% set instructionId = self.instructions ? self.id ~ '-instructions' : null %}
+
+	{% set attributesField = macros.addAttributes(craft.formalism.deepMerge(self.attributesField, {
+		class: [
+			'form-select mt-2 block w-full',
+			self.attributesField.class|default()
+		]|join(' ')|trim,
+		name: self.name,
+		id: self.id,
+		required: self.isRequired ? 'required' : null,
+		disabled: self.isDisabled or self.options is empty ? 'true' : null,
+		'aria-invalid': hasError ? 'true' : null,
+		'aria-describedby': instructionId,
+		'data-field': '',
+	})) %}
+
+	<div {{ attributesContainer }}>
+		<label {{ attributesInner }}>
+			{{ forms.label(self.label, not self.isRequired) }}
+			<select {{ attributesField }}>
+				{% for option in self.options %}
+					<option value="{{ option.value }}"{{ option.value == self.value ? ' selected' }}>{{ option.label|raw }}</option>
+				{% endfor %}
+			</select>
+		</label>
+		{{ forms.messages(self.error, self.instructions, instructionId) }}
+	</div>
+
+{% endspaceless %}{% endmacro %}
+
+
+{% macro checkboxGroup(params, overrides) %}{% spaceless %}
+	{% import 'macros' as macros %}
+	{% import _self as forms %}
+
+	{% set defaults = {
+		label: 'Label',
+		name: '',
+		options: [],
+		instructions: '',
+		placeholder: '',
+		id: 'checbkox-group' ~ random(5000),
+		error: '',
+		oneLine: false,
+		hasError: false,
+		isRequired: false,
+		isOpen: false,
+		attributesContainer: {},
+		attributesInner: {},
+		attributesField: {},
+	} %}
+
+	{% set self = craft.formalism.deepMerge(defaults, params) %}
+
+	{% if overrides %}
+		{% set self = craft.formalism.deepMerge(self,overrides) %}
+	{% endif %}
+
+	{% set hasError = self.error or self.hasError %}
+	{% set errorClass = hasError ? 'has-error' : '' %}
+	{% set filledClass = self.value or self.isOpen ? 'is-filled' : '' %}
+
+	{% set attributesContainer = macros.addAttributes(craft.formalism.deepMerge(self.attributesContainer, {
+		class: [
+			"",
+			errorClass,
+			filledClass
+		]|join(' ')|trim,
+		'data-field-container': '',
+	})) %}
+
+	{% set attributesInner = macros.addAttributes(craft.formalism.deepMerge(self.attributesInner, {
+		class: [
+			'block',
+			self.oneLine ? 'flex flex-wrap -mb-8' : null,
+		]|join(' ')|trim,
+		for: self.id,
+		'data-field-inner': '',
+	})) %}
+
+	{% set attributesOption = macros.addAttributes({
+		class: [
+			'min-w-20',
+			self.oneLine ? 'mb-8 mr-8 last:mr-0' : 'mb-2 last:mb-0',
+		]|join(' ')|trim,
+	}) %}
+
+	{% set instructionId = self.instructions ? self.id ~ '-instructions' : null %}
+
+	<fieldset {{ attributesContainer }}>
+		{% if self.label %}
+			<legend class="block mb-4" data-field-legend>
+				{{ forms.label(self.label, not self.isRequired, null, "text-base") }}
+			</legend>
+		{% endif %}
+		{% if hasError %}
+			<div class="block mb-3 -mt-3">
+				{{ forms.messages(self.error, self.instructions, instructionId) }}
+			</div>
+		{% endif %}
+		<div {{ attributesInner }}>
+			{% for option in self.options %}
+				<div{{ attributesOption }}>
+					{{ forms.checkbox({
+						name: self.name ~ '[]',
+						id: self.id ~ '-' ~ loop.index0,
+						isFieldGroup: true,
+					}|merge(option), {
+						error: defaults.error,
+						hasError: defaults.hasError
+					}) }}
+				</div>
+			{% endfor %}
+		</label>
+	</div>
+
+{% endspaceless %}{% endmacro %}
+
+{% macro checkbox(params, overrides) %}{% spaceless %}
+	{% import 'macros' as macros %}
+	{% import _self as forms %}
+
+	{% set defaults = {
+		label: 'Label',
+		name: '',
+		value: '',
+		instructions: '',
+		placeholder: '',
+		id: 'input' ~ random(5000),
+		type: 'text',
+		error: '',
+		hasError: false,
+		isDisabled: false,
+		isChecked: false,
+		isRequired: false,
+		isFieldGroup: false,
+		isOpen: false,
+		attributesContainer: {},
+		attributesInner: {},
+		attributesField: {},
+	} %}
+
+	{% set self = craft.formalism.deepMerge(defaults, params) %}
+
+	{% if overrides %}
+		{% set self = craft.formalism.deepMerge(self,overrides) %}
+	{% endif %}
+
+	{% set hasError = self.error or self.hasError %}
+	{% set errorClass = hasError ? 'has-error' : '' %}
+	{% set filledClass = self.value or self.isOpen ? 'is-filled' : '' %}
+
+	{% set attributesContainer = macros.addAttributes(craft.formalism.deepMerge(self.attributesContainer, {
+		class: [errorClass, filledClass]|join(' ')|trim,
+		'data-field-container': '',
+	})) %}
+
+	{% set attributesInner = macros.addAttributes(craft.formalism.deepMerge(self.attributesInner, {
+		class: 'inline-flex items-center',
+		for: self.id,
+		'data-field-inner': '',
+	})) %}
+
+	{% set attributesField = macros.addAttributes(craft.formalism.deepMerge(self.attributesField, {
+		class: [
+			'form-checkbox mr-3 h-6 w-6 focus:ring',
+			 hasError ? 'border-pink-700 focus:border-pink-700 focus:ring' : null,
+			 self.attributesField.class|default()
+		]|join(' ')|trim,
+		type: "checkbox",
+		id: self.id,
+		name: self.name,
+		value: self.value,
+		required: self.isRequired ? 'required' : null,
+		disabled: self.isDisabled ? 'true' : null,
+		checked: self.isChecked ? 'checked' : null,
+		'aria-invalid': hasError ? 'true' : null,
+		'data-field': ''
+	})) %}
+
+	<div {{ attributesContainer }}>
+		<label {{ attributesInner }}>
+			<input {{ attributesField }}>
+			{{ forms.label(self.label, null) }}
+		</label>
+		{{ forms.messages(self.error, null) }}
+	</div>
+
+{% endspaceless %}{% endmacro %}
+
+
+{% macro radioGroup(params, overrides) %}{% spaceless %}
+	{% import 'macros' as macros %}
+	{% import _self as forms %}
+
+	{% set defaults = {
+		label: 'Label',
+		name: '',
+		options: [],
+		instructions: '',
+		placeholder: '',
+		id: 'radio-group' ~ random(5000),
+		error: '',
+		oneLine: false,
+		hasError: false,
+		isRequired: false,
+		isOpen: false,
+		attributesContainer: {},
+		attributesInner: {},
+		attributesField: {},
+	} %}
+
+	{% set self = craft.formalism.deepMerge(defaults, params) %}
+
+	{% if overrides %}
+		{% set self = craft.formalism.deepMerge(self,overrides) %}
+	{% endif %}
+
+	{% set hasError = self.error or self.hasError %}
+	{% set errorClass = hasError ? 'has-error' : '' %}
+	{% set filledClass = self.value or self.isOpen ? 'is-filled' : '' %}
+
+	{% set attributesContainer = macros.addAttributes(craft.formalism.deepMerge(self.attributesContainer, {
+		class: [
+			"",
+			errorClass,
+			filledClass
+		]|join(' ')|trim,
+		'data-field-container': '',
+	})) %}
+
+	{% set attributesInner = macros.addAttributes(craft.formalism.deepMerge(self.attributesInner, {
+		class: [
+			'block',
+			self.oneLine ? 'flex flex-wrap -mb-8' : null,
+		]|join(' ')|trim,
+		for: self.id,
+		'data-field-inner': '',
+	})) %}
+
+	{% set attributesOption = macros.addAttributes({
+		class: [
+			'min-w-20',
+			self.oneLine ? 'mb-8 mr-8 last:mr-0' : 'mb-2 last:mb-0',
+		]|join(' ')|trim,
+	}) %}
+
+	{% set instructionId = self.instructions ? self.id ~ '-instructions' : null %}
+
+	<fieldset {{ attributesContainer }}>
+		{% if self.label %}
+			<legend class="block mb-4" data-field-legend>
+				{{ forms.label(self.label, not self.isRequired, null, "text-base") }}
+			</legend>
+		{% endif %}
+		{% if hasError %}
+			<div class="block mb-3 -mt-3">
+				{{ forms.messages(self.error, self.instructions, instructionId) }}
+			</div>
+		{% endif %}
+		<div {{ attributesInner }}>
+			{% for option in self.options %}
+				<div{{ attributesOption }}>
+					{{ forms.radio({
+						name: self.name,
+						id: self.id ~ '-' ~ loop.index0,
+						isFieldGroup: true,
+					}|merge(option), {
+						error: defaults.error,
+						hasError: defaults.hasError
+					}) }}
+				</div>
+			{% endfor %}
+		</label>
+	</div>
+
+{% endspaceless %}{% endmacro %}
+
+{% macro radio(params, overrides) %}{% spaceless %}
+	{% import 'macros' as macros %}
+	{% import _self as forms %}
+
+	{% set defaults = {
+		label: 'Label',
+		name: '',
+		value: '',
+		instructions: '',
+		placeholder: '',
+		id: 'input' ~ random(5000),
+		type: 'text',
+		error: '',
+		hasError: false,
+		isDisabled: false,
+		isChecked: false,
+		isRequired: false,
+		isFieldGroup: false,
+		isOpen: false,
+		attributesContainer: {},
+		attributesInner: {},
+		attributesField: {},
+	} %}
+
+	{% set self = craft.formalism.deepMerge(defaults, params) %}
+
+	{% if overrides %}
+		{% set self = craft.formalism.deepMerge(self,overrides) %}
+	{% endif %}
+
+	{% set hasError = self.error or self.hasError %}
+	{% set errorClass = hasError ? 'has-error' : '' %}
+	{% set filledClass = self.value or self.isOpen ? 'is-filled' : '' %}
+
+	{% set attributesContainer = macros.addAttributes(craft.formalism.deepMerge(self.attributesContainer, {
+		class: [errorClass, filledClass]|join(' ')|trim,
+		'data-field-container': '',
+	})) %}
+
+	{% set attributesInner = macros.addAttributes(craft.formalism.deepMerge(self.attributesInner, {
+		class: 'inline-flex items-center',
+		for: self.id,
+		'data-field-inner': '',
+	})) %}
+
+	{% set attributesField = macros.addAttributes(craft.formalism.deepMerge(self.attributesField, {
+		class: [
+			'form-radio h-6 w-6 mr-3 focus:ring',
+			 hasError ? 'border-pink-700 focus:border-pink-700 focus:ring' : null,
+			 self.attributesField.class|default()
+		]|join(' ')|trim,
+		type: "radio",
+		id: self.id,
+		name: self.name,
+		value: self.value,
+		required: self.isRequired ? 'required' : null,
+		disabled: self.isDisabled ? 'true' : null,
+		checked: self.isChecked ? 'checked' : null,
+		'aria-invalid': hasError ? 'true' : null,
+		'data-field': ''
+	})) %}
+
+	<div {{ attributesContainer }}>
+		<label {{ attributesInner }}>
+			<input {{ attributesField }}>
+			{{ forms.label(self.label, null) }}
+		</label>
+		{{ forms.messages(self.error, null) }}
+	</div>
+
+{% endspaceless %}{% endmacro %}
+
+{% macro file(params, overrides) %}{% spaceless %}
+	{% import 'macros' as macros %}
+	{% import _self as forms %}
+
+	{% set defaults = {
+		label: 'Label',
+		name: '',
+		value: '',
+		accept: '',
+		instructions: '',
+		id: 'input' ~ random(5000),
+		error: '',
+		hasError: false,
+		isDisabled: false,
+		isRequired: false,
+		isMultiple: false,
+		isOpen: false,
+		attributesContainer: {},
+		attributesInner: {},
+		attributesField: {},
+	} %}
+
+	{% set self = craft.formalism.deepMerge(defaults, params) %}
+
+	{% if overrides %}
+		{% set self = craft.formalism.deepMerge(self,overrides) %}
+	{% endif %}
+
+	{% set hasError = self.error or self.hasError %}
+	{% set errorClass = hasError ? 'has-error' : '' %}
+	{% set filledClass = self.value or self.isOpen ? 'is-filled' : '' %}
+
+	{% set attributesContainer = macros.addAttributes(craft.formalism.deepMerge(self.attributesContainer, {
+		class: [errorClass, filledClass]|join(' ')|trim,
+		'data-field-container': '',
+	})) %}
+
+	{% set attributesInner = macros.addAttributes(craft.formalism.deepMerge(self.attributesInner, {
+		class: 'block cursor-pointer',
+		for: self.id,
+		'data-field-inner': '',
+	})) %}
+
+	{% set instructionId = self.instructions ? self.id ~ '-instructions' : null %}
+
+	{% set attributesField = macros.addAttributes(craft.formalism.deepMerge(self.attributesField, {
+		class: [
+			'sr-only',
+			 hasError ? 'pr-10 border-pink-700 text-pink-700 placeholder-pink-500 focus:border-pink-700 focus:ring' : null,
+			 self.attributesField.class|default()
+		]|join(' ')|trim,
+		type: 'file',
+		id: self.id,
+		name: self.name,
+		value: self.value,
+		accept: self.accept,
+		multiple: self.isMultiple ? 'true' : null,
+		required: self.isRequired ? 'required' : null,
+		disabled: self.isDisabled ? 'true' : null,
+		'aria-invalid': hasError ? 'true' : null,
+		'aria-describedby': instructionId,
+		'data-field': ''
+	})) %}
+
+	<div {{ attributesContainer }}>
+		<label {{ attributesInner }}>
+			{{ forms.label(self.label, not self.isRequired) }}
+			<div class="relative">
+				<input {{ attributesField }}>
+			</div>
+			<div class="flex justify-center px-6 pt-5 pb-6 mt-2 border-2 border-gray-300 border-dashed rounded-md">
+				<div class="text-center">
+					<svg class="w-12 h-12 mx-auto text-gray-400" stroke="currentColor" fill="none" viewBox="0 0 48 48">
+						<path d="M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8m-12 4h.02" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+					</svg>
+					<p class="mt-1 text-sm text-gray-800">
+						<span class="font-medium text-blue-600 transition duration-150 ease-in-out hocus:text-blue-500 focus:outline-none focus:underline">
+							Upload a file
+						</span>
+						{# or drag and drop #}
+					</p>
+					{% if self.instructions %}
+						<p class="mt-1 text-xs text-gray-700"{% if instructionId %} id="{{ instructionId }}"{% endif %}>
+							{{ self.instructions }}
+						</p>
+					{% endif %}
+				</div>
+			</div>
+		</label>
+		{{ forms.messages(self.error) }}
+	</div>
+
+{% endspaceless %}{% endmacro %}

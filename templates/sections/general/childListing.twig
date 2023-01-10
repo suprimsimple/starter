@@ -1,0 +1,42 @@
+{% extends 'layouts/base' %}
+
+{% block content %}
+
+	{% embed "_organisms/internalPage" %}
+
+		{% block article %}
+
+			{% if parent()|trim|length %}
+				<div class="mb-12">
+					{{ parent() }}
+				</div>
+			{% endif %}
+
+			<div class="b b--listing">
+
+				{% set children = craft.entries({
+					descendantOf: entry,
+					descendantDist: 1,
+					with: [
+						"featureImage",
+					],
+				}).all() %}
+
+				{% include "_organisms/listing" with {
+					self: {
+						classes: "",
+						items: children,
+						organism: "cards",
+						type: "generic",
+						layout: "thirds",
+					}
+				} %}
+
+			</div>
+		{% endblock %}
+
+		{% block aside %}{% endblock %}
+
+	{% endembed %}
+
+{% endblock content %}

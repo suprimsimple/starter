@@ -1,0 +1,48 @@
+{% set defaults = {
+	isButton: false,
+	isSnug: false,
+	isStretch: false,
+	type: "submit",
+	attributes: [],
+	textAttributes: [],
+	baseClasses: ["text-white", "bg-blue-700"],
+	classes: [],
+	url: "",
+	text: 'Read more',
+	metadata: '',
+	target: false,
+	iconPosition: "right",
+	icon: "outline/heroicons/chevron-right",
+} %}
+
+{% set self = defaults|merge(self) %}
+
+{% import 'macros' as macros %}
+
+{% set classes = self.classes is iterable ? self.classes : [] %}
+{% set baseClasses = self.baseClasses is iterable ? self.baseClasses : [] %}
+{% set iconClasses = self.iconPosition and self.icon ? ["btn--icon btn--icon-#{self.iconPosition}"] : [] %}
+
+{% set allClasses = classes|merge(baseClasses)|merge(iconClasses) %}
+
+<{%- if self.url -%}
+	a
+	href="{{ self.url }}"
+	{% if self.target %}target="_blank"{% endif %}
+{%- elseif self.isButton -%}
+	button type="{{ self.type }}"
+{%- else -%}
+	span
+{%- endif %} class="btn group {{ allClasses|length ? " #{allClasses|join(' ')}" }}" {{ attr(self.attributes) }}>
+	{% if self.text %}
+		<span class="btn__text" {{ macros.addAttributes(self.textAttributes) }}>{{ self.text|raw }}</span>
+	{% endif %}
+	{% if self.metadata %}
+		<span class="btn__meta">{{ self.metadata }}</span>
+	{% endif %}
+	{% if self.icon -%}
+		{% block icon -%}
+			{{ macros.icon(self.icon, "btn__icon") }}
+		{%- endblock %}
+	{%- endif %}
+</{{ self.url ? 'a' : self.isButton ? 'button' : 'span'}}>

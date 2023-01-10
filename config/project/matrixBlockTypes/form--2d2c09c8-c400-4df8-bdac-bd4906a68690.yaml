@@ -1,0 +1,49 @@
+field: 47eeb68a-65d6-4d09-be70-f0037cfcf8fd # Content Blocks
+fieldLayouts:
+  53ecc8f6-631f-45d8-a816-f551c35fad88:
+    tabs:
+      -
+        elementCondition: null
+        elements:
+          -
+            elementCondition: null
+            fieldUid: 6b0d3ba6-e4f1-4d65-92a1-7b706500f050 # Form
+            instructions: null
+            label: null
+            required: true
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: d87cd8b8-4f80-47c5-a179-cb5f391fdfb7
+            userCondition: null
+            warning: null
+            width: 100
+        name: Content
+        uid: cc34afe5-20ca-4c2e-ab1d-dae63c43a2e2
+        userCondition: null
+fields:
+  6b0d3ba6-e4f1-4d65-92a1-7b706500f050: # Form
+    columnSuffix: null
+    contentColumnType: string
+    fieldGroup: null
+    handle: form
+    instructions: null
+    name: Form
+    searchable: true
+    settings:
+      allowSelfRelations: false
+      localizeRelations: false
+      maxRelations: null
+      minRelations: null
+      selectionLabel: null
+      showSiteMenu: true
+      source: null
+      sources: '*'
+      targetSiteId: null
+      validateRelatedElements: false
+      viewMode: null
+    translationKeyFormat: null
+    translationMethod: site
+    type: verbb\formie\fields\Forms
+handle: form
+name: Form
+sortOrder: 11

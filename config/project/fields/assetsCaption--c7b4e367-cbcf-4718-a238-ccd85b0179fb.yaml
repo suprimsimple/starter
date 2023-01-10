@@ -1,0 +1,19 @@
+columnSuffix: null
+contentColumnType: text
+fieldGroup: e6ff483a-ad4f-462b-96b8-29a404988b9f # Assets
+handle: assetsCaption
+instructions: 'This text is shown when this image is displayed in lightboxes. Content Blocks such as Image Gallery and Full-width Image will use a lightbox to display the full-size image.'
+name: Caption
+searchable: true
+settings:
+  byteLimit: null
+  charLimit: null
+  code: false
+  columnType: text
+  initialRows: 4
+  multiline: false
+  placeholder: null
+  uiMode: normal
+translationKeyFormat: null
+translationMethod: none
+type: craft\fields\PlainText

@@ -1,0 +1,81 @@
+{% set defaults = {
+	classes: [],
+	heading: "",
+	items: [],
+	paginated: false,
+	pageLimit: 10,
+	organism: "cards",
+	type: "generic",
+	layout: "full",
+	includeSeparator: false,
+	carousel: false,
+	noResults: "No results were found",
+} %}
+
+{% set self = defaults|merge(self) %}
+
+{% set gutterClasses = "mb-12 lg:mb-16" %}
+
+{% set layouts = {
+	full: "w-full mb-10",
+	halves: "w-full md:w-1/2 #{gutterClasses}",
+	thirds: "w-full md:w-1/2 lg:w-1/3 #{gutterClasses}",
+	quarters: "w-full md:w-1/2 lg:w-1/3 xl:w-1/4 #{gutterClasses}",
+} %}
+
+{% if self.paginated %}
+	{% paginate self.items.limit(self.pageLimit|default(10)) as pageInfo, loopItems %}
+{% else %}
+	{% set loopItems = self.items %}
+{% endif %}
+
+{% if self.heading|default %}
+
+<div class="relative mt-20 mb-8">
+	<div class="container flex items-center mx-auto ">
+		<h2 class="px-4 text-blue-800 heading-3">{{ self.heading|default }}</h2>
+	</div>
+</div>
+
+{% endif %}
+
+<div class="relative">
+
+	{% if loopItems|length %}
+
+		{% block listingHeader %}{% if self.paginated and pageInfo|default %}
+			<p class="block w-full pt-3 mb-12 text-base border-t border-blue text-blue">Showing <span class="font-medium">{{ (pageInfo.currentPage * self.pageLimit) - (self.pageLimit - 1) }}</span>&thinsp;&ndash;&thinsp;<span class="font-medium">{{ pageInfo.currentPage == pageInfo.totalPages ? pageInfo.total : pageInfo.currentPage * self.pageLimit }}</span> of <span class="font-medium">{{ pageInfo.total }}</span> results.</p>
+		{% endif %}{% endblock %}
+
+		<div class="relative flex flex-wrap{{ self.classes|length ? " #{self.classes|join(' ')}" }} {{ self.carousel ? ' carousel z-20 lg:-mx-6' : ' md:-mx-6 lg:-mx-8'}}"{{ self.carousel ? ' data-carousel' }}>
+			{% for item in loopItems %}
+
+				<div class="relative flex flex-col lg:px-8 {{ self.carousel ? ' min-h-full px-4' : ' md:px-6'}} {{ layouts[self.layout]|default("full") }}"{{ self.carousel ? ' data-carousel-cell' }}>
+					{% include ["_organisms/#{self.organism}/#{self.type}", "_organisms/cards/generic"] with {
+						item: item,
+						loop: loop,
+					} %}
+				</div>
+
+				{% if self.includeSeparator and not loop.last %}
+					<hr class="w-full mb-10 border-t-2 border-gray-200 md:mx-6 lg:mx-8 xl:mx-10">
+				{% endif %}
+
+			{% endfor %}
+
+			{% block afterLoop %}{% endblock %}
+
+		</div>
+
+		{% block listingFooter %}{% if self.paginated and pageInfo|default %}
+			{% include "_molecules/pagination" with { pageInfo: pageInfo } %}
+		{% endif %}{% endblock %}
+
+	{% else %}
+
+		<div class="mb-24 border-gray-300">
+			<p class="heading-4">{{ self.noResults }}</p>
+		</div>
+
+	{% endif %}
+</div>

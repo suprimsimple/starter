@@ -1,0 +1,18 @@
+{
+	"buttons": ["html", "formatting", "bold", "italic", "lists", "link", "file", "table"],
+	"formatting": ["p", "h2", "h3", "h4"],
+	"formattingAdd": {
+		"feature-paragraph": {
+			"title": "Feature Paragraph",
+			"api": "module.block.format",
+			"args": {
+				"tag": "p",
+				"class": "feature-paragraph"
+			}
+		}
+	},
+	"plugins": ["fullscreen", "table", "counter"],
+	"toolbarFixed": true,
+	"source": true,
+	"linkNewTab": true
+}

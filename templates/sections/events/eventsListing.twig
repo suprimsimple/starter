@@ -1,0 +1,59 @@
+{% extends 'layouts/base' %}
+
+{% block content %}
+
+	{% embed '_organisms/internalPage' %}
+
+		{% block internal %}
+
+			{% set appRequest 			= craft.app.request %}
+			{% set activeCategory 		= appRequest.getParam('category') %}
+			{% set activeType 			= appRequest.getParam('type') %}
+			{% set activeDate 			= appRequest.getParam('date') %}
+			{% set activeDisplay 		= appRequest.getParam('display')|default('list') %}
+			{% set activeWhen 			= appRequest.getParam('when')|default('all') %}
+			{% set activeTo 			= appRequest.getParam('to') %}
+			{% set activeFrom 			= appRequest.getParam('from') %}
+			{% set activeCalendarMonth 	= appRequest.getParam('month')|default(now|date('m')) %}
+			{% set activeCalendarYear 	= appRequest.getParam('year')|default(now|date('Y'))  %}
+			{% set activeKeyword 		= appRequest.getParam('keyword') %}
+
+			{# Fetch results #}
+			{% set params = {
+				section: 	   	'events',
+				entryType: 	   	null,
+				category: 	   	activeCategory is not empty ? craft.categories.slug(activeCategory|join(", ")) : null,
+				type: 	   		activeType is not empty ? craft.categories.slug(activeType|join(", ")) : null,
+				keyword:       	activeKeyword|default(null),
+				display:       	activeDisplay|default('list'),
+				when:          	activeWhen|default(null),
+				to:            	activeTo|default(null),
+				from:          	activeFrom|default(null),
+				calendarMonth: 	activeCalendarMonth|default(null),
+				year:          	activeCalendarYear,
+				month:         	activeCalendarMonth,
+			} %}
+
+			{# Fetch Events #}
+			{% set events = craft.simple.filterEvents(params) %}
+
+			<div class="container">
+				{% include "_organisms/listing" with {
+					self: {
+						classes: [],
+						heading: "",
+						items: events,
+						paginated: true,
+						pageLimit: 12,
+						organism: "cards",
+						type: "event",
+						layout: "thirds",
+					}
+				} %}
+			</div>
+
+		{% endblock %}
+
+	{% endembed %}
+
+{% endblock content %}

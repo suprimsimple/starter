@@ -1,0 +1,72 @@
+{% set defaults = {
+	formAction: '',
+	attributes: {},
+	rows: [],
+	buttonText: 'Go',
+	views: {},
+	display: "list",
+} %}
+
+{% set self = defaults|merge(self) %}
+
+{% import "macros" as macros %}
+
+{% if self.views %}
+
+	<div class="block">
+		<div class="border-b border-gray-300">
+			<nav class="flex -mb-px">
+				{% for view, config in self.views %}
+					<a href="{{ "#{url(craft.app.request.pathInfo)}?display=#{view}" }}" class="inline-flex items-center px-1 py-4 heading-5 border-b-2 group focus:outline-none transition {{ not loop.first ? "ml-6" }} {{ self.display == view ? "border-blue-500 text-blue-600" : "text-gray-600 border-transparent hocus:text-gray-700 hocus:border-gray-400" }}"{% if self.display == view %} aria-current="page"{% endif %}>
+						{{ macros.icon(config.icon, "transition group-hocus:text-blue-600") }}
+						<span class="ml-2">{{ config.text }}</span>
+					</a>
+				{% endfor %}
+			</nav>
+		</div>
+	</div>
+
+{% endif %}
+
+<form
+	action="{{ self.formAction }}"
+	class="p-6 mb-16 bg-gray-100 text-blue md:p-12 print:hidden" {{ macros.addAttributes(self.attributes|default) }}>
+
+	<div class="block w-full type-form">
+
+		{% for row in self.rows %}
+			<div class="flex flex-wrap md:-mx-4{{ row.classes|default ? " #{row.classes}" }}" {{ macros.addAttributes(row.attributes|default) }}>
+
+				{% for field in row.fields|default %}
+					<div class="w-full mb-6 md:px-4{{ row.fields|length > 1 ? " md:w-1/#{row.fields|length}" }}">
+						{{ field }}
+					</div>
+				{% endfor %}
+
+			</div>
+		{% endfor %}
+
+		<div class="flex items-center mt-2">
+			{% include '_atoms/button' with {
+				self: {
+					text: self.buttonText,
+					isButton: true,
+					type: 'submit',
+				}
+			} only %}
+			<a href="{{ "/#{craft.app.request.segments|join('/')}" }}" class="inline-block ml-12 group ring-offset-white outline">
+				<div class="flex items-center w-full font-medium leading-snug type-sm">
+					{{ macros.icon("outline/x", "type-base text-gray-600 transition transform ml-auto group-hover:translate-x-2") }}
+					<span class="ml-4 text-gray-600 text-transition group-hocus:text-gray-700">Clear filters</span>
+				</div>
+			</a>
+		</div>
+
+	</div>
+</form>
+
+{% block scripts %}
+	<script type="module" src="https://cdn.jsdelivr.net/npm/@duetds/date-picker@1.4.0/dist/duet/duet.esm.js"></script>
+	<script nomodule src="https://cdn.jsdelivr.net/npm/@duetds/date-picker@1.4.0/dist/duet/duet.js"></script>
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@duetds/date-picker@1.4.0/dist/duet/themes/default.css" />
+{% endblock %}

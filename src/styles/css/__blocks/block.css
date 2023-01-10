@@ -1,0 +1,44 @@
+/* Establish spacing between block items */
+.b + .b {
+	@apply mt-16;
+}
+
+/* Remove spacing between accordions */
+.b--accordion + .b--accordion {
+	@apply mt-10;
+}
+
+/* Headings need less space below */
+.b.b--heading {
+	@apply mb-4 mt-20;
+}
+
+.b.b--heading + .b {
+	@apply mt-8;
+}
+
+/* Links need less above, more below */
+.b.b--links {
+	@apply mb-20;
+}
+
+.b + .b.b--links {
+	@apply mt-8;
+}
+
+/* Fullwidth images need more space below */
+.b--fullwidth-image {
+	@apply mb-20;
+}
+
+.b--rich-text + .b.b--blockquote {
+	@apply mt-12;
+}
+
+.b--rich-text + .b.b--fullwidth-image {
+	@apply mt-8;
+}
+
+.b--fullwidth-image + .b.b--rich-text {
+	@apply -mt-12;
+}

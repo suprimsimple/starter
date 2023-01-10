@@ -1,0 +1,151 @@
+field: 47eeb68a-65d6-4d09-be70-f0037cfcf8fd # Content Blocks
+fieldLayouts:
+  8d3c37b4-3333-459e-bf92-70df2c3694d4:
+    tabs:
+      -
+        elementCondition: null
+        elements:
+          -
+            elementCondition: null
+            fieldUid: c2cb7fa9-6df4-4568-96cd-67fe9bf334d6 # Heading
+            instructions: null
+            label: null
+            required: true
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: 4d47fff7-48ba-49c7-9d32-f20481f741a7
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            elementCondition: null
+            fieldUid: e6868c0c-41bf-4894-ad63-7e21c7f0b113 # Heading Level
+            instructions: null
+            label: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: 70aa60aa-ae5a-40b2-bd57-35e63b1520f0
+            userCondition: null
+            warning: null
+            width: 50
+          -
+            elementCondition: null
+            fieldUid: 1827b28d-e381-4644-b686-9f0698fbd333 # Show in Table of Contents
+            instructions: null
+            label: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: 5172fb8f-51ce-4c36-9ec3-a8b82a409d9e
+            userCondition: null
+            warning: null
+            width: 50
+        name: Content
+        uid: c784e9b6-cc86-4071-b8c5-c34b4a062d1d
+        userCondition: null
+fields:
+  1827b28d-e381-4644-b686-9f0698fbd333: # Show in Table of Contents
+    columnSuffix: whkllhdy
+    contentColumnType: boolean
+    fieldGroup: null
+    handle: showInTableOfContents
+    instructions: null
+    name: 'Show in Table of Contents'
+    searchable: false
+    settings:
+      default: true
+      offLabel: null
+      onLabel: null
+    translationKeyFormat: null
+    translationMethod: none
+    type: craft\fields\Lightswitch
+  c2cb7fa9-6df4-4568-96cd-67fe9bf334d6: # Heading
+    columnSuffix: null
+    contentColumnType: text
+    fieldGroup: null
+    handle: heading
+    instructions: null
+    name: Heading
+    searchable: true
+    settings:
+      byteLimit: null
+      charLimit: null
+      code: false
+      columnType: text
+      initialRows: 4
+      multiline: false
+      placeholder: null
+      uiMode: normal
+    translationKeyFormat: null
+    translationMethod: none
+    type: craft\fields\PlainText
+  e6868c0c-41bf-4894-ad63-7e21c7f0b113: # Heading Level
+    columnSuffix: null
+    contentColumnType: text
+    fieldGroup: null
+    handle: headingLevel
+    instructions: null
+    name: 'Heading Level'
+    searchable: true
+    settings:
+      displayAsGraphic: null
+      displayFullwidth: null
+      options:
+        -
+          __assoc__:
+            -
+              - label
+              - 'Heading Two'
+            -
+              - showLabel
+              - '1'
+            -
+              - value
+              - h2
+            -
+              - imageUrl
+              - ''
+            -
+              - default
+              - '1'
+        -
+          __assoc__:
+            -
+              - label
+              - 'Heading Three'
+            -
+              - showLabel
+              - '1'
+            -
+              - value
+              - h3
+            -
+              - imageUrl
+              - ''
+            -
+              - default
+              - ''
+        -
+          __assoc__:
+            -
+              - label
+              - 'Heading Four'
+            -
+              - showLabel
+              - '1'
+            -
+              - value
+              - h4
+            -
+              - imageUrl
+              - ''
+            -
+              - default
+              - ''
+    translationKeyFormat: null
+    translationMethod: none
+    type: verbb\buttonbox\fields\Buttons
+handle: heading
+name: Heading
+sortOrder: 1

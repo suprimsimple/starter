@@ -1,0 +1,137 @@
+{# ================================================================== #}
+{# Imager Srcset
+{# ================================================================== #}
+{#
+	Generating background images and img tags
+	$image {object} Asset model, or URL
+	$imageType {string} imageType (controls sizes)
+	$config {object} config (optional)
+	$config.isBackground {boolean} (whether <div> with bg image or <img>) (optional)
+	$config.classes {string} (optional)
+	$config.alt {string} (optional)
+
+	Usage:
+
+	{% import 'macros' as macros %}
+
+	{{ macros.imagerSrcset(image, 'internalBanner', {
+		isBackground: false,
+		classes: '',
+		alt: '',
+	}) }}
+#}
+
+{% macro imagerSrcset(image, transformHandle, config) %}
+
+	{# Set the default config #}
+	{% set defaultConfig = {
+		isBackground: false,
+		classes: [],
+		alt: image is iterable ? (image['alt'] ?? image['title']) : null,
+		transformDefaults: null,
+		configOverrides: null,
+	} %}
+	{% set config = defaultConfig|merge(config|default([])) %}
+
+	{# Make sure the transform exists #}
+	{% set transform = craft.imager.getNamedTransform(transformHandle)|default(craft.imager.getNamedTransform("card")) %}
+	{% set transformHandle = craft.imager.hasNamedTransform(transformHandle) ? transformHandle : "card" %}
+
+	{% if image|default %}
+
+		{# Set Srcset transform #}
+		{% set transformedImages = craft.imager.transformImage(
+			image,
+			transformHandle,
+			config.transformDefaults,
+			config.configOverrides,
+		) %}
+
+		{% set imageWidth = transform.transforms.0.width ?? "800" %}
+		{% set ratio = transform.defaults.ratio|default(9/16) %}
+
+		<picture class="lazy lazy--{{ config.isBackground ? "background" : "img" }}{{ config.classes|default ? " #{config.classes|join(' ')}" }}">
+			<img
+				class="lazyload lazy__image"
+				src="{{ craft.imager.placeholder({ width: imageWidth, height: imageWidth / ratio }) }}"
+				alt="{{ config.alt }}"
+				data-parent-fit="cover"
+				data-sizes="auto"
+				data-srcset="{{ craft.imager.srcset(transformedImages, 'w+h') }}" />
+			<div class="lazy__placeholder" aria-hidden="true"></div>
+		</picture>
+
+	{% endif %}
+
+{% endmacro %}
+
+{# ================================================================== #}
+{# Imager Named Transform
+{# ================================================================== #}
+{#
+	Generates URL of image matching given name
+	$image {object} Asset model, or URL
+	$transformHandle {string} "fullWidth"
+	$config {array} (optional)
+
+	Usage:
+
+	{% import '_macros/imageMacros' as imageMacros %}
+
+	{{ imageMacros.imagerNamedTransform(image, "fullWidth" ) }}
+#}
+{% macro imagerNamedTransform(image, transformHandle, config) %}{% apply spaceless %}
+	{# Set the default config #}
+	{% set defaultConfig = {
+		transformDefaults: null,
+		configOverrides: null,
+	} %}
+	{% set config = defaultConfig|merge(config|default([])) %}
+
+	{# Make sure the transform exists #}
+	{% set transform = craft.imager.getNamedTransform(transformHandle)|default(craft.imager.getNamedTransform("card")) %}
+	{% set transformHandle = craft.imager.hasNamedTransform(transformHandle) ? transformHandle : "card" %}
+
+	{% if image|default %}
+
+		{# Set Srcset transform #}
+		{% set transformedImages = craft.imager.transformImage(
+			image,
+			transformHandle,
+			config.transformDefaults,
+			config.configOverrides,
+		) %}
+
+		{{ transformedImages[0].url|default }}
+
+	{% endif %}
+{% endapply %}{% endmacro %}
+
+
+{# ================================================================== #}
+{# Imager URL
+{# ================================================================== #}
+{#
+	Generates URL of image at given size
+	$image {object} Asset model, or URL
+	$width {numeral} controls size
+	$height {numeral} controls size
+	$mode {string} "crop", "fit", "letterbox" (optional)
+	$format {string} "png","jpg" (optional)
+
+	Usage:
+
+	{% import '_macros/imageMacros' as imageMacros %}
+
+	{{ imageMacros.imagerUrl(image, 600, 380 ) }}
+#}
+{% macro imagerUrl(image, width, height, mode, format) %}{% apply spaceless %}
+	{% set transformedImage = craft.imager.transformImage(image, {
+		width: width,
+		height: height,
+		mode: mode|default('crop'),
+		format: format|default('jpg'),
+		fallback: false,
+	}) %}
+	{{ transformedImage.url }}
+{% endapply %}{% endmacro %}

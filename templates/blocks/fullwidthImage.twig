@@ -1,0 +1,44 @@
+{% import 'macros/images' as imageMacros %}
+{% import 'macros' as macros %}
+
+{% if block.image|default %}
+
+	{% set fullImage = block.image[0] %}
+
+	<figure class="w-full">
+
+		{% set imageMarkup %}
+			{{ imageMacros.imagerSrcset(
+				fullImage,
+				"fullWidth",
+				{ classes: "", allowUpscale: false }
+			) }}
+		{% endset %}
+
+		{% if fullImage.width > 1280 and block['showModal']|default(true) %}
+			<a
+				href="{{ imageMacros.imagerNamedTransform(fullImage, "galleryFull") }}"
+				data-fancybox
+				data-caption="{{ block.caption|length ? block.caption : fullImage.title }}"
+				class="relative block group outline"
+			>
+				{{ macros.icon("outline/photograph", "flex justify-center items-center text-white type-7xl bg-blue-400 absolute z-10 inset-0 opacity-0 transition group-hover:opacity-75") }}
+				{{ imageMarkup }}
+			</a>
+		{% else %}
+			<div class="relative block">
+				{{ imageMarkup }}
+			</div>
+		{% endif %}
+
+		{% if block.caption|length %}
+
+			<figcaption class="mt-4 italic text-gray-700 type-base">
+				<p>{{ block.caption }}</p>
+			</figcaption>
+
+		{% endif %}
+
+	</figure>
+
+{% endif %}

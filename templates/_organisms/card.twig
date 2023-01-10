@@ -1,0 +1,99 @@
+{% set defaults = {
+	attributes: {},
+	classes: "",
+	image: globalFallbacks.fallbackBanner.one(),
+	imageAspectRatio: "aspect-w-8 aspect-h-7",
+	headingLevel: "h3",
+	heading: "",
+	subheading: "",
+	text: "",
+	url: "",
+	target: false,
+	showButton: false,
+	buttonText: 'Learn more',
+	buttonIcon: null,
+	buttonTarget: false,
+} %}
+
+{% set self = defaults|merge(self) %}
+
+{% import 'macros' as macros %}
+{% import 'macros/images' as imageMacros %}
+
+	<article class="{{ self.classes is iterable ? "#{allClasses|join(' ')} " }}card {{ self.url ? " card--link outline" }}" {{ macros.addAttributes(self.attributes) }}>
+		{% block card %}
+			<div class="card__content">
+				{% block cardContent %}
+
+					{% block cardHeading %}
+
+						{% if self.url %}
+							<a
+								class="card__link"
+								aria-describedby="button-{{ self.heading|kebab }}"
+								href="{{ self.url }}"
+								{% if self.target %}target="_blank" rel="noreferrer noopener"{% endif %}
+							>
+						{% endif %}
+
+							<{{ self.headingLevel }} class="card__heading">{{ self.heading }}</{{ self.headingLevel }}>
+
+						{% if self.url %}
+							</a>
+						{% endif %}
+
+						{% if subheading|default %}
+							<div class="heading-6 mt-3">{{ self.subheading }}</div>
+						{% endif %}
+
+					{% endblock %}
+
+					{% block cardInner %}
+
+						<p class="card__text line-clamp-4">
+							{{ self.text|raw }}
+						</p>
+					{% endblock %}
+
+					{% if self.showButton and self.buttonText %}
+						<div class="card__buttons">
+							{% block cardButtons %}
+								{% include "_atoms/button" with {
+									self: {
+										url: null,
+										text: self.buttonText,
+										icon: self.buttonIcon,
+										attributes: {
+											"aria-hidden": "true",
+											"id": "button-" ~ self.heading|kebab,
+										}
+									}
+								} %}
+							{% endblock %}
+						</div>
+					{% endif %}
+
+				{% endblock %}
+			</div>
+
+			{% block cardImageOuter %}
+				<div class="card__asset">
+					{% block cardImage %}
+						<div class="card__asset-inner {{ self.imageAspectRatio }}">
+							{% block cardImageAsset %}
+								{% if self.image %}
+									{{ imageMacros.imagerSrcset(
+										self.image,
+										'card',
+										{ classes: "card__image absolute h-full w-full", isBackground: true })
+									}}
+								{% endif %}
+							{% endblock %}
+							<div class="card__overlay"></div>
+						</div>
+					{% endblock %}
+				</div>
+			{% endblock %}
+
+		{% endblock %}
+	</article>

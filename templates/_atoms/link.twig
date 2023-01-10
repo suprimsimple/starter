@@ -1,0 +1,39 @@
+{% import 'macros' as macros %}
+
+{% set defaults = {
+	isActive: false,
+	isButton: false,
+	attributes: null,
+	classes: [],
+	metadata: null,
+	url: '',
+	text: 'Read more',
+	target: false,
+	icon: 'outline/heroicons/arrow-right',
+} %}
+
+{% set self = defaults|merge(self) %}
+
+<{%- if self.url -%}
+	a
+	href="{{ self.url }}"
+	{% if self.target %}target="_blank"{% endif %}
+{%- elseif self.isButton -%}
+	button type="button"
+{%- else -%}
+	span
+{%- endif %} class="block-link group{{ self.isActive ? " block-link--active" }}{{ self.classes|length ? " #{self.classes|join(' ')}" }}"{{ self.isActive ? " aria-current"}} {{ macros.addAttributes(self.attributes) }}>
+
+	<div class="block-link__inner">
+		{% if self.text|length %}
+			<span class="block-link__text">{{ self.text }}</span>
+		{% endif %}
+		{% if self.metadata %}
+			<span class="block-link__meta">{{ self.metadata }}</span>
+		{% endif %}
+		{% block icon %}{% if self.icon %}
+			{{ macros.icon(self.icon, "block-link__icon") }}
+		{% endif %}{% endblock %}
+	</div>
+
+</{{ self.url ? 'a' : self.isButton ? 'button' : 'span'}}>

@@ -1,0 +1,35 @@
+defaultPlacement: end
+enableVersioning: true
+handle: news
+name: News
+previewTargets:
+  -
+    __assoc__:
+      -
+        - label
+        - 'Primary entry page'
+      -
+        - urlFormat
+        - '{url}'
+      -
+        - refresh
+        - '1'
+  -
+    __assoc__:
+      -
+        - label
+        - 'News listing page'
+      -
+        - urlFormat
+        - '{{ craft.entries.section("sitemap").type("newsListing").one().uri|default("news") }}'
+      -
+        - refresh
+        - '1'
+propagationMethod: all
+siteSettings:
+  7cff4d8a-4325-4cf7-955c-d5de168e98e5: # $DEFAULT_SITE_NAME
+    enabledByDefault: true
+    hasUrls: true
+    template: sections/news/newsDetail
+    uriFormat: '{{ craft.entries.section("sitemap").type("newsListing").one().uri|default("news") }}/{slug}'
+type: channel

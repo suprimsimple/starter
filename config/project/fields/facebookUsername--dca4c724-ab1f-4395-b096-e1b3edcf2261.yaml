@@ -1,0 +1,19 @@
+columnSuffix: null
+contentColumnType: text
+fieldGroup: 76eb371f-fb30-4a2c-8e62-eb9cd1629262 # Globals
+handle: facebookUsername
+instructions: 'The username for your Facebook Page, without the preceding @.'
+name: 'Facebook Username'
+searchable: false
+settings:
+  byteLimit: null
+  charLimit: null
+  code: false
+  columnType: null
+  initialRows: 4
+  multiline: false
+  placeholder: null
+  uiMode: normal
+translationKeyFormat: null
+translationMethod: none
+type: craft\fields\PlainText

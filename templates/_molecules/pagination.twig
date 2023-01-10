@@ -1,0 +1,89 @@
+{% import "macros" as macros %}
+
+{% if pageInfo.totalPages > 1 %}
+
+{% set isFirstPage = pageInfo.currentPage == 1 %}
+{% set isLastPage = pageInfo.currentPage == pageInfo.totalPages %}
+
+{% set coreClasses = "inline-flex items-center justify-center w-12 h-12 tabular-nums rounded-full leading-none transition border hocus:border-black focus:outline-none" %}
+{% set inactiveClasses = coreClasses ~ " border-transparent" %}
+{% set activeClasses = coreClasses ~ " border-black" %}
+
+<nav aria-label="Pagination" class="block mt-20 font-normal type-base">
+	<ul class="flex items-center justify-between gap-x-1">
+		<li class="flex flex-1 w-0">
+			<a
+				{% if not isFirstPage %}
+					href="{{ pageInfo.prevUrl }}"
+				{% else %}
+					aria-disabled="true"
+				{% endif %}
+				class="inline-flex items-center leading-none border transition border-transparent rounded-full h-12 pl-2 pr-4 -ml-2  {{ isFirstPage ? "pointer-events-none" : "hocus:border-black" }}">
+				{{ macros.icon("outline/heroicons/arrow-left", "mr-4") }}
+				Previous
+			</a>
+		</li>
+
+		{% if pageInfo.currentPage > 4 %}
+			<li class="hidden md:flex">
+				<a href="{{ pageInfo.firstUrl }}" class="{{ inactiveClasses }}" aria-label="Page 1">1</a>
+			</li>
+			<li class="hidden mx-2 md:flex">
+				&hellip;
+			</li>
+		{% endif %}
+
+		{% for key, url in pageInfo.getDynamicRangeUrls(5) %}
+			{% set isActive = key == pageInfo.currentPage %}
+			<li class="hidden md:flex">
+				<a href="{{ url }}" class="{{ isActive ? activeClasses : inactiveClasses }}" aria-label="{{ isActive ? 'Current Page, '}}Page {{ key }}"{{ isActive ? ' aria-current="true"'}}>{{ key }}</a>
+			</li>
+		{% endfor %}
+
+		{% if pageInfo.totalPages > pageInfo.currentPage + 4 %}
+			<li class="hidden mx-2 md:flex">
+				&hellip;
+			</li>
+			<li class="hidden md:flex">
+				<a href="{{ pageInfo.lastUrl }}" class="{{ inactiveClasses }}" aria-label="Page {{ pageInfo.totalPages }}">{{ pageInfo.totalPages }}</a>
+			</li>
+		{% endif %}
+
+		{# This shows on smaller screens #}
+		<li class="block w-auto ml-auto mr-auto md:hidden">
+
+			{# {% import "macros/forms" as forms %} #}
+
+			<label for="page" class="sr-only">Go to page</label>
+
+			{# {{ forms.select({
+				label: null,
+				id: 'page',
+				name: 'page',
+				options: range(1, pageInfo.totalPages)|map(i => {
+					label: i,
+					value: pageInfo.getPageUrl( i ),
+				}),
+				value: pageInfo.getPageUrl( pageInfo.currentPage ),
+				attributesField: {
+					'onchange': 'if (this.value) window.location.href=this.value',
+				}
+			}) }} #}
+		</li>
+
+		<li class="flex justify-end flex-1 w-0">
+			<a
+				{% if not isLastPage %}
+					href="{{ pageInfo.nextUrl }}"
+				{% else %}
+					aria-disabled="true"
+				{% endif %}
+				class="inline-flex items-center leading-none border transition border-transparent rounded-full h-12 pr-2 pl-4 -mr-2  {{ isLastPage ? "pointer-events-none" : "hocus:border-black" }}">
+					Next
+					{{ macros.icon("outline/heroicons/arrow-right", "ml-4") }}
+			</a>
+		</li>
+	</ul>
+</nav>
+
+{% endif %}

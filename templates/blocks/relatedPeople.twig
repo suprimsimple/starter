@@ -1,0 +1,10 @@
+{% include "_organisms/listing" with {
+	self: {
+		classes: "",
+		items: block.people|filter(p => p.type.handle == "person"),
+		organism: "cards",
+		type: "person",
+		layout: "halves",
+		includeSeparator: false,
+	}
+} %}

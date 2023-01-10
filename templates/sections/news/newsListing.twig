@@ -1,0 +1,39 @@
+{% extends 'layouts/base' %}
+
+{% block content %}
+
+	{% embed '_organisms/internalPage' %}
+
+		{% block internal %}
+
+			{% set newsArticles = craft.entries({
+				section: "news",
+				orderBy: "postDate DESC",
+				limit: 10,
+				with: [
+					"featureImage",
+					"newsCategory",
+				],
+			}) %}
+
+			<div class="container">
+			
+				{% include "_organisms/listing" with {
+					self: {
+						classes: [],
+						heading: "",
+						items: newsArticles,
+						paginated: true,
+						pageLimit: 12,
+						organism: "cards",
+						type: "article",
+						layout: "thirds",
+					}
+				} %}
+			</div>
+
+		{% endblock %}
+
+	{% endembed %}
+
+{% endblock content %}

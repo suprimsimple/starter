@@ -1,0 +1,41 @@
+{% extends 'layouts/base' %}
+
+{% block content %}
+
+	{% import "macros" as macros %}
+
+	{{ macros.eager(
+		entry,
+		[
+			'featureImage',
+			'newsCategory',
+		]
+	) }}
+
+	{% embed '_organisms/internalPage' %}
+
+		{% block bannerText %}
+
+			{{ parent() }}
+
+			{% if entry.newsCategory|default %}
+				<div class="relative flex flex-wrap items-center mb-4">
+					<div class="p-1 upper">Posted{{ entry.newsCategory|length ? " in" }}</div>
+					{% for cat in entry.newsCategory %}
+						<div class="p-1">
+							<span class="inline-flex items-center px-3 py-1 font-medium leading-5 text-blue-800 bg-blue-100 rounded-full type-sm">
+								{{ cat.title }}
+							</span>
+						</div>
+					{% endfor %}
+					<span class="p-1 upper">on {{ entry.postDate|date("j M Y") }}</span>
+				</div>
+			{% endif %}
+
+
+		{% endblock %}
+
+
+	{% endembed %}
+
+{% endblock content %}

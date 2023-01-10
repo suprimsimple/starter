@@ -1,0 +1,40 @@
+field: 47eeb68a-65d6-4d09-be70-f0037cfcf8fd # Content Blocks
+fieldLayouts:
+  0feaeaf1-9db4-407b-8324-2825b8d0345e:
+    tabs:
+      -
+        elementCondition: null
+        elements:
+          -
+            elementCondition: null
+            fieldUid: 0c7f50f5-bad5-44a8-b347-4f5678d1b51e # Tip
+            instructions: null
+            label: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: d07357d4-d4cc-43a0-a701-c3b814036dfb
+            userCondition: null
+            warning: null
+            width: 100
+        name: Content
+        uid: 1447330a-af3e-4297-80cb-bb139acaae06
+        userCondition: null
+fields:
+  0c7f50f5-bad5-44a8-b347-4f5678d1b51e: # Tip
+    columnSuffix: null
+    contentColumnType: string
+    fieldGroup: null
+    handle: tip
+    instructions: null
+    name: Tip
+    searchable: false
+    settings:
+      style: tip
+      tip: 'This will output anchor links to all **Heading** blocks that are below this block and have **Show in Table of Contents** enabled.'
+    translationKeyFormat: null
+    translationMethod: none
+    type: carlcs\uielementfields\fields\UiTip
+handle: tableOfContents
+name: 'Table of Contents'
+sortOrder: 12

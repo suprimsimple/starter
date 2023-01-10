@@ -1,0 +1,6 @@
+.outline {
+	@apply outline-none focus:outline-none;
+	@apply ring-offset-2;
+	@apply ring-green-700 ring-opacity-80;
+	@apply focus:ring;
+}

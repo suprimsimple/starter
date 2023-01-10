@@ -1,0 +1,21 @@
+columnSuffix: null
+contentColumnType: string
+fieldGroup: 76eb371f-fb30-4a2c-8e62-eb9cd1629262 # Globals
+handle: footerLinks
+instructions: null
+name: 'Footer Links'
+searchable: false
+settings:
+  blockTypeFields: 0
+  changedFieldIndicator: null
+  contentTable: '{{%stc_footerlinks_1}}'
+  fieldLayout: row
+  maxRows: null
+  minRows: null
+  propagationKeyFormat: null
+  propagationMethod: all
+  selectionLabel: 'Add a link'
+  staticField: null
+translationKeyFormat: null
+translationMethod: site
+type: verbb\supertable\fields\SuperTableField

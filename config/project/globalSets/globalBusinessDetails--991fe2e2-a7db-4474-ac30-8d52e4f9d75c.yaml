@@ -1,0 +1,234 @@
+fieldLayouts:
+  e664ca19-1b69-4f07-a646-d5a6a4cf7c91:
+    tabs:
+      -
+        elementCondition: null
+        elements:
+          -
+            elementCondition: null
+            fieldUid: 74dcb940-7812-4e4e-ba10-e33c689f664e # Full Business Name
+            instructions: null
+            label: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: d44e6bc3-e29f-4655-9418-c336de623713
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            elementCondition: null
+            fieldUid: cb90ac97-fcfc-4571-95af-ee57a70b1ba0 # Tagline
+            instructions: null
+            label: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: f5b6c91a-1d6c-489f-abd3-468037e0fb07
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            elementCondition: null
+            fieldUid: 8ccc192a-6b42-4b77-948f-60d7df1e9741 # Business Description
+            instructions: null
+            label: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: 0c399b74-9174-42c7-b646-b428f769ed29
+            userCondition: null
+            warning: null
+            width: 100
+        name: 'Key Information'
+        uid: f295f2f9-d57c-4565-aade-f4088f051db0
+        userCondition: null
+      -
+        elementCondition: null
+        elements:
+          -
+            elementCondition: null
+            fieldUid: 3c14afe7-5c3d-41ff-b29f-49fb4cd451c5 # Email Address
+            instructions: null
+            label: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: 41657f39-2ad3-4f26-b15e-9594cbd08ac4
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            elementCondition: null
+            fieldUid: a5e673e2-276f-4e90-9a0b-87d9ed98f554 # Phone Number
+            instructions: null
+            label: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: 2d409b61-234b-4da3-b8b7-75bf61ffb1ec
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            elementCondition: null
+            fieldUid: bc5712b5-f3c3-43f3-a86f-0c753ade706e # Fax Number
+            instructions: null
+            label: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: b33dca42-ce31-4deb-b517-e94a9576686e
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            elementCondition: null
+            heading: Address
+            type: craft\fieldlayoutelements\Heading
+            uid: 8d01a37b-bfec-4a35-bd02-167f4138e86c
+            userCondition: null
+          -
+            elementCondition: null
+            fieldUid: 37f4eb2d-7dd0-41ac-9a21-4bfd18378698 # Address Line One
+            instructions: null
+            label: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: 784a4e6f-a49e-44f1-99e4-bf5cdf9f2d44
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            elementCondition: null
+            fieldUid: 40f87e3d-201e-4421-b67a-e2303f577587 # Address Line Two
+            instructions: null
+            label: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: 8f2a9be5-2dc4-4b47-8a9d-2fc29d60740e
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            elementCondition: null
+            fieldUid: 6e0d1f7e-6865-4c99-a962-fb53a2d37112 # Suburb
+            instructions: null
+            label: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: 720974df-0e15-4a5d-b02f-7d9f5a22e980
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            elementCondition: null
+            fieldUid: 3398ad72-92a0-4d6f-b91e-ef5f10b58fa1 # Postcode
+            instructions: null
+            label: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: c73242da-2974-42da-a787-60ddd5e7c30b
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            elementCondition: null
+            fieldUid: ef2849ad-90a3-45dc-b533-141cfe5ea7c4 # State
+            instructions: null
+            label: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: 4c9ae71c-9b3b-4a27-8ae7-42064c68d751
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            elementCondition: null
+            fieldUid: 297d2abd-664d-413c-bfd5-365af29a5c98 # Geolocation
+            instructions: null
+            label: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: 5db5a0ca-e8fc-4c07-864c-6a4f9ff60166
+            userCondition: null
+            warning: null
+            width: 100
+        name: Contact
+        uid: b539c05f-b5a8-4852-979c-e076fbb39654
+        userCondition: null
+      -
+        elementCondition: null
+        elements:
+          -
+            elementCondition: null
+            fieldUid: dca4c724-ab1f-4395-b096-e1b3edcf2261 # Facebook Username
+            instructions: null
+            label: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: 4ca39a1c-8ddd-424e-8cd3-e8e10b9e73fe
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            elementCondition: null
+            fieldUid: 10d45bef-3acb-4dc4-b66e-8fe0ac9da884 # Instagram Username
+            instructions: null
+            label: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: 3403a7f9-bbac-4300-b2b1-309115d0f79f
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            elementCondition: null
+            fieldUid: 5b4ed2e9-5ee2-44af-83b6-c90e78d04a9a # LinkedIn Page
+            instructions: null
+            label: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: 908b045f-9907-421a-b425-78f43c0c25f4
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            elementCondition: null
+            fieldUid: ec6f2e50-3b5e-48af-88bf-3e241c404bb0 # Twitter Handle
+            instructions: null
+            label: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: 17ad4f85-d449-478b-b456-1be2e1e469f5
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            elementCondition: null
+            fieldUid: ab45cc71-ada0-4bc3-b990-34eeb6fd9e73 # YouTube Channel
+            instructions: null
+            label: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: 334ff8ae-68e5-436b-96f9-39ebbc67edfb
+            userCondition: null
+            warning: null
+            width: 100
+        name: Social
+        uid: 34705692-4481-40a6-8e77-3b5b4c9cf549
+        userCondition: null
+handle: globalBusinessDetails
+name: 'Business Details'
+sortOrder: 1

@@ -1,0 +1,83 @@
+{% import 'macros' as macros %}
+{% import 'macros/forms' as forms %}
+
+	{% set defaults = {
+		label: 'Label',
+		name: '',
+		options: [],
+		instructions: '',
+		placeholder: '',
+		value: null,
+		id: 'radio-group' ~ random(5000),
+		error: '',
+		oneLine: false,
+		hasColumns: null,
+		hasError: false,
+		isRequired: false,
+		isOpen: false,
+		attributesContainer: {},
+		attributesInner: {},
+		attributesField: {},
+	} %}
+
+	{% set self = defaults|merge(self, true) %}
+
+	{% set hasError = self.error or self.hasError %}
+	{% set errorClass = hasError ? 'has-error' : '' %}
+	{% set filledClass = self.value or self.isOpen ? 'is-filled' : '' %}
+
+	{% set attributesContainer = macros.addAttributes(self.attributesContainer|merge({
+		class: [
+			"",
+			errorClass,
+			filledClass
+		]|join(' ')|trim,
+	}, true)) %}
+
+	{% set attributesInner = macros.addAttributes(self.attributesInner|merge({
+		class: [
+			'block',
+			self.oneLine ? 'flex flex-wrap -mb-8' : null,
+			self.hasColumns ? 'columns-[12rem] columns-3 gap-12' : null,
+		]|join(' ')|trim,
+		for: self.id,
+	}, true)) %}
+
+	{% set attributesOption = macros.addAttributes({
+		class: [
+			'min-w-20',
+			self.oneLine ? 'mb-8 mr-8 last:mr-0' : 'mb-2 last:mb-0',
+		]|join(' ')|trim,
+	}) %}
+
+	{% set instructionId = self.instructions ? self.id ~ '-instructions' : null %}
+
+	<fieldset {{ attributesContainer }}>
+		{% if self.label %}
+			<legend class="block w-full mb-6" data-field-legend>
+				<span class="flex leading-tight text-black type-base lg:text-dark">
+					<span class="font-normal">{{ self.label }}</span>
+				</span>
+			</legend>
+		{% endif %}
+		{% if hasError %}
+			<div class="block mb-3 -mt-3">
+				{{ forms.messages(self.error, self.instructions, instructionId) }}
+			</div>
+		{% endif %}
+		<div {{ attributesInner }}>
+			{% for option in self.options %}
+				<div{{ attributesOption }}>
+					{{ include ("_atoms/forms/radio", {
+						self: {
+							name: self.name,
+							id: self.id ~ '-' ~ loop.index0,
+							error: self.error,
+							hasError: self.hasError,
+							attributesField: self.attributesField,
+						}|merge(option)
+					}, with_context=false) }}
+				</div>
+			{% endfor %}
+		</div>
+	</fieldset>

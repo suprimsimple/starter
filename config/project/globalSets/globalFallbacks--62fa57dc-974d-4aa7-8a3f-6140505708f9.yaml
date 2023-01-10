@@ -1,0 +1,36 @@
+fieldLayouts:
+  62c0904d-e36a-45da-9b7e-5a08c33293d4:
+    tabs:
+      -
+        elementCondition: null
+        elements:
+          -
+            elementCondition: null
+            fieldUid: 14641187-5a7f-4b50-a3ff-3baabbd25de7 # Fallback Banner
+            instructions: null
+            label: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: d45b6ab4-485b-49c5-bed6-28dcaa9e380e
+            userCondition: null
+            warning: null
+            width: 50
+          -
+            elementCondition: null
+            fieldUid: 6980935c-c341-4a77-8155-8b72bfff849b # Fallback Person
+            instructions: null
+            label: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: 6c95e90d-5314-42a8-8ea7-515041dc9ba9
+            userCondition: null
+            warning: null
+            width: 50
+        name: Images
+        uid: ad066fba-99d4-4fb0-ad31-6e73f4d20277
+        userCondition: null
+handle: globalFallbacks
+name: Fallbacks
+sortOrder: 2

@@ -1,0 +1,24 @@
+fieldLayouts:
+  3b2901f0-b46d-4eb8-9766-2c7cc9b654cd:
+    tabs:
+      -
+        elementCondition: null
+        elements:
+          -
+            elementCondition: null
+            fieldUid: 712e1ad9-1027-4d44-a4a9-1d5987a22b04 # Footer Links
+            instructions: null
+            label: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: b14790ce-a08d-4b6a-ae32-7410a5b338fb
+            userCondition: null
+            warning: null
+            width: 100
+        name: 'Ganeral Links'
+        uid: 0f11c536-5dbd-496e-90c7-1f21d9d40da8
+        userCondition: null
+handle: globalFooter
+name: Footer
+sortOrder: 3

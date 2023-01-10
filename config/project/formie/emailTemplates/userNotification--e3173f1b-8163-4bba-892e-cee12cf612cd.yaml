@@ -1,0 +1,4 @@
+handle: userNotification
+name: 'User Notification'
+sortOrder: 99
+template: formie/userNotification

@@ -1,0 +1,61 @@
+field: 47eeb68a-65d6-4d09-be70-f0037cfcf8fd # Content Blocks
+fieldLayouts:
+  56f61d96-7664-4e95-b26a-5153f3680d6e:
+    tabs:
+      -
+        elementCondition: null
+        elements:
+          -
+            elementCondition: null
+            fieldUid: f490eab9-3135-4439-89a9-f7a3d6423b7d # People
+            instructions: null
+            label: null
+            required: true
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: 48777abb-83d5-41b1-b8a7-3dcea5709522
+            userCondition: null
+            warning: null
+            width: 100
+        name: Content
+        uid: e3ac0074-9299-4dbb-a964-8288204e86ef
+        userCondition: null
+fields:
+  f490eab9-3135-4439-89a9-f7a3d6423b7d: # People
+    columnSuffix: null
+    contentColumnType: string
+    fieldGroup: null
+    handle: people
+    instructions: null
+    name: People
+    searchable: true
+    settings:
+      allowSelfRelations: false
+      localizeRelations: false
+      maxRelations: null
+      minRelations: null
+      selectionCondition:
+        __assoc__:
+          -
+            - elementType
+            - craft\elements\Entry
+          -
+            - fieldContext
+            - global
+          -
+            - class
+            - craft\elements\conditions\entries\EntryCondition
+      selectionLabel: 'Add a person'
+      showSiteMenu: true
+      source: null
+      sources:
+        - 'section:af1f0d8e-fa93-4f55-87ff-9175cc33b128' # People
+      targetSiteId: null
+      validateRelatedElements: false
+      viewMode: null
+    translationKeyFormat: null
+    translationMethod: site
+    type: craft\fields\Entries
+handle: relatedPeople
+name: 'Related People'
+sortOrder: 8

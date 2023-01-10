@@ -1,0 +1,23 @@
+{% set defaults = {
+	attributes: {},
+	classes: "",
+	tags: [],
+	tagClasses: "tag--fill type-small uppercase font-heading",
+	includeLinks: false,
+} %}
+
+{% set self = defaults|merge(self) %}
+
+{% import 'macros' as macros %}
+
+{% if self.tags %}
+	<div class="relative flex flex-wrap -m-1 align-center{{ self.classes ? " #{self.classes|join(' ')}" }}"{{ macros.addAttributes(self.attributes) }}>
+		{% for item in self.tags %}
+			<div class="p-1">
+				{% include "_atoms/tag" with {
+					self: item|merge({ classes: self.tagClasses ~ " " ~ item["classes"]|default, includeLinks: self.includeLinks })
+				} %}
+			</div>
+		{% endfor %}
+	</div>
+{% endif %}

@@ -1,0 +1,44 @@
+field: 47eeb68a-65d6-4d09-be70-f0037cfcf8fd # Content Blocks
+fieldLayouts:
+  bb4357ad-e7df-4096-87b0-3ce36091418c:
+    tabs:
+      -
+        elementCondition: null
+        elements:
+          -
+            elementCondition: null
+            fieldUid: 0006e839-b7f7-48d2-bd2c-b73f71bb20c7 # Table
+            instructions: null
+            label: null
+            required: true
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: e9395350-d6c6-425b-809f-1e01e1467a65
+            userCondition: null
+            warning: null
+            width: 100
+        name: Content
+        uid: 841fd7b1-8197-4128-9487-330bf0388abb
+        userCondition: null
+fields:
+  0006e839-b7f7-48d2-bd2c-b73f71bb20c7: # Table
+    columnSuffix: null
+    contentColumnType: text
+    fieldGroup: null
+    handle: table
+    instructions: null
+    name: Table
+    searchable: true
+    settings:
+      columnsAddRowLabel: null
+      columnsInstructions: null
+      columnsLabel: null
+      rowsAddRowLabel: null
+      rowsInstructions: null
+      rowsLabel: null
+    translationKeyFormat: null
+    translationMethod: none
+    type: verbb\tablemaker\fields\TableMakerField
+handle: table
+name: Table
+sortOrder: 10

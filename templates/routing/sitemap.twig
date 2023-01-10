@@ -1,0 +1,25 @@
+{% switch entry.type %}
+
+	{# Redirect to first child #}
+	{% case "redirectToFirstChild" %}
+		{% if entry.hasDescendants() %}
+			{% redirect entry.getChildren().one.url %}
+		{% endif %}
+
+	{% case "childListing" %}
+		{% include 'sections/general/childListing' %}
+
+	{% case "newsListing" %}
+		{% include 'sections/news/newsListing' %}
+
+	{% case "eventsListing" %}
+		{% include 'sections/events/eventsListing' %}
+
+	{% case "locationsListing" %}
+		{% include 'sections/locations/locationsListing' %}
+
+	{% default %}
+		{% include 'sections/general/generalContent' %}
+
+
+{% endswitch %}

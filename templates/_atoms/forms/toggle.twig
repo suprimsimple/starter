@@ -1,0 +1,46 @@
+{% import 'macros' as macros %}
+{% import 'macros/forms' as forms %}
+
+{% set defaults = {
+	label: 'Label',
+	name: '',
+	value: '',
+	instructions: '',
+	id: 'input' ~ random(5000),
+	type: 'text',
+	error: '',
+	hasError: false,
+	isDisabled: false,
+	isChecked: false,
+	attributesField: {},
+} %}
+
+{% set self = defaults|merge(self|default({}, true)) %}
+
+{% set attributesField = macros.addAttributes(self.attributesField|merge({
+	class: [
+		'toggle__input',
+			self.attributesField.class|default()
+	]|join(' ')|trim,
+	type: "checkbox",
+	role: "switch",
+	value: self.value,
+	id: self.id,
+	name: self.name,
+	disabled: self.isDisabled ? 'true' : null,
+	checked: self.isChecked ? 'checked' : null,
+	"x-data": "{}",
+	":aria-pressed": "$el.checked",
+	'aria-invalid': self.hasError ? 'true' : null,
+}), true) %}
+
+<div class="toggle">
+	<div class="toggle__wrapper">
+		<input {{ attributesField }}>
+		<div class="toggle__switch"></div>
+	</div>
+	<label class="toggle__label" for="{{ self.id }}">
+		{{ self.label }}
+	</label>
+	{% block afterLabel %}{% endblock %}
+</div>

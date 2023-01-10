@@ -1,0 +1,27 @@
+{% import "macros" as macros %}
+
+{{ macros.eager(
+	entry,
+	[
+		'contentBlocks.imageGallery:images',
+		'contentBlocks.relatedPeople:people',
+		'contentBlocks.relatedPeople:people.peopleProfileImage',
+		'contentBlocks.fullwidthImage:image',
+		'contentBlocks.links:links',
+		'contentBlocks.video:video',
+		'contentBlocks.callToAction:links',
+		'contentBlocks.form:form',
+	]
+) }}
+
+{% for block in entry.contentBlocks %}
+
+	{% set blockIndex = loop.index %}
+
+	<div class="b b--{{ block.type.handle|kebab }}">
+
+		{% include '/blocks/' ~ block.type.handle ignore missing with {block: block, blockIndex: blockIndex} %}
+
+	</div>
+
+{% endfor %}

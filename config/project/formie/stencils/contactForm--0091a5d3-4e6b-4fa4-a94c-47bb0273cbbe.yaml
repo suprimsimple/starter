@@ -1,0 +1,190 @@
+data:
+  dataRetention: forever
+  dataRetentionValue: null
+  fileUploadsAction: retain
+  notifications:
+    -
+      attachFiles: true
+      bcc: null
+      cc: null
+      conditions: '{"sendRule":"send","conditionRule":"all","conditions":[]}'
+      content: '[{"type":"paragraph","content":[{"type":"text","text":"A user submission has been made on the \""},{"type":"variableTag","attrs":{"label":"Form Name","value":"{formName}"}},{"type":"text","text":"\" form on "},{"type":"variableTag","attrs":{"label":"Site Name","value":"{siteName}"}},{"type":"text","text":" at "},{"type":"variableTag","attrs":{"label":"Timestamp (yyyy-mm-dd hh:mm:ss)","value":"{timestamp}"}}]},{"type":"paragraph","content":[{"type":"text","text":"Their submission details are:"}]},{"type":"paragraph","content":[{"type":"variableTag","attrs":{"label":"All Form Fields","value":"{allFields}"}}]}]'
+      enableConditions: false
+      enabled: true
+      formId: null
+      from: ''
+      fromName: null
+      id: stencil60ada34dc9b6d
+      name: 'Admin Notification'
+      replyTo: '{field.emailAddress}'
+      replyToName: null
+      subject: 'A new submission was made on "{formName}"'
+      templateId: 1
+      to: '{systemEmail}'
+      uid: null
+    -
+      attachFiles: true
+      bcc: null
+      cc: null
+      conditions: '{"sendRule":"send","conditionRule":"all","conditions":[]}'
+      content: '[{"type":"paragraph","content":[{"type":"text","text":"Thanks again for contacting us. Our team will get back to you as soon as we can."}]},{"type":"paragraph","content":[{"type":"text","text":"As a reminder, you submitted the following details at "},{"type":"variableTag","attrs":{"label":"Timestamp (yyyy-mm-dd hh:mm:ss)","value":"{timestamp}"}}]},{"type":"paragraph","content":[{"type":"variableTag","attrs":{"label":"All Form Fields","value":"{allFields}"}}]}]'
+      enableConditions: false
+      enabled: true
+      formId: null
+      from: null
+      fromName: null
+      id: stencil60ada34dc9b6e
+      name: 'User Notification'
+      replyTo: null
+      replyToName: null
+      subject: 'Thanks for contacting us!'
+      templateId: 2
+      to: '{field.emailAddress}'
+      uid: null
+  pages:
+    -
+      id: new1272610411
+      label: 'Page 1'
+      notificationFlag: true
+      rows:
+        -
+          fields:
+            -
+              brandNewField: false
+              columnWidth: 12
+              handle: yourName
+              hasLabel: true
+              id: new7715-7348
+              label: 'Your Name'
+              settings:
+                firstNameCollapsed: false
+                firstNameDefaultValue: ''
+                firstNameEnabled: true
+                firstNameLabel: 'First Name'
+                firstNamePlaceholder: 'e.g. Peter'
+                firstNameRequired: true
+                handle: yourName
+                instructions: 'Please enter your full name.'
+                instructionsPosition: ''
+                label: 'Your Name'
+                labelPosition: verbb\formie\positions\Hidden
+                lastNameCollapsed: false
+                lastNameDefaultValue: ''
+                lastNameEnabled: true
+                lastNameLabel: 'Last Name'
+                lastNamePlaceholder: 'e.g. Sherman'
+                lastNameRequired: true
+                limitType: characters
+                middleNameCollapsed: true
+                middleNameDefaultValue: ''
+                middleNameEnabled: false
+                middleNameLabel: 'Middle Name'
+                placeholder: 'Your name'
+                prefixCollapsed: true
+                prefixDefaultValue: ''
+                prefixEnabled: false
+                prefixLabel: Prefix
+                subfieldLabelPosition: ''
+                useMultipleFields: true
+              type: verbb\formie\fields\formfields\Name
+              vid: new1136-595
+          id: new8990-9934
+        -
+          fields:
+            -
+              brandNewField: false
+              columnWidth: 12
+              handle: emailAddress
+              hasLabel: true
+              id: new6482-9528
+              label: 'Email Address'
+              settings:
+                handle: emailAddress
+                instructions: 'Please enter your email so we can get in touch.'
+                instructionsPosition: ''
+                label: 'Email Address'
+                labelPosition: ''
+                limitType: characters
+                placeholder: 'e.g. psherman@wallaby.com'
+                required: true
+              type: verbb\formie\fields\formfields\Email
+              vid: new3130-7176
+          id: new9524-8509
+        -
+          fields:
+            -
+              brandNewField: false
+              columnWidth: 12
+              handle: message
+              hasLabel: true
+              id: new982-7322
+              label: Message
+              settings:
+                handle: message
+                instructions: 'Please enter your comments.'
+                instructionsPosition: ''
+                label: Message
+                labelPosition: ''
+                limitType: characters
+                placeholder: 'e.g. The reason for my enquiry is...'
+                required: true
+              type: verbb\formie\fields\formfields\MultiLineText
+              vid: new2412-3535
+          id: new2177-9685
+      settings:
+        backButtonLabel: Back
+        buttonsPosition: left
+        label: 'Page 1'
+        nextButtonConditions: '{"showRule":"show","conditionRule":"all","conditions":[]}'
+        showBackButton: false
+        submitButtonLabel: Submit
+      sortOrder: 0
+  settings:
+    collectIp: false
+    collectUser: false
+    dataRetention: null
+    dataRetentionValue: null
+    defaultEmailTemplateId: '2'
+    defaultInstructionsPosition: verbb\formie\positions\BelowInput
+    defaultLabelPosition: verbb\formie\positions\AboveInput
+    disableCaptchas: false
+    displayCurrentPageTitle: false
+    displayFormTitle: false
+    displayPageProgress: true
+    displayPageTabs: true
+    errorMessage: '[{"type":"paragraph","content":[{"type":"text","text":"Couldn’t save submission due to errors."}]}]'
+    errorMessagePosition: top-form
+    fileUploadsAction: null
+    limitSubmissions: false
+    limitSubmissionsMessage: null
+    limitSubmissionsNumber: null
+    limitSubmissionsType: null
+    loadingIndicator: spinner
+    loadingIndicatorText: null
+    progressPosition: end
+    redirectUrl: null
+    requireUser: false
+    requireUserMessage: null
+    scheduleForm: false
+    scheduleFormEnd: null
+    scheduleFormExpiredMessage: null
+    scheduleFormPendingMessage: null
+    scheduleFormStart: null
+    scrollToTop: true
+    submissionTitleFormat: '{field.yourName} – {dateInt}'
+    submitAction: message
+    submitActionFormHide: true
+    submitActionMessage: '[{"type":"paragraph","content":[{"type":"text","text":"Thank you for contacting us! Our team will get in touch shortly to follow up on your message."}]}]'
+    submitActionMessagePosition: top-form
+    submitActionMessageTimeout: null
+    submitActionTab: null
+    submitActionUrl: null
+    submitMethod: ajax
+    validationOnFocus: true
+    validationOnSubmit: true
+  userDeletedAction: retain
+defaultStatus: 412c62c9-8dde-47e3-969a-45bccc5a2518 # New
+handle: contactForm
+name: 'Default Form Settings'
+submitActionEntry: null
+template: eebe4179-920a-4520-bbf0-c3cea952a512 # Custom Template

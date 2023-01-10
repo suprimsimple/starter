@@ -1,0 +1,51 @@
+{% extends 'layouts/base' %}
+
+{% set entry = craft.entries.section("compilations").slug(entrySlug).one() %}
+
+{% if not entry or not craft.app.request.isPreview %}
+	{% exit 404 %}
+{% endif %}
+
+{% block content %}
+	{% import "macros" as macros %}
+
+	<div class="outer-container">
+		<div class="container">
+
+			<div class="mt-32 mb-16">
+				<h1 class="text-center heading-0 text-violet-800">{{ entry.title|typogrify }} Preview</h1>
+			</div>
+
+			{% set showsQuery = compilationToQuery(entry) %}
+
+			{% set shows = showsQuery
+				.with([
+					"showsFeatureImage",
+					"showsFeatureImages",
+					"showsPerformances",
+					"showsPerformances.performanceAccessibility",
+					"showsGenres",
+					"showsHomeCompany",
+					"showsSeries",
+					"showsSeries.logo",
+					"showsFestival",
+					"showsFestival.logo",
+				])
+				.orderBy("showsFirstPerformanceDate ASC")
+				.all()
+			%}
+
+			<div class="grid grid-cols-3 gap-20">
+
+				{% for item in shows %}
+
+					{% include "_organisms/cards/show" %}
+
+				{% endfor %}
+
+			</div>
+
+		</div>
+	</div>
+
+{% endblock %}

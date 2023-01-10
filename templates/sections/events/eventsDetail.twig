@@ -1,0 +1,204 @@
+{% extends 'layouts/base' %}
+
+{% block content %}
+
+	{% import "macros" as macros %}
+
+	{{ macros.eager(
+		entry,
+		[
+			'featureImage',
+			'eventsLocation',
+			'eventsCategory',
+		]
+	) }}
+
+	{% set parent = craft.entries.type("eventsListing").one() %}
+
+	{% embed '_organisms/internalPage' %}
+
+		{% block article %}
+
+			{% import "macros" as macros %}
+			{% import "macros/events" as eventMacros %}
+			{% import 'macros/images' as imageMacros %}
+
+			{# Event date #}
+			{% set occurrences = entry.eventsDates.futureOccurrences(now|date('Y-m-d')~' 00:00:00') %}
+
+			{# Setting location #}
+			{% set geoLocation = null %}
+			{% set location = '' %}
+
+			{# Geolocation #}
+			{% if entry.geolocation.lat|default and entry.geolocation.lng|default %}
+				{% set location = entry.geolocation.address %}
+				{% set geoLocation = entry %}
+
+				{% set geoLocation = [{
+					locationName: entry.geolocation.address,
+					locationHandle: '',
+					locationSummary: '',
+					locationUrl: '',
+					locationLat: entry.geolocation.lat|default,
+					locationLng: entry.geolocation.lng|default,
+				}] %}
+			{% endif %}
+
+			{# If address has been entered manually #}
+			{# {% if entry.addressesLineOne|length %}
+				{% set addressLine = '' %}
+				{% set addressLine = entry.addressesLineOne ~ ' ' ~ entry.addressesLineTwo %}
+
+				{% set suburb = entry.addressesSuburb|length ? entry.addressesSuburb : null %}
+				{% set state = entry.addressesState.value|length ? entry.addressesState.value|replace('South Australia', 'SA') : null %}
+				{% set postcode = entry.addressesPostCode|length ? entry.addressesPostCode : null %}
+
+				{% if suburb and state and postcode %}
+					{% set location = macros.formatAddress(addressLine, null, suburb, state, postcode) %}
+				{% else %}
+					{% set location = addressLine %}
+				{% endif %}
+
+			{% endif %} #}
+
+			<h1 class="h1">{{ entry.title }}</h1>
+
+			<div class="flex flex-col justify-between w-full px-4 py-2 mb-12 bg-white border-t-2 border-gray-300 rounded-b max-md:space-y-4 md:items-center md:flex-row">
+
+				{% if entry.eventsDates.isContinuousDays %}
+					{% set calendarLinkConfig = {
+						title: entry.title,
+						startDate: entry.eventsDates.firstOccurrence.from|default,
+						endDate: entry.eventsDates.lastOccurrence.to|default,
+						address: location|default(''),
+						description: entry.summary|default(''),
+					} %}
+				{% else %}
+					{% set calendarLinkConfig = {
+						title: entry.title,
+						startDate: entry.eventsDates.firstOccurrence(now|date("Y-m-d"), true).from|default,
+						endDate: entry.eventsDates.firstOccurrence(now|date("Y-m-d"), true).to|default,
+						address: location|default(''),
+						description: entry.summary|default(''),
+					} %}
+				{% endif %}
+
+				<div class="flex items-center text-blue">
+					<span class="upper">Add to calendar</span>
+					<ul class="flex ml-4 space-x-4 copy">
+						<li>
+							<a class="p-1 underline transition outline ring-offset-gray-100 hocus:text-blue-400 hocus:no-underline" target="_blank" href="{{ eventMacros.addToCalendarLink(calendarLinkConfig) }}">iCal</a>
+						</li>
+						<li>
+							<a class="p-1 underline transition outline ring-offset-gray-100 hocus:text-blue-400 hocus:no-underline" target="_blank" href="{{ eventMacros.addToCalendarLink(calendarLinkConfig|merge({ type: 'google' })) }}">Google</a>
+						</li>
+					</ul>
+				</div>
+
+				<div class="flex items-center upper text-blue">
+					Share event
+					<ul class="flex ml-4 space-x-2">
+						<li><a aria-label="Share on Facebook" class="block text-3xl text-blue-800 transition outline ring-offset-gray-100 hover:text-blue-400" href="https://www.facebook.com/sharer/sharer.php?u={{ craft.app.request.absoluteUrl|url_encode }}" target="_blank">{{ macros.icon("social/facebook",'block') }}</a></li>
+						<li><a aria-label="Share on Twitter" class="block text-3xl text-blue-800 transition outline ring-offset-gray-100 hover:text-blue-400" href="https://twitter.com/intent/tweet?text={{ ("Check out " ~ entry.title ~ " on " ~ siteName ~ " - " ~  craft.app.request.absoluteUrl)|url_encode }}" target="_blank">{{ macros.icon("social/twitter", 'block') }}</a></li>
+					</ul>
+				</div>
+			</div>
+
+			{% set bookingContent -%}{%- spaceless %}
+				{% if entry.eventsBookingCallToAction|default %}
+					{{ entry.eventsBookingCallToAction.link }}
+				{% endif %}
+			{% endspaceless -%}{%- endset %}
+
+			{% set items = [
+				{
+					key: 'Category',
+					value: entry.eventsCategory|join(", "),
+				},
+				{
+					key: 'Bookings',
+					value: bookingContent,
+				},
+			] %}
+
+			{% if entry.eventsDates.isContinuousDays %}
+				{% set items = items|unshift(
+					{
+						key: 'Dates',
+						value: entry.eventsDates|default ? eventMacros.dateSpan(entry.eventsDates.firstOccurrence, entry.eventsDates.lastOccurrence, { showDate: true, showTime: false }),
+					},
+					{
+						key: 'Time',
+						value: entry.eventsDates|default ? eventMacros.dateSpan(entry.eventsDates.firstOccurrence, entry.eventsDates.lastOccurrence, { showDate: false, showTime: true }),
+					},
+					{
+						key: 'Where',
+						value: entry.type.handle != 'virtualEvent' ? location,
+					},
+				) %}
+			{% else %}
+				{% set items = items|unshift(
+					{
+						key: 'When',
+						value: entry.eventsDates|default ? eventMacros.singleDate(entry.eventsDates.firstOccurrence(now|date("Y-m-d")~' 00:00:00', true), { showDate: true, showTime: true }),
+					},
+					{
+						key: 'Where',
+						value: entry.type.handle != 'virtualEvent' ? location,
+					},
+					{
+						key: 'Upcoming dates',
+						value: eventMacros.otherOccurrenceDates(occurrences, entry.title, location|default, entry.summary),
+					},
+				) %}
+			{% endif %}
+
+			{% include "_molecules/datalist" with {
+				self: {
+					classes: ["mb-10"],
+					size: "halves",
+					items: items,
+				}
+			} %}
+
+			{% include '_molecules/contentBlocks' %}
+
+			{% if geoLocation %}
+				{# {% if geoLocation.geolocation.lat and geoLocation.geolocation.lng %}
+
+					{% set location = [{
+						locationName: geoLocation.title,
+						locationHandle: geoLocation.slug,
+						locationSummary: geoLocation.summary,
+						locationLat: geoLocation.geolocation.lat|default,
+						locationLng: geoLocation.geolocation.lng|default,
+					}] %} #}
+
+					<div class="b b--map" id="map">
+						<div class="richtext">
+							<h2>Location</h2>
+						</div>
+
+						<div class="mt-8">
+							{% include "_organisms/map" with {
+								items: geoLocation
+							}%}
+						</div>
+					</div>
+				{# {% endif %} #}
+
+			{% endif %}
+
+
+		{% endblock %}
+
+		{% block aside %}
+
+			{% set pages = parent.siblings.all()|merge([parent]) %}
+			{{ parent() }}
+		{% endblock %}
+
+	{% endembed %}
+
+{% endblock content %}

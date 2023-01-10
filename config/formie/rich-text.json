@@ -1,0 +1,28 @@
+{
+	"forms": {
+		"submitActionMessage": {
+			"buttons": [
+				"bold",
+				"italic"
+			],
+			"rows": 3
+		},
+		"errorMessage": {
+			"buttons": [
+				"bold",
+				"italic"
+			],
+			"rows": 3
+		}
+	},
+	"notifications": {
+		"content": {
+			"buttons": [
+				"bold",
+				"italic",
+				"link",
+				"variableTag"
+			]
+		}
+	}
+}

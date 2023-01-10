@@ -1,0 +1,56 @@
+{% import "macros" as macros %}
+
+{% set defaults = {
+	type: 'text',
+	label: '',
+	value: '',
+	instructions: '',
+	placeholder: '',
+	id: 'text' ~ random(5000),
+	name: 'text',
+	attributes: {},
+	classes: [],
+	attributesContainer: {
+		class: "relative",
+	},
+	attributesInner: {},
+	attributesField: {},
+	hasHiddenLabel: false,
+	isDisabled: false,
+	isRequired: false,
+	error: '',
+} %}
+
+{% set self = defaults|merge(self|default({})) %}
+
+<div class="relative forms-text" {{ macros.addAttributes(self.attributesContainer) }}>
+	<label class="block px-6 mb-1 font-normal copy-sm{{ self.hasHiddenLabel ? " sr-only" }}" for="{{ self.id }}">{{ self.label }}</label>
+	<div {{ macros.addAttributes(self.attributesInner) }}>
+		{% block input %}
+			<input
+				id="{{ self.id }}"
+				class="{{ self.classes|join(" ") }} form-input w-full"
+				type="{{ self.type }}"
+				name="{{ self.name }}"
+				value="{{ self.value }}"
+				placeholder="{{ self.placeholder }}"
+				{{ macros.addAttributes(self.attributes) }}
+				{{ self.isDisabled ? "disabled" }}
+				{{ self.isRequired ? "aria-required=true required" }}
+				{{ self.instructions ? "aria-describedby=" ~ id ~ "-instructions" }}
+				{{ macros.addAttributes(self.attributesField) }}
+			>
+			{% if self.isRequired %}
+				<span class="absolute right-6 top-1.5 text-dark">*</span>
+			{% endif %}
+		{% endblock %}
+	</div>
+	{% if self.instructions %}
+		<div id="{{ self.id }}-instructions" class="px-6 my-1 italic text-gray-600 copy-2xs">
+			{{ self.instructions }}
+		</div>
+	{% endif %}
+	{% if self.error %}
+		<div class="px-6 mt-1 text-status-red copy-2xs">{{ self.error }}</div>
+	{% endif %}
+</div>

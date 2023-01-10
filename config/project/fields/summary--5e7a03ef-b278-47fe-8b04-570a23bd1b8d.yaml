@@ -1,0 +1,19 @@
+columnSuffix: null
+contentColumnType: string(1024)
+fieldGroup: 336ecc00-f868-49ae-8e2a-7c0425a2f1e1 # Common
+handle: summary
+instructions: 'This text is displayed when this entry is featured on listing pages, or when it appears in search. It will also be used as the meta description.'
+name: Summary
+searchable: true
+settings:
+  byteLimit: null
+  charLimit: 256
+  code: false
+  columnType: null
+  initialRows: 4
+  multiline: true
+  placeholder: null
+  uiMode: normal
+translationKeyFormat: null
+translationMethod: none
+type: craft\fields\PlainText

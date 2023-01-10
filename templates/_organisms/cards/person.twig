@@ -1,0 +1,123 @@
+
+{% embed "_organisms/card" with {
+	self: {
+		image: item.peopleProfileImage.one()|default,
+		imageAspectRatio: "aspect-w-8 aspect-h-9",
+		heading: item.title,
+		subheading: item.peoplePosition|default,
+		text: null,
+		url: item.url,
+	}
+} %}
+	{% block cardImageAsset %}
+		{% import "macros/images" as imageMacros %}
+		{% if self.image|default %}
+			{{ imageMacros.imagerSrcset(
+				self.image,
+				'peopleThumb',
+				{ classes: "card__image absolute h-full w-full", isBackground: true }
+			) }}
+		{% else %}
+			<div class="absolute w-full h-full bg-blue-300 card__image"></div>
+		{% endif %}
+	{% endblock %}
+	{% block cardContent %}
+		{% import "macros" as macros %}
+		{{ parent() }}
+
+		<div class="middleclass-text">
+			{{ item.peopleShortBiography }}
+		</div>
+
+		{# {% include "_molecules/datalist" with {
+			self: {
+				classes: ["mt-4", "w-full"],
+				items: [
+					{
+						key: macros.icon("outline/phone"),
+						aria: "Phone Number",
+						value: item.contactPhoneNumber|default,
+						url: "tel:#{item.contactPhoneNumber|default|replace(' ')}",
+					},
+					{
+						key: macros.icon("outline/phone"),
+						aria: "Mobile Number",
+						value: item.contactMobileNumber|default,
+						url: "tel:#{item.contactMobileNumber|default|replace(' ')}",
+					},
+					{
+						key: macros.icon("outline/mail"),
+						aria: "Email Address",
+						value: item.contactEmailAddress|default,
+						url: "mailto:#{item.contactEmailAddress|default}",
+					},
+					{
+						key: macros.icon("outline/arrow-right"),
+						aria: "Link",
+						value: "View full profile",
+						url: item.url,
+					},
+				]
+			}
+		} %} #}
+	{% endblock %}
+
+{% endembed %}
+
+
+
+{# {% import "macros/images" as imageMacros %}
+{% import "macros" as macros %}
+
+<div class="flex flex-col min-h-full">
+
+	<div class="relative aspect-w-8 aspect-h-9">
+		{% if item.peopleProfileImage|default %}
+			{{ imageMacros.imagerSrcset(
+				item.peopleProfileImage[0],
+				'peopleThumb',
+				{ classes: "absolute h-full w-full", isBackground: true }
+			) }}
+		{% else %}
+			<div class="absolute inset-0 bg-blue-300"></div>
+		{% endif %}
+	</div>
+
+	<div class="relative mt-4">
+		<h3 class="font-medium text-blue-800 heading-3">{{ item.title }}{{ item.peopleHonorific ? " #{item.peopleHonorific}" }}</h3>
+		{% if item.peoplePosition|default %}
+			<div class="mt-2 text-gray-700 heading-5">{{ item.peoplePosition }}</div>
+		{% endif %}
+
+		{% include "_molecules/datalist" with {
+			self: {
+				classes: ["mt-6", "w-full"],
+				items: [
+					{
+						key: macros.icon("outline/phone"),
+						value: item.contactPhoneNumber|default,
+						url: "tel:#{item.contactPhoneNumber|default|replace(' ')}",
+					},
+					{
+						key: macros.icon("outline/phone"),
+						value: item.contactMobileNumber|default,
+						url: "tel:#{item.contactMobileNumber|default|replace(' ')}",
+					},
+					{
+						key: macros.icon("outline/mail"),
+						value: item.contactEmailAddress|default,
+						url: "mailto:#{item.contactEmailAddress|default}",
+					},
+					{
+						key: macros.icon("social/linkedin"),
+						value: "View LinkedIn Profile",
+						target: "_blank",
+						url: item.contactLinkedIn|default,
+					}
+				]
+			}
+		} %}
+
+
+	</div>
+</div> #}
