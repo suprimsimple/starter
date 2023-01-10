@@ -20,7 +20,7 @@ const App = () => {
 	}
 	return (
 		<>
-			<Button onClick={handleCount}>Button Component asdasasdasd</Button>
+			<Button onClick={handleCount}>Button Components</Button>
 			<span>{count}</span>
 			<TimeStamp></TimeStamp>
 		</>

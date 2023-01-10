@@ -2,7 +2,6 @@ import { defineConfig, splitVendorChunkPlugin } from "vite"
 import legacy from "@vitejs/plugin-legacy"
 import ViteRestart from "vite-plugin-restart"
 import { visualizer } from "rollup-plugin-visualizer"
-import react from "@vitejs/plugin-react"
 // import { ViteFaviconsPlugin } from "vite-plugin-favicon2"
 
 const viteRestartValue = (() => {
@@ -31,7 +30,6 @@ export default defineConfig(({ command }) => ({
 		},
 	},
 	plugins: [
-		react({ fastRefresh: true }),
 		legacy({
 			targets: ["defaults", "not IE 11"],
 		}),
@@ -48,9 +46,6 @@ export default defineConfig(({ command }) => ({
 		}),
 		// splitVendorChunkPlugin(),
 	],
-	worker: {
-		plugins: [react()],
-	},
 	server: {
 		host: "0.0.0.0",
 		port: 3000,
