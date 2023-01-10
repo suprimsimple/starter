@@ -1,0 +1,63 @@
+{% if entry['bannerImage']|default %}
+	{% set bannerImage = entry.bannerImage[0] %}
+
+{% elseif parent is defined and parent != null and parent['bannerImage']|default %}
+	{% set bannerImage = parent.bannerImage[0] %}
+
+{% elseif globalFallbacks.is defined and globalFallbacks.fallbackBanner|default %}
+	{% set bannerImage = globalFallbacks.fallbackBanner[0] %}
+
+{% endif %}
+
+{% import 'macros/images' as imageMacros %}
+
+<section class="banner banner--internal">
+
+	{% if bannerImage|default %}
+		{{ imageMacros.imagerSrcset(
+			bannerImage,
+			'internalBanner',
+			{ classes: 'banner__image', isBackground: true })
+		}}
+
+	{% else %}
+		<div class="lazyload banner__image" data-parent-fit="cover" data-sizes="auto" data-bgset="{{ craft.imager.placeholder }}">
+		<img class="image__placeholder" src="{{ craft.imager.placeholder }}" alt="">
+
+	{% endif %}
+
+	{% if entry['bannerVideo']|default %}
+		{% set embeddedAsset = craft.embeddedAssets.get(entry.bannerVideo.one()) %}
+
+		{% if embeddedAsset != null %}
+			{% set id = embeddedAsset.url|replace(embeddedAsset.providerUrl, '') %}
+			{% if '/' in id %}
+				{% set id = id|split('/')[0] %}
+			{% endif %}
+
+			<div class="banner__video">
+				<iframe src="//player.vimeo.com/video/{{ id }}?background=1" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+			</div>
+		{% endif %}
+
+	{% endif %}
+
+	<div class="container">
+
+		<div class="banner__content">
+
+			<div class="banner__text">
+
+				{% block bannerText %}
+
+					<h1 class="banner__heading">{{ entry['title']|default }}</h1>
+
+				{% endblock %}
+
+			</div>
+
+		</div>
+
+	</div>
+
+</section>

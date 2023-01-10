@@ -1,0 +1,39 @@
+.tag {
+	@apply inline-flex items-center px-3 py-1 rounded-full;
+	@apply type-sm leading-none;
+}
+
+.tag[href] {
+	@apply transition;
+}
+
+/*
+================================================
+Fill
+================================================
+*/
+
+.tag--fill {
+	@apply border-transparent border-2;
+	@apply text-black bg-gray-200;
+}
+
+.tag--fill[href],
+button.tag--fill {
+	@apply hocus:text-black hocus:bg-indigo-200  hocus:border-current;
+}
+
+/*
+================================================
+Outline
+================================================
+*/
+
+.tag--outline {
+	@apply border border-current;
+	@apply type-base px-4 py-3;
+}
+
+.tag--outline.tag--blue {
+	@apply text-blue-700;
+}

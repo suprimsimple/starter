@@ -1,0 +1,10 @@
+.video {
+	@apply relative h-0 overflow-hidden rounded-lg w-full m-0 type-base;
+	@apply aspect-video;
+}
+
+.video iframe,
+.video object,
+.video embed {
+	@apply absolute w-full h-full inset-0;
+}

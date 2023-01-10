@@ -1,0 +1,76 @@
+{# ================================================================== #}
+{# Breadcrumbs partial
+{# ================================================================== #}
+{#
+	Generates breadcrumbs
+	$crumbs {array} SEOMatic breadcrumbs, or Entry Models
+	$config {object} (optional)
+	$config.truncateOver {numeric}
+	$config.keepLast {numeric} includes current page
+	$config.showCurrent {boolean}
+
+
+	Usage:
+
+	{% include '__molecules/breadcrumbs' with {
+		crumbs: seomatic.jsonLd.get('breadcrumbList').itemListElement|default
+	} %}
+#}
+
+
+{% set defaultConfig = {
+	truncateOver: 5,
+	truncateTo: 3,
+	showCurrent: false,
+} %}
+
+{% set config = defaultConfig|merge(config|default([])) %}
+
+{% if crumbs %}
+
+	<nav class="breadcrumbs" aria-label="You are here:" role="navigation">
+		<ul class="breadcrumbs__wrapper">
+
+			{% set ellipsisShown = false %}
+			{% for item in crumbs %}
+
+				{% if item['item']|default %}
+					{% set crumbUrl = item['item']|default('/') %}
+					{% set crumbName = item['name']|default('') %}
+				{% else %}
+					{% set crumbUrl = item['url']|default('/')  %}
+					{% set crumbName = item['title']|default('') %}
+				{% endif %}
+
+				{% if loop.last %}
+					{# In most instances, it isn't worth showing the current page #}
+					{% if config.showCurrent %}
+						<li class="breadcrumbs__crumb">
+							<span class="breadcrumbs__active"><span class="sr-only">Current: </span> {{ crumbName }}</span>
+						</li>
+					{% endif %}
+
+				{% elseif crumbs|length >= config.truncateOver and loop.index > 1 and loop.index <= (crumbs|length - config.truncateTo) and ellipsisShown %}
+					{# Don't output anything, this is a middle crumb in a long list. #}
+
+				{% elseif crumbs|length >= config.truncateOver and loop.index > 1 and loop.index <= (crumbs|length - config.truncateTo) and not ellipsisShown %}
+					{# This is the middle of a long list of crumbs. Let's just show that we're omitting some parent pages. #}
+					{% set ellipsisShown = true %}
+					<li class="breadcrumbs__crumb">
+						<span class="breadcrumbs__divider">
+							&hellip;
+						</span>
+					</li>
+
+				{% else %}
+					{# Output a breadcrumb! #}
+					<li class="breadcrumbs__crumb">
+						<a class="breadcrumbs__link" href="{{ crumbUrl }}">{{ crumbName }}</a>
+					</li>
+				{% endif %}
+
+			{% endfor %}
+		</ul>
+	</nav>
+
+{% endif %}

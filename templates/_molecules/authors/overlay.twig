@@ -1,0 +1,81 @@
+{% if entry is defined and currentUser.can('editEntries:' ~ entry.getSection().uid) %}
+	<div class="fixed z-50 flex space-x-2 bottom-16 right-6">
+		{% include "_atoms/button" with {
+			self: {
+				isButton: true,
+				text: "View entry details",
+				classes: ["bg-blue-600 shadow-lg text-white hocus:bg-blue-800"],
+				icon: "solid/heroicons/clipboard-document",
+				attributes: {
+					"data-fancybox": "cp-details",
+					"data-src": "#cp-details",
+				},
+			}
+		} %}
+		{% include "_atoms/button" with {
+			self: {
+				url: entry.cpEditUrl,
+				text: "Edit entry",
+				classes: ["bg-red-600 shadow-lg text-white hocus:bg-red-800"],
+				icon: "solid/heroicons/pencil",
+			}
+		} %}
+		{% if currentUser.admin and getenv('ENVIRONMENT') != "dev" %}
+			{% include "_atoms/button" with {
+				self: {
+					url: 'https://prometheus.test/' ~ entry.uri,
+					target: true,
+					text: "View on local",
+					classes: ["bg-indigo-600 shadow-lg text-white hocus:bg-indigo-800"],
+					icon: "solid/heroicons/eye",
+				}
+			} %}
+		{% endif %}
+		{% if currentUser.admin and getenv('ENVIRONMENT') == "dev" %}
+			{% include "_atoms/button" with {
+				self: {
+					url: 'https://project-url-goes-here.com.au' ~ entry.uri,
+					target: true,
+					text: "View on production/staging",
+					classes: ["bg-indigo-600 shadow-lg text-white hocus:bg-indigo-800"],
+					icon: "solid/heroicons/eye",
+				}
+			} %}
+		{% endif %}
+	</div>
+
+	<div class="hidden" id="cp-details">
+		<div class="richtext">
+			<h2>{{ entry.title }} ({{ entry.section.name }})</h2>
+		</div>
+		{% set revisions = craft.entries.revisionOf(entry.id).all() %}
+		{% include "_molecules/datalist" with {
+			self: {
+				classes: ["mt-10", "mb-6"],
+				useIcons: false,
+				items: [
+					{
+						key: "Published",
+						value: entry.postDate|date('l, d F Y \\a\\t g:ia')|default,
+					},
+					{
+						key: "Updated",
+						value: entry.dateUpdated|date('l, d F Y \\a\\t g:ia')|default,
+					},
+					{
+						key: "Expiry Date",
+						value: entry.expiryDate ? entry.expiryDate|date('l, d F Y \\a\\t g:ia')|default,
+					},
+					{
+						key: "Revisions",
+						value: revisions|default ? revisions|length,
+					},
+					{
+						key: "Last Edit By",
+						value: revisions|default ? revisions|last.author.friendlyName|default,
+					},
+				]
+			}
+		} %}
+	</div>
+{% endif %}

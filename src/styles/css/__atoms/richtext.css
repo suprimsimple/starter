@@ -1,0 +1,267 @@
+.middleclass-text > *:last-child {
+	margin-bottom: 0;
+}
+
+.middleclass-text > *:first-child {
+	margin-top: 0;
+}
+
+.middleclass-text p {
+	@apply font-normal mb-4;
+}
+
+.middleclass-text strong {
+	@apply font-medium;
+}
+
+.middleclass-text a {
+	@apply underline font-medium;
+}
+
+.middleclass-text a:hover,
+.middleclass-text a:focus {
+	@apply no-underline;
+}
+
+.styled-links a {
+	@apply underline;
+}
+
+.styled-links a:hover,
+.styled-links a:focus {
+	@apply no-underline;
+}
+
+@layer components {
+	.richtext {
+		@apply max-w-[80ch];
+	}
+
+	.richtext > *:last-child {
+		margin-bottom: 0;
+	}
+
+	.richtext > *:first-child {
+		margin-top: 0;
+	}
+
+	.richtext h2,
+	.richtext h3,
+	.richtext h4 {
+		@apply text-blue-800;
+	}
+
+	.richtext h1 {
+		@apply text-2xl font-medium leading-tight mb-20;
+	}
+
+	.richtext h2 {
+		@apply heading-3 font-medium mt-20 mb-8;
+	}
+
+	.richtext h3 {
+		@apply heading-4 font-medium mt-16 mb-6 pt-2 border-t-2 border-gray-400;
+	}
+
+	.richtext h4 {
+		@apply heading-5 font-medium mt-12 mb-4;
+	}
+
+	.richtext h2 + * {
+		margin-top: 0;
+	}
+	.richtext h3 + * {
+		margin-top: 0;
+	}
+	.richtext h4 + * {
+		margin-top: 0;
+	}
+
+	.richtext p,
+	.richtext li {
+		@apply text-gray-700 copy;
+	}
+
+	.richtext p {
+		@apply mb-4;
+	}
+
+	.richtext p.feature-paragraph {
+		@apply copy-lg text-gray-700 mb-6;
+	}
+
+	.richtext strong {
+		@apply font-bold;
+	}
+
+	.richtext a {
+		@apply text-blue-700 font-bold underline outline;
+	}
+
+	.richtext a:hover,
+	.richtext a:focus {
+		@apply text-blue-500 no-underline;
+	}
+
+	/* Lists */
+
+	.richtext ol,
+	.richtext ul {
+		@apply list-none pl-8 relative my-6;
+	}
+
+	.richtext ol > li::before {
+		content: counter(list-item, decimal) ".";
+		@apply text-gray-600 absolute left-0;
+	}
+
+	.richtext ol ol {
+		@apply mt-3 pl-5;
+	}
+
+	.richtext ol ol li::before {
+		content: counter(list-item, lower-roman) ".";
+	}
+
+	.richtext ul > li::before {
+		content: "–";
+		@apply absolute left-0;
+	}
+
+	.richtext ul ul {
+		@apply mt-3 pl-5;
+	}
+
+	.richtext ul ul > li {
+		@apply pl-2;
+	}
+
+	.richtext ul ul > li::before {
+		content: "";
+		@apply w-2 h-2 rounded-full bg-gray-300 mt-2;
+	}
+
+	.richtext li + li {
+		@apply mt-3;
+	}
+
+	.richtext li strong:first-child {
+		@apply block;
+	}
+
+	/* Blockquote */
+
+	.richtext blockquote {
+		@apply border-l-4 border-yellow-400 pt-1 pb-2 pl-4 my-8 copy-lg;
+	}
+
+	.richtext blockquote p {
+		@apply last-of-type:mb-0;
+		font-size: inherit;
+	}
+
+	/* Code */
+	.richtext pre {
+		@apply font-mono bg-gray-700 px-4 py-4 mt-4 mb-4 rounded-lg overflow-x-scroll;
+	}
+
+	.richtext pre code {
+		@apply bg-gray-700 text-gray-100;
+	}
+
+	.richtext code {
+		@apply font-mono bg-gray-100 px-1;
+		font-size: 0.875em;
+	}
+
+	/* Table */
+	.richtext table {
+		@apply w-full table-fixed table-responsive my-12;
+	}
+
+	.richtext table thead {
+		@apply text-left;
+	}
+
+	.richtext table thead th {
+		@apply pt-2 pb-8 px-3;
+		@apply border-t-2 border-blue-500;
+		@apply heading-5 font-medium text-blue-700;
+	}
+
+	.richtext table tbody {
+		@apply bg-white;
+	}
+
+	.richtext table tbody tr:nth-of-type(even) {
+		@apply bg-gray-100;
+	}
+
+	.richtext table tbody td {
+		@apply py-3 px-3;
+		@apply border-t border-gray-200;
+	}
+
+	@media (max-width: theme("screens.md")) {
+		.table-responsive tbody td[data-th] {
+			position: relative;
+			border: none;
+			padding-left: 9.5rem !important;
+			display: block;
+		}
+
+		.table-responsive tbody td[data-th]:before {
+			@apply text-gray-900 font-bold;
+			content: attr(data-th);
+			display: inline-block;
+			width: 7.5em;
+			vertical-align: inherit;
+			line-height: 1;
+			position: absolute;
+			left: 0.5rem;
+			top: 1rem;
+		}
+
+		.table-responsive,
+		.table-responsive thead,
+		.table-responsive tbody,
+		.table-responsive tr {
+			display: block;
+		}
+
+		.table-responsive th,
+		.table-responsive td {
+			display: flex;
+			align-items: flex-start;
+		}
+
+		.table-responsive thead th {
+			@apply sr-only;
+		}
+
+		.table-responsive tbody td {
+			@apply p-3;
+		}
+
+		.table-responsive tbody tr {
+			@apply border-b border-gray-200;
+		}
+
+		.table-responsive tbody tr:nth-of-type(even) td {
+			@apply bg-gray-100;
+		}
+
+		.table-responsive tbody tr:last-of-type {
+			border-bottom: 0;
+		}
+	}
+
+	/* Misc */
+	.richtext hr {
+		@apply mt-20 mb-4 border-0 border-t border-gray-300;
+	}
+
+	.richtext iframe {
+		@apply mt-8;
+	}
+}

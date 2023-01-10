@@ -1,0 +1,59 @@
+{% set defaults = {
+	title: "",
+	id: "accordion-" ~ random(1,9999),
+	body: "",
+	bodyClasses: "",
+} %}
+
+{% set self = defaults|merge(self) %}
+
+{% import 'macros' as macros %}
+
+<div class="relative w-full accordion" x-data="{ expanded: false }">
+	<button
+		type="button"
+		id="{{ self.id }}-trigger"
+		aria-controls="{{ self.id }}-content"
+		class="w-full text-left transition border-t border-black group focus:outline-none"
+		:aria-expanded="expanded ? 'true' : 'false'"
+		@click="expanded = !expanded"
+	>
+		<div
+		class="relative flex items-start justify-between w-full pt-2 transition border-t-2 copy-lg group-hover:border-black"
+		:class="expanded ? 'border-black' : 'border-transparent'"
+		>
+			<div class="pr-12" id="{{ self.id }}-header">
+				{{ self.title|raw }}
+			</div>
+
+			<span
+			class="p-1 transition border border-black rounded-full leading-0 group-hover:opacity-80 ring-offset-2 ring-black ring-opacity-80 ring-offset-bg group-focus:ring"
+			:class="expanded ? 'bg-transparent text-black' : 'bg-black text-white'"
+			>
+				{{ macros.icon(
+					"outline/heroicons/plus",
+					"",
+					{ ":class": "{ 'hidden' : expanded }" }
+				) }}
+				{{ macros.icon(
+					"outline/heroicons/minus",
+					"",
+					{ ":class": "{ 'hidden' : !expanded }" }
+				) }}
+			</span>
+		</div>
+	</button>
+
+	<div
+		role="region"
+		id="{{ self.id }}-content"
+		aria-labelledby="{{ self.id }}-trigger"
+		class="block"
+		x-show="expanded"
+		x-collapse
+	>
+		<div class="pt-4{{ self.bodyClasses ? " #{self.bodyClasses}" }}">
+			{{ self.body|raw }}
+		</div>
+	</div>
+</div>

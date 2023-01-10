@@ -1,0 +1,39 @@
+{% if block.video|length %}
+
+	{% set video = craft.embeddedAssets.get(block.video.one()) %}
+
+	{% set layout = block['display']|default("inline") %}
+
+	{% switch layout %}
+
+		{% case "inline" %}
+			<div class="video">
+				{{ video ? video.html|replace('iframe', 'iframe title="' ~ video.title ~ '" ')|raw }}
+			</div>
+
+		{% case "lightbox" %}
+			{% import "macros/images" as imageMacros %}
+
+			{% set assetImage = video.images|multisort('width', direction=SORT_DESC, sortFlag=SORT_NUMERIC)[0].url|default(video.image) %}
+
+			<figure class="relative constrain-content">
+				<img class="object-cover aspect-video w-full" src="{{ assetImage }}" alt="">
+				<figcaption class="absolute left-4 bottom-8 md:left-8 md:bottom-12 lg:left-12 lg:bottom-24">
+					{% include "_atoms/button" with {
+						self: {
+							url: video.url|default,
+							classes: [],
+							text: "Play full video",
+							attributes: {
+								"aria-label": "Watch video on #{video.providerName}",
+								"data-fancybox": true,
+							},
+							icon: "solid/heroicons/play",
+						}
+					} %}
+				</figcaption>
+			</figure>
+
+	{% endswitch %}
+
+{% endif %}

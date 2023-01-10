@@ -1,0 +1,79 @@
+fieldLayouts:
+  4c307ee1-64e1-4b38-b7ee-4619ae406119:
+    tabs:
+      -
+        elementCondition: null
+        elements:
+          -
+            autocapitalize: true
+            autocomplete: false
+            autocorrect: true
+            class: null
+            disabled: false
+            elementCondition: null
+            id: null
+            instructions: null
+            label: null
+            max: null
+            min: null
+            name: null
+            orientation: null
+            placeholder: null
+            readonly: false
+            requirable: false
+            size: null
+            step: null
+            tip: null
+            title: null
+            type: craft\fieldlayoutelements\entries\EntryTitleField
+            uid: 4afd6679-27e0-40e1-950d-da7c17d0792e
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            elementCondition: null
+            fieldUid: 440ee12e-8957-4daa-bac9-420f461a30c6 # Feature Image
+            instructions: null
+            label: null
+            required: true
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: 6ce71cb4-790c-41f3-aa27-4b221492041e
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            elementCondition: null
+            fieldUid: 5e7a03ef-b278-47fe-8b04-570a23bd1b8d # Summary
+            instructions: null
+            label: null
+            required: true
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: 2680c19b-b83e-47c2-8afd-13471e645e94
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            elementCondition: null
+            fieldUid: 47eeb68a-65d6-4d09-be70-f0037cfcf8fd # Content Blocks
+            instructions: null
+            label: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: 176c5439-4beb-4d8e-8af8-e3ec3aa285da
+            userCondition: null
+            warning: null
+            width: 100
+        name: Content
+        uid: e6c7972b-0703-48fc-bbb6-64afae8c97c8
+        userCondition: null
+handle: newsListing
+hasTitleField: true
+name: 'Listing – News'
+section: 59180e18-27bd-4cb4-9fc7-39eeea9c19b0 # Sitemap
+sortOrder: 3
+titleFormat: null
+titleTranslationKeyFormat: null
+titleTranslationMethod: site

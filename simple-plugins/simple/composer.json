@@ -1,0 +1,38 @@
+{
+	"name": "simple/simple",
+	"description": "This is another awesome plugin crafted by Simple ❤️.",
+	"type": "craft-plugin",
+	"version": "1.0.0",
+	"keywords": [
+		"craft",
+		"cms",
+		"craftcms",
+		"craft-plugin",
+		"simple"
+	],
+	"support": {
+		"docs": "https://github.com/simpleim/simple/blob/master/README.md",
+		"issues": "https://github.com/simpleim/simple/issues"
+	},
+	"license": "MIT",
+	"authors": [
+		{
+			"name": "Simple Integrated Marketing",
+			"homepage": "https://simple.com.au"
+		}
+	],
+	"require": {
+		"craftcms/cms": "^4.0.0"
+	},
+	"autoload": {
+		"psr-4": {
+			"simple\\simple\\": "src/"
+		}
+	},
+	"extra": {
+		"name": "Simple",
+		"handle": "simple",
+		"changelogUrl": "https://raw.githubusercontent.com/simpleim/simple/master/CHANGELOG.md",
+		"class": "simple\\simple\\Simple"
+	}
+}

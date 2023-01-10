@@ -1,0 +1,66 @@
+{% import 'macros' as macros %}
+{% import 'macros/forms' as forms %}
+
+	{% set defaults = {
+		label: 'Label',
+		name: '',
+		value: '',
+		instructions: '',
+		placeholder: '',
+		id: 'input' ~ random(5000),
+		type: 'text',
+		error: '',
+		hasError: false,
+		isDisabled: false,
+		isChecked: false,
+		isRequired: false,
+		isFieldGroup: false,
+		isOpen: false,
+		attributesContainer: {},
+		attributesInner: {},
+		attributesField: {},
+	} %}
+
+	{% set self = defaults|merge(self, true) %}
+
+	{% set hasError = self.error or self.hasError %}
+	{% set errorClass = hasError ? 'has-error' : '' %}
+	{% set filledClass = self.value or self.isOpen ? 'is-filled' : '' %}
+
+	{% set attributesContainer = macros.addAttributes(self.attributesContainer|merge({
+		class: [errorClass, filledClass]|join(' ')|trim,
+		'data-field-container': '',
+	}, true)) %}
+
+	{% set attributesInner = macros.addAttributes(self.attributesInner|merge({
+		class: 'inline-flex items-start',
+		for: self.id,
+		'data-field-inner': '',
+	}, true)) %}
+
+	{% set attributesField = macros.addAttributes(self.attributesField|merge({
+		class: [
+			'form-checkbox mr-3 h-6 w-6 focus:ring',
+			 hasError ? 'border-status-red focus:border-status-red focus:ring' : null,
+			 self.attributesField.class|default()
+		]|join(' ')|trim,
+		type: "checkbox",
+		id: self.id,
+		name: self.name,
+		value: self.value,
+		required: self.isRequired ? 'required' : null,
+		disabled: self.isDisabled ? 'true' : null,
+		checked: self.isChecked ? 'checked' : null,
+		'aria-invalid': hasError ? 'true' : null,
+		'data-field': ''
+	}, true)) %}
+
+	<div {{ attributesContainer }}>
+		<label {{ attributesInner }}>
+			<input {{ attributesField }}>
+			<span class="flex leading-tight type-lg">
+				<span class="font-light">{{ self.label }}</span>
+			</span>
+		</label>
+		{{ forms.messages(self.error, null) }}
+	</div>

@@ -1,0 +1,41 @@
+{% set featureImage = item.featureImage[0]|default %}
+{% set summary = item.summary|default %}
+{% set url = item.url|default %}
+
+{% set showImage = showImage is defined ? showImage : true %}
+
+{% if item.type.handle == "mirroredPage" and item.internalPage[0]|default %}
+	{% set sourceItem = item.internalPage[0]|default %}
+	{% set featureImage = featureImage is not empty ? featureImage : sourceItem.featureImage[0]|default %}
+	{% set summary = summary|length ? summary : sourceItem.summary|default %}
+	{% set url = sourceItem.url %}
+{% endif %}
+
+{% embed "_organisms/card" with {
+	self: {
+		image: featureImage|default(globalFallbacks.fallbackBanner[0]),
+		theme: theme|default,
+		heading: item.title,
+		text: summary,
+		url: url,
+		buttonText: "Find out more",
+		buttonTarget: false,
+	}
+} %}
+
+	{% block cardHeading %}
+		{% if not showImage %}
+			<hr class="w-full mb-2 border-t-2 border-blue">
+		{% endif %}
+		{{ parent() }}
+	{% endblock %}
+
+	{% block cardImageOuter %}
+		{% if showImage %}
+			{{ parent() }}
+		{% else %}
+			{# Nothing! #}
+		{% endif %}
+	{% endblock %}
+
+{% endembed %}

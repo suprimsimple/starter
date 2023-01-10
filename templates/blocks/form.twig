@@ -1,0 +1,7 @@
+{% set form = block.form[0]|default %}
+
+{% if form %}
+	<div class="px-6 py-6 bg-white border-t-4 border-gray-400">
+		{{ craft.formie.renderForm(form) }}
+	</div>
+{% endif %}

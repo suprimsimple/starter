@@ -1,0 +1,63 @@
+{% set label = label | default('') %}
+{% set value = value | default('') %}
+{% set instructions = instructions | default('') %}
+{% set id = id | default('select' ~ random(5000)) %}
+{% set name = name | default(id) %}
+{% set error = error | default('') %}
+{% set isDisabled = isDisabled | default(false) %}
+{% set isRequired = isRequired | default(false) %}
+{% set options = options | default([]) %}
+{% set hideLabel = hideLabel is defined ? hideLabel : false %}
+{% set attributes = attributes ?? {} %}
+{% set classes = classes ?? "" %}
+
+{% import "macros" as macros %}
+
+<div class="{{ classes }}">
+	<label class='mb-1 block type-base font-medium text-gray-600 {{ hideLabel ? "sr-only" }}' for="{{ id }}">
+		{{ label }}
+	</label>
+
+	<div class='relative'>
+		<select
+			class="w-full py-4 pl-4 pr-8 bg-transparent border border-gray-600 rounded bg-none focus:ring-violet-500 hocus:border-ring-violet-500 copy disabled:bg-gray-100"
+			id="{{ id }}"
+			name="{{ name }}"
+			{{ isDisabled ? "disabled" }}
+			{{ isRequired ? "required" }}
+			{{ macros.addAttributes(attributes) }}
+		>
+			{% for option in options %}
+				 {% if option.group|default %}
+					<optgroup label="{{ option.group.label }}">
+						{% for groupOption in option.group.options %}
+							 <option value="{{ groupOption.value }}" {{ value == groupOption.value ? "selected" }}>
+								{{ groupOption.label }}
+							</option>
+						{% endfor %}
+					</optgroup>
+				{% else %}
+					<option value="{{ option.value }}" {{ value == option.value ? "selected" }}>
+						{{ option.label }}
+					</option>
+				{% endif %}
+			{% endfor %}
+		</select>
+
+		{% if isRequired %}
+			<span class='absolute right-6 top-1.5 text-red-error'>*</span>
+		{% endif %}
+
+		<div class="absolute inset-0 grid items-center justify-end pr-4 pointer-events-none">
+			{{ macros.icon("outline/heroicons/chevron-down", iconClasses|default("") ~ " icon--fixed-size") }}
+		</div>
+	</div>
+
+	{% if instructions %}
+		<div class="px-6 my-1 italic text-gray-400 copy-2xs">{{ instructions }}</div>
+	{% endif %}
+
+	{% if error %}
+		<div class='px-6 mt-1 text-red-800 copy-2xs'>{{ error }}</div>
+	{% endif %}
+</div>

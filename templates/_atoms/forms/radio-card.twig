@@ -1,0 +1,27 @@
+{% import 'macros' as macros %}
+{% import "macros/images" as imageMacros %}
+
+{% set defaults = {
+	classes: [],
+	name: '',
+	text: '',
+	value: '',
+	attributesField: {},
+	image: globalFallbacks.fallbackBanner.one(),
+} %}
+
+{% set self = defaults|merge(self|default({})) %}
+
+<label class="radio-card{{ self.classes ? " #{self.classes|join(' ')}" }}">
+	<input type="radio" class="radio-card__input" name="{{ self.name }}" value="{{ self.value }}" {{ macros.addAttributes(self.attributesField) }}>
+	<div class="radio-card__text">{% block text %}{{ self.text }}{% endblock %}</div>
+	{% if self.image|default %}
+		{{ imageMacros.imagerSrcset(
+			self.image,
+			'card',
+			{ classes: "radio-card__image", isBackground: true })
+		}}
+	{% endif %}
+	<div class="radio-card__overlay"></div>
+	{{ macros.icon("zoutline/tick", "radio-card__tick") }}
+</label>

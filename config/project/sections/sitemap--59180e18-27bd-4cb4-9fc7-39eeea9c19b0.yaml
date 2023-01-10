@@ -1,0 +1,27 @@
+defaultPlacement: end
+enableVersioning: true
+handle: sitemap
+name: Sitemap
+previewTargets:
+  -
+    __assoc__:
+      -
+        - label
+        - 'Primary entry page'
+      -
+        - urlFormat
+        - '{url}'
+      -
+        - refresh
+        - '1'
+propagationMethod: all
+siteSettings:
+  7cff4d8a-4325-4cf7-955c-d5de168e98e5: # $DEFAULT_SITE_NAME
+    enabledByDefault: true
+    hasUrls: true
+    template: routing/sitemap
+    uriFormat: '{parent.uri}/{slug}'
+structure:
+  maxLevels: null
+  uid: f0fdeb07-8fee-4786-8d18-f41d46525e46
+type: structure

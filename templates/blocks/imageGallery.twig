@@ -1,0 +1,30 @@
+{% import 'macros/images' as images %}
+{% import 'macros' as macros %}
+
+{% if block.images is not empty %}
+
+	<div class="relative">
+		<ul class="flex flex-wrap -mx-4">
+
+			{% for image in block.images %}
+				<li class="w-1/2 p-4 sm:w-1/2 md:w-1/3">
+
+					<a class="block w-full group outline" data-fancybox="gallery-{{ blockIndex }}" title="{{ image.title }}" href="{{ images.imagerNamedTransform(image, "galleryFull") }}">
+
+						<div class="relative">
+							{{ macros.icon("outline/photograph", "flex justify-center items-center text-white type-6xl bg-blue-400 absolute z-10 inset-0 opacity-0 transition group-hover:opacity-75") }}
+							{{ images.imagerSrcset(
+								image,
+								'galleryThumb',
+								{ classes: "", isBackground: false, alt: image.caption ?? image.title }
+							) }}
+						</div>
+
+					</a>
+
+				</li>
+			{% endfor %}
+
+		</ul>
+	</div>
+{% endif %}

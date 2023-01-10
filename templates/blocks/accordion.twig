@@ -1,0 +1,8 @@
+{% include "_molecules/accordion" with {
+	self: {
+		title: block.accordionTitle|default,
+		id: block.accordionTitle|kebab,
+		body: block.accordionBody|default,
+		bodyClasses: "richtext",
+	}
+} %}

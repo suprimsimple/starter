@@ -1,0 +1,4 @@
+handle: adminNotification
+name: 'Admin Notification'
+sortOrder: 99
+template: formie/adminNotification

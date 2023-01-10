@@ -1,0 +1,129 @@
+field: 47eeb68a-65d6-4d09-be70-f0037cfcf8fd # Content Blocks
+fieldLayouts:
+  6fe29e60-63c5-41ef-8e93-75b6db15b572:
+    tabs:
+      -
+        elementCondition: null
+        elements:
+          -
+            elementCondition: null
+            fieldUid: 3efced5f-5a2e-450d-bbeb-a4734016d19c # Heading
+            instructions: null
+            label: null
+            required: true
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: c3f2829e-2013-4207-a347-e2b9fab7fdfb
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            elementCondition: null
+            fieldUid: 9642d52c-6736-48fd-b7d9-fd0001469624 # Text
+            instructions: null
+            label: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: 21cf6b7c-726c-46e5-85af-04856b8163b0
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            elementCondition: null
+            fieldUid: 05fcf341-3d07-4f9f-bd75-d5ca6418570f # Links
+            instructions: null
+            label: null
+            required: true
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: 71bf2757-6e44-4b4f-a509-2a317c9a7bcf
+            userCondition: null
+            warning: null
+            width: 100
+        name: Content
+        uid: 366c8b6b-b868-40ef-bae1-e0613a5c0164
+        userCondition: null
+fields:
+  3efced5f-5a2e-450d-bbeb-a4734016d19c: # Heading
+    columnSuffix: null
+    contentColumnType: string(512)
+    fieldGroup: null
+    handle: heading
+    instructions: null
+    name: Heading
+    searchable: true
+    settings:
+      byteLimit: null
+      charLimit: 128
+      code: false
+      columnType: null
+      initialRows: 2
+      multiline: true
+      placeholder: null
+      uiMode: normal
+    translationKeyFormat: null
+    translationMethod: none
+    type: craft\fields\PlainText
+  05fcf341-3d07-4f9f-bd75-d5ca6418570f: # Links
+    columnSuffix: null
+    contentColumnType: string
+    fieldGroup: null
+    handle: links
+    instructions: null
+    name: Links
+    searchable: false
+    settings:
+      blockTypeFields: 0
+      changedFieldIndicator: 1155495798
+      columns:
+        __assoc__:
+          -
+            - 352f913c-ae12-4651-ab99-bd06c7c922c3 # Link
+            -
+              __assoc__:
+                -
+                  - width
+                  - ''
+      contentTable: '{{%stc_17_links}}'
+      fieldLayout: row
+      maxRows: null
+      minRows: 1
+      propagationKeyFormat: null
+      propagationMethod: all
+      selectionLabel: 'Add a link'
+      staticField: null
+    translationKeyFormat: null
+    translationMethod: site
+    type: verbb\supertable\fields\SuperTableField
+  9642d52c-6736-48fd-b7d9-fd0001469624: # Text
+    columnSuffix: null
+    contentColumnType: text
+    fieldGroup: null
+    handle: text
+    instructions: null
+    name: Text
+    searchable: true
+    settings:
+      availableTransforms: '*'
+      availableVolumes: '*'
+      columnType: text
+      configSelectionMode: choose
+      defaultTransform: ''
+      manualConfig: ''
+      purifierConfig: null
+      purifyHtml: true
+      redactorConfig: Simple.json
+      removeEmptyTags: false
+      removeInlineStyles: false
+      removeNbsp: false
+      showHtmlButtonForNonAdmins: false
+      showUnpermittedFiles: false
+      showUnpermittedVolumes: false
+      uiMode: enlarged
+    translationKeyFormat: null
+    translationMethod: none
+    type: craft\redactor\Field
+handle: callToAction
+name: 'Call To Action'
+sortOrder: 13

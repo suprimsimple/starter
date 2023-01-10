@@ -1,0 +1,15 @@
+<div class="relative pl-6 md:pl-8 lg:pl-12 text-blue print:hidden">
+	<div class="absolute left-0 w-2 h-full bg-gradient-to-b from-blue-400 to-blue-700"></div>
+	<h2 class="mb-6 font-medium heading-4">On this page</h2>
+	<ul class="flex flex-col">
+		{% for item in entry.contentBlocks[blockIndex:]|filter( i => i.type.handle == "heading" and i['showInTableOfContents']|default(1) ) %}
+			<li class="mb-3 font-medium last:mb-0 copy">
+				<a href="{{ "#" ~ item.heading|kebab }}" class="inline-flex items-center underline group text-blue outline hocus:no-underline">
+					{% import "macros" as macros %}
+					{{ macros.icon("outline/heroicons/arrow-down", "text-small text-gray-500 transform transition group-hocus:translate-y-1") }}
+					<span class="ml-3">{{ item.heading }}</span>
+				</a>
+			</li>
+		{% endfor %}
+	</ul>
+</div>

@@ -1,0 +1,43 @@
+{% set tableBlock = block.table|default %}
+
+{% set alignment = {
+	"right": "text-right",
+	"center": "text-center",
+	"left": "text-left",
+} %}
+
+<div class="richtext">
+	<table class="table">
+		<thead>
+			<tr>
+				{% for column in tableBlock.columns|default %}
+					<th class="{{ alignment[column.align|default("left")] }}"{{ column.width ? " width=\"#{column.width}\""|raw }}>{{ column.heading }}</th>
+				{% endfor %}
+			</tr>
+		</thead>
+		<tbody class="">
+
+			{% for row in tableBlock.rows %}
+				<tr>
+					{% set rowLoop = loop %}
+					{% for key, column in row %}
+						{% set headingData = tableBlock.columns[key]|default %}
+						<td class="{{ alignment[headingData.align|default("left")] }}" data-th="{{ headingData.heading|default }}">
+							{{ column }}
+						</td>
+					{% endfor %}
+				</tr>
+			{% endfor %}
+
+		</tbody>
+		{# {% if block.tableFooter|default %}
+			<tfoot class="bg-yellow-100 border-t border-gray-700">
+				<tr>
+					<td colspan="{{ tableBlock.columns|length }}" class="px-4 py-4 text-base italic leading-snug text-center text-gray-800">
+						{{ block.tableFooter }}
+					</td>
+				</tr>
+			</tfoot>
+		{% endif %} #}
+	</table>
+</div>

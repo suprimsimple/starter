@@ -1,0 +1,100 @@
+columnSuffix: null
+contentColumnType: string
+fieldGroup: 76eb371f-fb30-4a2c-8e62-eb9cd1629262 # Globals
+handle: state
+instructions: null
+name: State
+searchable: true
+settings:
+  options:
+    -
+      __assoc__:
+        -
+          - label
+          - 'South Australia'
+        -
+          - value
+          - SA
+        -
+          - default
+          - ''
+    -
+      __assoc__:
+        -
+          - label
+          - Victoria
+        -
+          - value
+          - VIC
+        -
+          - default
+          - ''
+    -
+      __assoc__:
+        -
+          - label
+          - 'New South Wales'
+        -
+          - value
+          - NSW
+        -
+          - default
+          - ''
+    -
+      __assoc__:
+        -
+          - label
+          - 'Western Australia'
+        -
+          - value
+          - WA
+        -
+          - default
+          - ''
+    -
+      __assoc__:
+        -
+          - label
+          - 'Northern Territory'
+        -
+          - value
+          - NT
+        -
+          - default
+          - ''
+    -
+      __assoc__:
+        -
+          - label
+          - Queensland
+        -
+          - value
+          - QLD
+        -
+          - default
+          - ''
+    -
+      __assoc__:
+        -
+          - label
+          - 'Australian Capital Territory'
+        -
+          - value
+          - ACT
+        -
+          - default
+          - ''
+    -
+      __assoc__:
+        -
+          - label
+          - Tasmania
+        -
+          - value
+          - TAS
+        -
+          - default
+          - ''
+translationKeyFormat: null
+translationMethod: none
+type: craft\fields\Dropdown

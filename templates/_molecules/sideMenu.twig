@@ -1,0 +1,49 @@
+{% import 'macros' as macros %}
+
+{% set default = {
+	headingText: '',
+	headingUrl: '',
+	pages: [],
+} %}
+
+{% set self = default|merge(self) %}
+
+<nav class="relative">
+	{% if self.headingText and self.headingUrl %}
+		<div class="mb-10">
+			<a class="flex items-center group" href="{{ self.headingUrl }}">
+				{{ macros.icon("outline/heroicons/arrow-left-circle", "mr-4 type-xl transition group-hocus:-translate-x-2") }}
+				<div class="leading-snug transition-colors type-xl group hocus:text-blue-700">
+					{{ self.headingText }}
+				</div>
+			</a>
+		</div>
+	{% endif %}
+	<ul class="text-gray-700">
+
+		{% for page in self.pages %}
+
+			{% if page.type.handle|default == 'link' %}
+				{% set childUrl = page.redirectLink.url %}
+				{% set childTitle = page.redirectLink.getText()|length ? page.redirectLink.getText() : page.title %}
+			{% else %}
+				{% set childUrl = page.url %}
+				{% set childTitle = page.title %}
+			{% endif %}
+
+			{% set externalLink = siteUrl not in childUrl %}
+			{% set isActive = craft.app.request.segments|last == page.slug %}
+			<li class="mb-8">
+				{% include "_atoms/link" with {
+					self: {
+						classes: [""],
+						isActive: isActive,
+						url: childUrl,
+						text: childTitle,
+						target: externalLink,
+					}
+				}%}
+			</li>
+		{% endfor %}
+	</ul>
+</nav>

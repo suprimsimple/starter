@@ -1,0 +1,56 @@
+{% set defaults = {
+	ariaLabel: "Tabbed navigation",
+	tabs: {},
+} %}
+
+{% set self = defaults|merge(self) %}
+
+{% set activeTab = activeTab is defined ? activeTab : self.tabs|keys[0]|default %}
+
+{% import "macros" as macros %}
+
+<div class="block" x-data="{ activeTab: '{{ activeTab|default }}' }">
+	<div class="">
+		<div
+			role="tablist"
+			aria-label="{{ self.ariaLabel }}"
+			class="flex flex-wrap justify-start gap-2">
+			{% for key, data in self.tabs %}
+
+				{% include "_atoms/button" with {
+					self: {
+						isButton: true,
+						type: "button",
+						id: "tab-#{key}",
+						role: "tab",
+						icon: null,
+						text: data.text,
+						attributes: {
+							"aria-controls": "panel-#{key}",
+							":aria-selected": "activeTab == '#{key}' ? 'true' : 'false'",
+							":tab-index": "activeTab == '#{key}' ? '0' : '-1'",
+							":aria-disabled": "activeTab == '#{key}'",
+							":class": "{ 'btn--solid bg-black' : activeTab == '#{key}' }",
+							"@focus": "activeTab = '#{key}';",
+							"@click": "activeTab = '#{key}';",
+						}
+					}
+				} %}
+
+			{% endfor %}
+		</div>
+	</div>
+	<div class="block">
+		{% for key, data in self.tabs %}
+			<div
+				tabindex="0"
+				role="tabpanel"
+				id="panel-{{ key }}"
+				aria-labelledby="tab-{{ key }}"
+				x-show="activeTab == '{{ key }}'"
+				class="outline-none">
+				{{ data.panel }}
+			</div>
+		{% endfor %}
+	</div>
+</div>

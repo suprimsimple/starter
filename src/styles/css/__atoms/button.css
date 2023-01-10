@@ -1,0 +1,32 @@
+.btn {
+	@apply inline-flex items-center px-4 py-4 transition rounded;
+	@apply font-normal leading-tight;
+}
+
+button.btn,
+.btn[href] {
+	@apply outline;
+	@apply hocus:bg-blue-800;
+}
+
+.btn .icon {
+	@apply transition-transform;
+}
+
+.btn--icon-left .btn__icon {
+	@apply order-first;
+	@apply mr-2;
+}
+
+.btn--icon-right .btn__icon {
+	@apply ml-2;
+}
+
+.btn__meta {
+	@apply mx-2;
+}
+
+.btn--card::before {
+	content: "";
+	@apply inset-0 absolute block;
+}

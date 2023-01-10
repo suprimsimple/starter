@@ -1,0 +1,246 @@
+/* =============================================================================
+Variable Overrides
+All CSS variables can be found in the Formie repo:
+https://github.com/verbb/formie/blob/craft-3/src/web/assets/frontend/src/scss/_variables.scss
+============================================================================= */
+
+html:root {
+	--icon-plus: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='currentColor'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M12 6v6m0 0v6m0-6h6m-6 0H6'/%3E%3C/svg%3E%0A");
+	--icon-remove: url("data:image/svg+xml,%3Csvg viewBox='0 0 32 32' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M10 22L22 10' stroke='currentColor' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M10 10L22 22' stroke='currentColor' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E%0A");
+
+	/* General */
+	--fui-font: theme("fontFamily.sans");
+	--fui-font-size: clamp(1rem, calc(1rem + (2 / 1792 * 100 * 1vw)), 1.125rem);
+	--fui-color: theme("colors.gray.800");
+	--fui-border-radius: 0.25em;
+	--fui-primary-color: theme("colors.blue.700");
+	--fui-primary-color-hover: theme("colors.green.700");
+	--fui-error: theme("colors.pink.800");
+	--fui-error-border: theme("colors.pink.700");
+	--fui-gray-100: theme("colors.gray.100");
+	--fui-gray-200: theme("colors.gray.200");
+	--fui-gray-300: theme("colors.gray.300");
+	--fui-gray-400: theme("colors.gray.400");
+	--fui-gray-500: theme("colors.gray.500");
+	--fui-gray-600: theme("colors.gray.600");
+	--fui-gray-700: theme("colors.gray.700");
+	--fui-gray-800: theme("colors.gray.800");
+	--fui-gray-900: theme("colors.gray.900");
+	--fui-border-color: theme("colors.gray.300");
+	--fui-focus-border-color: theme("colors.green.400");
+	--fui-focus-shadow: 0 0 0 3px theme("colors.green.300");
+
+	/* Layout/Grid */
+	--fui-row-gutter: 1.4rem;
+	--fui-field-gutter: 1rem;
+
+	/* Alerts */
+	--fui-alert-padding: 1em;
+	--fui-alert-font-size: 0.875em;
+	--fui-alert-line-height: 1.25;
+
+	/* Field Labels */
+	--fui-label-font-size: 5rem;
+	--fui-label-line-height: 1.25;
+	--fui-label-font-weight: 500;
+	--fui-label-margin: 0.5rem;
+	--fui-label-error-color: var(--fui-error-color, #771d1d);
+	--fui-label-error-border-color: var(--fui-error-border, #f8b4b4);
+
+	/* Page Progress */
+	--fui-progress-height: 1.2em;
+
+	/* Field Labels */
+	--fui-label-font-size: 0.9em;
+
+	/* Field Instructions */
+	--fui-instructions-font-size: 0.875em;
+
+	/* Button */
+	--fui-btn-font-size: 1em;
+	--fui-btn-bg-color: theme("colors.gray.100");
+	--fui-btn-bg-color-hover: theme("colors.gray.300");
+
+	/* Form Titles */
+	--fui-title-margin: 0 0 1em;
+
+	/* Page Titles */
+	--fui-page-title-margin: 0 0 1em;
+
+	/* Page Tabs */
+	--fui-tabs-margin-bottom: 1em;
+	--fui-tabs-font-size: 0.875em;
+	--fui-tab-padding: 0.5em 1em;
+
+	/* Page Progress */
+	--fui-progress-height: 1.4rem;
+	--fui-progress-font-size: 0.8em;
+	--fui-progress-font-weight: 400;
+
+	/* Validation */
+	--fui-error-font-size: 0.875em;
+	--fui-error-margin-top: 0.5em;
+
+	/* Field Labels */
+	--fui-label-font-size: 0.875em;
+	--fui-label-error-color: var(--fui-error-color, #771d1d);
+	--fui-label-error-border-color: var(--fui-error-border, #f8b4b4);
+
+	/* Field Instructions */
+	--fui-instructions-font-size: 0.875em;
+
+	/* Field - Checkboxes/Radios */
+	--fui-check-font-size: 0.875em;
+	--fui-check-margin-bottom: 0.5rem;
+	--fui-check-margin-right: 1rem;
+	--fui-check-label-top: 2px;
+	--fui-check-label-width: 1.25rem;
+	--fui-check-label-height: 1.25rem;
+	--fui-check-check-bg-size: 10px auto;
+	--fui-check-radio-bg-size: 10px auto;
+
+	/* Field - Group */
+	--fui-group-padding: 1rem;
+
+	/* Field - Input */
+	--fui-input-font-size: 1em;
+	--fui-input-padding: 0.5em 0.75em;
+	--fui-label-error-color: var(--fui-error-color, #771d1d);
+	--fui-label-error-border-color: var(--fui-error-border, #f8b4b4);
+	--fui-input-error-box-shadow-focus: 0 0 0 3px rgba(248, 180, 180, 0.45);
+
+	/* Field - Repeater */
+	/* --fui-repeater-add-btn-bg-image: var(--icon-plus);
+	--fui-repeater-remove-btn-icon-width: 14px;
+	--fui-repeater-remove-btn-icon-height: 14px;
+	--fui-repeater-remove-btn-icon-bg-image: var(--icon-remove); */
+
+	/* Field - Select */
+
+	/* Field - Table */
+	--fui-table-th-font-size: 0.8em;
+	/* --fui-table-add-btn-bg-image: var(--icon-plus);
+	--fui-table-remove-btn-width: 14px;
+	--fui-table-remove-btn-height: 14px;
+	--fui-table-remove-btn-bg-image: var(--icon-remove); */
+}
+
+/*
+================================================
+Style Overrides
+================================================
+*/
+
+/* The legend in a group should be bigger */
+.fui-group > .fui-fieldset > .fui-legend {
+	font-size: 1.2em;
+	margin-bottom: 1em;
+}
+
+/* The legend in a name field should be bigger */
+.fui-type-name .fui-fieldset > .fui-legend,
+.fui-type-repeater .fui-fieldset > .fui-legend,
+.fui-type-table .fui-fieldset > .fui-legend {
+	font-size: 1.1em;
+	margin-bottom: 0.5em;
+}
+
+/* More spacing around fields with buttons */
+.fui-field.fui-type-table:not(.fui-type-hidden-field),
+.fui-field.fui-type-repeater:not(.fui-type-hidden-field) {
+	margin-bottom: 1.8rem;
+}
+
+/* Let's ignore whatever CMS users create with the "Section" field */
+.fui-hr {
+	border-top-style: solid !important;
+	border-top-width: 1px !important;
+	border-top-color: theme("colors.gray.500") !important;
+}
+
+/* HTML and Headings */
+
+.fui-type-html a {
+	@apply text-blue-900 underline;
+}
+.fui-type-html a:hover,
+.fui-type-html a:focus {
+	@apply text-green-900 no-underline;
+}
+
+.fui-type-html {
+	@apply type-base;
+}
+
+.fui-i .fui-title,
+.fui-i .fui-page-title,
+.fui-type-html h2,
+.fui-type-html h3,
+.fui-type-html h4,
+.fui-type-heading h2,
+.fui-type-heading h3,
+.fui-type-heading h4 {
+	@apply text-blue-800 font-normal print:text-black;
+}
+
+.fui-type-html h2,
+.fui-type-html h3,
+.fui-type-html h4,
+.fui-type-heading h2,
+.fui-type-heading h3,
+.fui-type-heading h4 {
+	@apply mt-6;
+}
+
+.fui-i .fui-title,
+.fui-type-html h2,
+.fui-type-heading h2 {
+	@apply heading-3 leading-tight;
+}
+
+.fui-i .fui-page-title,
+.fui-type-html h3,
+.fui-type-heading h3 {
+	@apply heading-4 leading-tight;
+}
+
+.fui-type-html h4,
+.fui-type-heading h4 {
+	@apply type-base leading-normal;
+}
+
+.fui-type-html p,
+.fui-type-html ul,
+.fui-type-html ol {
+	@apply text-gray-800;
+}
+
+.fui-type-html p {
+	@apply font-normal leading-relaxed mb-4;
+}
+
+.fui-type-html ol {
+	@apply list-decimal pl-5 mt-4 mb-4;
+}
+
+.fui-type-html ol ol {
+	@apply mt-2 pl-5;
+	list-style-type: lower-roman;
+}
+
+.fui-type-html ul {
+	@apply list-disc pl-5 mt-4 mb-4;
+}
+
+.fui-type-html ul ul {
+	@apply mt-2 pl-5;
+	list-style-type: circle;
+}
+
+.fui-type-html li {
+	@apply leading-relaxed font-normal;
+}
+
+.fui-type-html li + li {
+	@apply mt-3;
+}

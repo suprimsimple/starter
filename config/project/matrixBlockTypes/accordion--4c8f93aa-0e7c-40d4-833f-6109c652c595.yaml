@@ -1,0 +1,86 @@
+field: 47eeb68a-65d6-4d09-be70-f0037cfcf8fd # Content Blocks
+fieldLayouts:
+  2fe75200-1996-4906-8bd1-f787d5a37daa:
+    tabs:
+      -
+        elementCondition: null
+        elements:
+          -
+            elementCondition: null
+            fieldUid: e19fac13-a3b4-4f10-843f-074416b49810 # Title
+            instructions: null
+            label: null
+            required: true
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: 104fc4d0-6e80-482a-9f5e-b56f0a0761b0
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            elementCondition: null
+            fieldUid: b54a7046-e6f4-4aef-86f2-c8af8ab19831 # Body
+            instructions: null
+            label: null
+            required: true
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: aa1b1b2b-6d27-4c75-b71c-38c17de9164a
+            userCondition: null
+            warning: null
+            width: 100
+        name: Content
+        uid: ca575158-a91a-43b0-a564-cd1593730c2c
+        userCondition: null
+fields:
+  b54a7046-e6f4-4aef-86f2-c8af8ab19831: # Body
+    columnSuffix: null
+    contentColumnType: text
+    fieldGroup: null
+    handle: accordionBody
+    instructions: null
+    name: Body
+    searchable: true
+    settings:
+      availableTransforms: '*'
+      availableVolumes: ''
+      columnType: text
+      configSelectionMode: choose
+      defaultTransform: ''
+      manualConfig: ''
+      purifierConfig: null
+      purifyHtml: true
+      redactorConfig: Standard.json
+      removeEmptyTags: true
+      removeInlineStyles: true
+      removeNbsp: true
+      showHtmlButtonForNonAdmins: true
+      showUnpermittedFiles: false
+      showUnpermittedVolumes: true
+      uiMode: enlarged
+    translationKeyFormat: null
+    translationMethod: none
+    type: craft\redactor\Field
+  e19fac13-a3b4-4f10-843f-074416b49810: # Title
+    columnSuffix: null
+    contentColumnType: text
+    fieldGroup: null
+    handle: accordionTitle
+    instructions: null
+    name: Title
+    searchable: true
+    settings:
+      byteLimit: null
+      charLimit: null
+      code: false
+      columnType: text
+      initialRows: 4
+      multiline: false
+      placeholder: null
+      uiMode: normal
+    translationKeyFormat: null
+    translationMethod: none
+    type: craft\fields\PlainText
+handle: accordion
+name: Accordion
+sortOrder: 4

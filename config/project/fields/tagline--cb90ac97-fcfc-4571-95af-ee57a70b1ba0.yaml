@@ -1,0 +1,19 @@
+columnSuffix: null
+contentColumnType: string(192)
+fieldGroup: 76eb371f-fb30-4a2c-8e62-eb9cd1629262 # Globals
+handle: tagline
+instructions: null
+name: Tagline
+searchable: false
+settings:
+  byteLimit: null
+  charLimit: 48
+  code: false
+  columnType: null
+  initialRows: 4
+  multiline: false
+  placeholder: null
+  uiMode: normal
+translationKeyFormat: null
+translationMethod: none
+type: craft\fields\PlainText

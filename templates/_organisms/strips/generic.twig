@@ -1,0 +1,9 @@
+{% include "_organisms/card" with {
+	self: {
+		classes: "card--strip",
+		image: item.featureImage[0]|default,
+		heading: item.title,
+		text: item.summary,
+		url: item.url,
+	}
+} %}

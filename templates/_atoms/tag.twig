@@ -1,0 +1,21 @@
+{% set defaults = {
+	classes: "tag--fill",
+	includeLinks: false,
+	includeTooltip: false,
+	title: "",
+	url: null,
+} %}
+
+{% set self = defaults|merge(self|default) %}
+
+{% if self is defined %}
+	{% if self.includeLinks|default and self.url|default %}
+		<a href="{{ self.url }}" class="tag{{ self.classes ? " #{self.classes|join(' ')}" }}">
+			{{ self.title|default }}
+		</a>
+	{% else %}
+		<span class="tag {{ self.classes ? " #{self.classes|join(' ')}" }}">
+			{{ self.title|default }}
+		</span>
+	{% endif %}
+{% endif %}

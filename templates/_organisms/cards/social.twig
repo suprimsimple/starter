@@ -1,0 +1,30 @@
+{% embed "_organisms/card" with {
+	self: {
+		image: item.socialMediaPictureAsset[0]|default,
+		url: item.socialMediaLink,
+		target: true,
+	}
+} %}
+	{% import "macros" as macros %}
+	{% block cardContent %}
+		<div class="w-full p-8 -mt-8 bg-gray-100 xxl:p-12 text-blue">
+			<a
+				class="flex items-start w-full mb-12 transition outline-none text-blue card__link hocus:text-orange hocus:underline"
+				href="{{ self.url }}"
+				{% if self.target %}target="_blank" rel="noreferrer noopener"{% endif %}
+			>
+				<div>
+					<span class="block w-full mb-2 leading-none type-base">{{ "@#{item.socialMediaHandle}" }}</span>
+					<span class="block w-full leading-none type-base">{{ item.postDate|date('d F Y') }}</span>
+				</div>
+				<div class="ml-auto text-3xl">
+					{{ macros.icon("social/" ~ item.socialMediaSource) }}
+				</div>
+			</a>
+			<p class="w-full heading-4">
+				{{ item.socialMediaMessage|truncateOnWord(200)|raw }}
+			</p>
+		</div>
+	{% endblock %}
+
+{% endembed %}

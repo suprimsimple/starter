@@ -1,0 +1,19 @@
+columnSuffix: null
+contentColumnType: string(2048)
+fieldGroup: 76eb371f-fb30-4a2c-8e62-eb9cd1629262 # Globals
+handle: businessDescription
+instructions: 'A description of the business that owns the website.'
+name: 'Business Description'
+searchable: false
+settings:
+  byteLimit: null
+  charLimit: 512
+  code: false
+  columnType: null
+  initialRows: 4
+  multiline: true
+  placeholder: null
+  uiMode: normal
+translationKeyFormat: null
+translationMethod: none
+type: craft\fields\PlainText

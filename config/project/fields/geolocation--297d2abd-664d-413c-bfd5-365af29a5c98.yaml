@@ -1,0 +1,34 @@
+columnSuffix: null
+contentColumnType: text
+fieldGroup: 76eb371f-fb30-4a2c-8e62-eb9cd1629262 # Globals
+handle: geolocation
+instructions: null
+name: Geolocation
+searchable: true
+settings:
+  boundary: '""'
+  boundaryRestrictionNELat: ''
+  boundaryRestrictionNELng: ''
+  boundaryRestrictionSWLat: ''
+  boundaryRestrictionSWLng: ''
+  country: null
+  countryRestriction: ''
+  height: '448'
+  hideAddress: false
+  hideLatLng: '1'
+  hideMap: false
+  hideSearch: false
+  lat: -34.9458926692
+  lng: 138.59979177454
+  maxZoom: 18.0
+  minZoom: 3.0
+  showCurrentLocation: false
+  showLatLng: false
+  showW3WField: false
+  showW3WGrid: false
+  size: normal
+  typeRestriction: ''
+  zoom: 17
+translationKeyFormat: null
+translationMethod: none
+type: ether\simplemap\fields\MapField

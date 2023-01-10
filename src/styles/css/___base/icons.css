@@ -1,0 +1,17 @@
+.icon {
+	display: inline-block;
+	fill: currentColor;
+	stroke: none;
+	vertical-align: middle;
+}
+
+.icon[class*="icon-outline"] {
+	fill: none;
+	stroke: currentColor;
+}
+
+.icon svg {
+	width: 1em;
+	height: 1em;
+	display: block;
+}

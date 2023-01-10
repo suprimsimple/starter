@@ -1,0 +1,205 @@
+{#
+================================================================================
+SVG Icons
+================================================================================
+
+Add new icons by dropping a svg into the 'src/icons' folder.
+
+Usage:
+
+{% import 'macros' as macros %}
+{{ macros.icon("outline/iconFilename") }}
+
+#}
+
+{% macro icon(iconFilename, classes, attributes) %}
+	{% import _self as macros %}
+	<span class="icon {{ "icon-#{iconFilename|replace('/', '-')}" }}{{ classes ? ' ' ~ classes }}"{{ macros.addAttributes(attributes) }}>
+		<svg aria-hidden="true"><use xlink:href="{{ "##{iconFilename}" }}"/></svg>
+	</span>
+{% endmacro %}
+
+{#
+================================================================================
+Eager Load
+================================================================================
+
+Craft's Eager-Loading Elements allows you to nicely optimize your templates by
+telling Craft to load everything you need in one big query.
+
+Usage:
+
+{% import 'macros' as macros %}
+{{ macros.eager(entry, ['bannerImage']) }}
+
+#}
+{% macro eager(element, fields) %}
+	{% set element = element|default %}
+	{% set fields = fields|default([]) %}
+
+	{% if element and fields|length %}
+
+		{% do craft.app.elements.eagerLoadElements(
+			className(element),
+			[element],
+			fields
+		) %}
+
+	{% endif %}
+
+{% endmacro %}
+
+{#
+================================================================================
+Add Attributes
+================================================================================
+
+Converts an object to a list of attributes. Great for keeping things clean when
+working with a bunch of values. If value is falsy then it won't output the
+attribute.
+
+Usage:
+{% import '_macros' as macros %}
+{% set attributes = {
+	class: 'link'
+	href: '#',
+	target: link.blank ? "_blank",
+} %}
+<a {{ macros.addAttributes(attributes) }}>Text</a>
+
+#}
+
+{% macro addAttributes(attributes) %}{% if attributes %}
+	{% set output %}
+		{% for key, value in attributes|filter((key, value) => key|default and value|default) %} {% apply spaceless %}
+			{{ key }}="{{ value|default }}"
+		{% endapply %}{% endfor %}
+	{% endset %}
+	{{ output | trim | raw }}
+{% endif %}{% endmacro %}
+
+
+{#
+================================================================================
+Filesize Macro
+================================================================================
+
+Converts byes to human-readable format.
+
+Usage:
+
+{% import 'macros' as macros %}
+{{ macros.bytesToSize(bytes) }}
+
+#}
+
+{% macro bytesToSize(bytes) %}{% apply spaceless %}
+	{% set kilobyte = 1024 %}
+	{% set megabyte = kilobyte * 1024 %}
+	{% set gigabyte = megabyte * 1024 %}
+	{% set terabyte = gigabyte * 1024 %}
+
+	{% if bytes < kilobyte %}
+		{{ bytes ~ 'B' }}
+	{% elseif bytes < megabyte %}
+		{{ (bytes / kilobyte)|number_format(0, '.') ~ 'KB' }}
+	{% elseif bytes < gigabyte %}
+		{{ (bytes / megabyte)|number_format(1, '.') ~ 'MB' }}
+	{% elseif bytes < terabyte %}
+		{{ (bytes / gigabyte)|number_format(2, '.') ~ 'GB' }}
+	{% else %}
+		{{ (bytes / terabyte)|number_format(2, '.') ~ 'TB' }}
+	{% endif %}
+{% endapply %}{% endmacro %}
+
+
+{#
+================================================================================
+Http prefix checker
+================================================================================
+
+This makes sure a url has a http(s) prefix and helps avoid broken links.
+
+#}
+
+{% macro parseUrl(url, prefix) -%}
+{{- url starts with 'http://' or url starts with 'https://'
+	? url
+	: (prefix ? prefix ~ url : 'http://' ~ url)
+-}}
+{%- endmacro %}
+
+
+{#
+================================================================================
+Format a full address
+================================================================================
+
+#}
+
+{% macro formatAddress(addressLine1, addressLine2, suburb, state, postcode) -%}{% apply spaceless %}
+	{% set addressesSuburb = [addressLine1,addressLine2,suburb]|join(', ') %}
+	{% set fulladdress = (addressesSuburb ~ ' ' ~ (state|upper) ~ ' ' ~ postcode)|trim|replace({' , ':' '}) %}
+	{# This removes empty addresses - a little nasty but works #}
+	{{ fulladdress|replace({',':''})|trim|length == 0 ? '' : fulladdress }}
+{% endapply -%}
+{%- endmacro %}
+
+{#
+================================================================================
+Return icon based on link type / location
+================================================================================
+
+#}
+
+{% macro getLinkIcon(linkType, linkUrl) %}{% apply spaceless %}
+	{% set icon = null %}
+	{% set typeKey = {
+		"asset": "outline/heroicons/arrow-down-tray",
+		"email": "outline/heroicons/envelope",
+		"entry": "outline/heroicons/link",
+		"tel": "outline/heroicons/phone",
+		"url": "outline/heroicons/arrow-top-right-on-square",
+	} %}
+	{% set urlKey = {
+		"instagram.com" : "social/instagram",
+		"facebook.com" : "social/facebook",
+		"twitter.com" : "social/twitter",
+		"linkedin.com" : "social/linkedin",
+	} %}
+
+	{% set urlKeyFound = linkUrl ? urlKey|keys|filter( k => k in linkUrl) %}
+
+	{% set icon = urlKeyFound ? attribute(urlKey, urlKeyFound[0]) : null %}
+
+	{% set icon = icon is empty and linkType ? attribute(typeKey, linkType) : icon %}
+
+	{{ icon }}
+{% endapply %}{% endmacro %}
+
+
+{#
+================================================================================
+When using HMR, static images and icons are served from the web server, not Vite
+Stripping out the port should fix it
+================================================================================
+
+#}
+
+{% macro viteStaticPath(path) %}{% apply spaceless %}
+	{% set staticPath = craft.vite.asset(path, true)  %}
+	{% if craft.vite.devServerRunning %}
+		{% set staticPath = staticPath|replace("#{alias('@web')}:3000", "@webroot/dist") %}
+	{% else %}
+		{% set staticPath = staticPath|replace("#{alias('@web')}", "@webroot") %}
+	{% endif %}
+	{{ staticPath }}
+{% endapply %}{% endmacro %}
+
+{% macro viteStaticUrl(path) %}{% apply spaceless %}
+	{% set staticUrl = craft.vite.asset(path, true)  %}
+	{% if craft.vite.devServerRunning %}
+		{% set staticUrl = staticUrl|replace(":3000", "/dist") %}
+	{% endif %}
+	{{ staticUrl }}
+{% endapply %}{% endmacro %}

@@ -1,0 +1,12 @@
+defaultPlacement: end
+enableVersioning: true
+handle: people
+name: People
+propagationMethod: all
+siteSettings:
+  7cff4d8a-4325-4cf7-955c-d5de168e98e5: # $DEFAULT_SITE_NAME
+    enabledByDefault: true
+    hasUrls: false
+    template: null
+    uriFormat: null
+type: channel

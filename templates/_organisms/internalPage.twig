@@ -1,0 +1,78 @@
+{% import "macros/images" as imageMacros %}
+
+<main class="">
+
+	<section class="relative pt-16 pb-24 outer-container">
+
+		<div class="container relative mx-auto">
+
+			<div class="flex">
+				<div class="text-gray-500 lg:w-2/5">
+					{% block bannerText %}
+						{% include '_molecules/breadcrumbs' with { crumbs: seomatic.jsonLd.get('breadcrumbList').itemListElement|default } %}
+						<h1 class="mt-6 h1">{{ entry.title }}</h1>
+					{% endblock %}
+				</div>
+				<div class="relative lg:w-3/5">
+					<div class="overflow-hidden bg-gray-300 rounded-lg aspect-w-5 aspect-h-2">
+						{% if entry.featureImage|default %}
+							{{ imageMacros.imagerSrcset(
+								entry.featureImage[0],
+								'internalBanner',
+								{ classes: "absolute h-full w-full", isBackground: true })
+							}}
+						{% endif %}
+					</div>
+				</div>
+			</div>
+		</div>
+
+	</section>
+
+	{% block internal %}
+		<section class="relative outer-container">
+
+			<div class="container flex flex-wrap items-start justify-between">
+
+				<article class="w-full first:last:flex-grow lg:w-7/12 lg:mr-1/12" id="main-content"{# for skip-to-content button #}>
+					{% block article %}
+
+						{% include '_molecules/contentBlocks' with { contentBlocks: entry.contentBlocks } %}
+
+					{% endblock %}
+				</article>
+
+				{% block aside %}
+					<aside class="px-12 pt-10 pb-8 mt-16 rounded-lg shadow-lg lg:mt-0 md:w-full lg:w-4/12 lg:sticky top-4">
+
+						{% set parent = parent is defined ? parent : entry.parent|default(entry) %}
+						{% set pages = pages is defined ? pages : parent.children.all()|default([]) %}
+						{% set isTopLevel = entry.id == parent.id %}
+
+						{% if entry.hasDescendants and not isTopLevel %}
+							{% set pages = entry.getChildren().all()|default([]) %}
+
+						{% elseif entry.section.handle in ["miscPages"] %}
+							{% set pages = craft.entries.section("miscPages").all()|default([]) %}
+
+						{% endif %}
+
+						<nav class="internal__subnav">
+							{% include "_molecules/sideMenu" with {
+								self: {
+									headingText: not isTopLevel ? parent.title,
+									headingUrl: not isTopLevel ? parent.url,
+									pages: pages,
+								}
+							} %}
+						</nav>
+
+					</aside>
+				{% endblock %}
+
+			</div>
+
+		</section>
+	{% endblock %}
+
+</main>

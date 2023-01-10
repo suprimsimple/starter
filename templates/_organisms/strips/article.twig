@@ -1,0 +1,26 @@
+{% embed "_organisms/card" with {
+	self: {
+		classes: "card--strip",
+		image: item.featureImage[0]|default,
+		heading: item.title,
+		subheading: item.postDate ? item.postDate|date("j M Y")|default,
+		text: item.summary,
+		url: item.url,
+	}
+} %}
+	{% import "macros" as macros %}
+	{% block cardContent %}
+		{{ parent() }}
+
+		{% if item.newsCategory|default %}
+			<div class="mt-4">
+				{% include "_molecules/tag-cloud" with {
+					self: {
+						tags: item.newsCategory,
+					}
+				} %}
+			</div>
+		{% endif %}
+	{% endblock %}
+
+{% endembed %}

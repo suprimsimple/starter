@@ -1,0 +1,128 @@
+.card {
+	@apply relative flex flex-col min-h-full;
+	@apply bg-gray-50 shadow-md;
+	@apply rounded-md overflow-hidden;
+}
+
+.card--link {
+	@apply focus-within:ring-2;
+}
+
+.card--link:focus-within .card__image,
+.card--link:hover .card__image {
+	@apply scale-105;
+}
+
+.card__content {
+	@apply flex flex-col items-start flex-grow;
+	@apply p-4 pt-3 md:pt-6 md:p-8;
+	@apply xl:max-w-lg;
+}
+
+.card__heading {
+	@apply w-full heading-3;
+}
+
+.card__text {
+	@apply w-full mt-8 copy;
+}
+
+.card__link {
+	@apply block w-full text-blue-700 transition outline-none;
+	@apply hover:underline;
+}
+
+.card__link:hover + .card__text + .card__buttons .btn {
+	@apply bg-black border-black text-white;
+}
+
+.card__link::before {
+	content: "";
+	@apply absolute inset-0;
+	z-index: 10;
+}
+
+.card__asset {
+	@apply relative order-first;
+}
+
+.card__asset-inner {
+	@apply relative overflow-hidden;
+}
+
+.card__image {
+	@apply transition-transform duration-500 ease-out scale-100;
+}
+
+.card__overlay {
+	@apply absolute top-auto z-20 w-full h-0 scale-105 -bottom-px;
+	@apply pointer-events-none;
+	@apply transition-all;
+	background-color: var(--current-bg, transparent);
+}
+
+.card__buttons {
+	@apply mt-auto;
+	@apply pt-8;
+	@apply flex gap-4;
+}
+
+/* Shows */
+
+.card--image-bottom {
+	@apply relative overflow-hidden;
+}
+
+.card--image-bottom .card__asset {
+	@apply order-none;
+}
+
+.card--image-bottom .card__content {
+	@apply pb-0 pt-7;
+}
+
+.card--image-bottom .card__overlay {
+	@apply bottom-auto -top-px;
+}
+
+/* Strip */
+
+.card--strip.card--strip {
+	@apply md:flex-row;
+	@apply min-h-0;
+	@apply shadow-none;
+}
+
+.card--strip:not(.card--fill) {
+	@apply items-start bg-transparent;
+}
+
+.card--strip.card--fill {
+	@apply items-stretch;
+	@apply min-h-[20rem];
+}
+
+.card--strip .card__content {
+	@apply md:p-8;
+	@apply w-full md:w-3/5 md:pl-12;
+	@apply bg-transparent;
+}
+
+.card--strip:not(.card--fill) .card__content {
+	@apply py-0;
+}
+
+.card--strip .card__asset {
+	@apply pb-0 mb-6;
+	@apply w-full md:mb-0 md:w-2/5;
+	@apply min-h-full;
+	@apply max-md:aspect-square;
+}
+
+.card--strip .card__asset-inner {
+	@apply h-full;
+}
+
+.card--strip .card__heading {
+	@apply heading-5;
+}

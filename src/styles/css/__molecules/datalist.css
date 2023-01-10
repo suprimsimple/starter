@@ -1,0 +1,75 @@
+.datalist {
+	@apply flex flex-wrap text-gray-700;
+}
+
+.datalist__item {
+	@apply w-full flex-grow;
+}
+
+.datalist__inner {
+	@apply w-full;
+}
+
+.datalist__term {
+	@apply pr-4;
+}
+
+.datalist__meta {
+	font-size: 0.8em;
+	@apply inline-block ml-4 text-gray-700;
+}
+
+/*
+================================================
+Rows
+================================================
+*/
+
+.datalist--rows {
+}
+
+.datalist--rows .datalist__item {
+	@apply flex flex-wrap items-start;
+}
+
+.datalist--rows .datalist__item:not(:first-child) {
+	@apply mt-8;
+}
+
+.datalist--rows .datalist__inner {
+	@apply w-full flex;
+}
+
+.datalist--rows:not(.datalist--icons) .datalist__term {
+	@apply text-sm pt-2 w-24 md:w-32 flex-grow-0 flex-shrink-0 upper;
+}
+
+.datalist--rows.datalist--icons .datalist__term {
+	@apply type-xl pr-4;
+}
+
+.datalist--rows .datalist__definition {
+	@apply copy leading-tight pt-2;
+}
+
+/*
+================================================
+Columns
+================================================
+*/
+
+.datalist--cols {
+	@apply -mx-6;
+}
+
+.datalist--cols .datalist__item {
+	@apply px-6 pb-12;
+}
+
+.datalist--cols .datalist__term {
+	@apply font-medium copy leading-tight mb-4;
+}
+
+.datalist--cols .datalist__definition {
+	@apply copy leading-snug;
+}

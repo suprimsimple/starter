@@ -1,0 +1,118 @@
+field: 47eeb68a-65d6-4d09-be70-f0037cfcf8fd # Content Blocks
+fieldLayouts:
+  04ef43bd-1371-4ae5-825d-16ae32d69f21:
+    tabs:
+      -
+        elementCondition: null
+        elements:
+          -
+            elementCondition: null
+            fieldUid: 62c6ceb3-208b-4451-87ea-8817bef46885 # Display
+            instructions: null
+            label: null
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: 134b34c7-e2e0-4de0-a7b2-17f0755766e9
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            elementCondition: null
+            fieldUid: 5ed189e3-b44a-4d37-8238-444877760c4e # Links & Downloads
+            instructions: null
+            label: null
+            required: true
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: 8c7d7d51-ba7f-4aeb-87eb-ce01b1198549
+            userCondition: null
+            warning: null
+            width: 100
+        name: Content
+        uid: b16d1702-eae5-4f4d-ac58-e14a3ef2870e
+        userCondition: null
+fields:
+  5ed189e3-b44a-4d37-8238-444877760c4e: # Links & Downloads
+    columnSuffix: null
+    contentColumnType: string
+    fieldGroup: null
+    handle: links
+    instructions: null
+    name: 'Links & Downloads'
+    searchable: true
+    settings:
+      blockTypeFields: 0
+      changedFieldIndicator: 326976207
+      columns:
+        __assoc__:
+          -
+            - c098fde7-bc2b-4bc0-8139-235dd729b4e9 # Link
+            -
+              __assoc__:
+                -
+                  - width
+                  - ''
+      contentTable: '{{%stc_6_links}}'
+      fieldLayout: row
+      maxRows: null
+      minRows: 1
+      propagationKeyFormat: null
+      propagationMethod: all
+      selectionLabel: 'Add a link'
+      staticField: null
+    translationKeyFormat: null
+    translationMethod: site
+    type: verbb\supertable\fields\SuperTableField
+  62c6ceb3-208b-4451-87ea-8817bef46885: # Display
+    columnSuffix: czswdbgx
+    contentColumnType: text
+    fieldGroup: null
+    handle: display
+    instructions: null
+    name: Display
+    searchable: false
+    settings:
+      displayAsGraphic: null
+      displayFullwidth: null
+      options:
+        -
+          __assoc__:
+            -
+              - label
+              - Links
+            -
+              - showLabel
+              - '1'
+            -
+              - value
+              - links
+            -
+              - imageUrl
+              - ''
+            -
+              - default
+              - '1'
+        -
+          __assoc__:
+            -
+              - label
+              - Buttons
+            -
+              - showLabel
+              - '1'
+            -
+              - value
+              - buttons
+            -
+              - imageUrl
+              - ''
+            -
+              - default
+              - ''
+    translationKeyFormat: null
+    translationMethod: none
+    type: verbb\buttonbox\fields\Buttons
+handle: links
+name: 'Links & Downloads'
+sortOrder: 7
